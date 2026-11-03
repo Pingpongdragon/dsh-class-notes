@@ -8,6 +8,34 @@ git 的本质是**一个可回溯的目录树数据结构**——只在改动路
 
 ---
 
+<!-- chapters:start -->
+## 官方章节时间轴
+
+| 时间 | 章节 |
+|---|---|
+| 00:00–24:40 | 开场 & 版本管理 |
+| 24:40–1:03:08 | Git 入门与一些  最佳实践 |
+| 1:03:08–1:40:14 | 学习 Git |
+
+### 关键画面
+
+<figure>
+<img src="../assets/03/chapter-1.jpg" alt="开场 & 版本管理">
+<figcaption>00:00 · 开场 & 版本管理</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/03/chapter-2.jpg" alt="Git 入门与一些  最佳实践">
+<figcaption>24:40 · Git 入门与一些  最佳实践</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/03/chapter-3.jpg" alt="学习 Git">
+<figcaption>1:03:08 · 学习 Git</figcaption>
+</figure>
+
+<!-- chapters:end -->
+
 ## 分段大纲
 
 | 序号 | 章节 | 核心内容 |
