@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepSeek Harness [09] 笔记</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin:0; background:#f4f7fb; color:#1f2937; font-family:"Microsoft YaHei","PingFang SC",system-ui,-apple-system,sans-serif; }
+  article { max-width: 900px; margin: 0 auto; padding: 48px 28px 80px; background:#fff; box-shadow: 0 0 40px rgba(15,23,42,.06); }
+  h1 { font-size: 30px; line-height:1.35; color:#0f172a; border-bottom:3px solid #dbeafe; padding-bottom:16px; }
+  h2 { font-size: 22px; color:#1d4ed8; margin-top:42px; border-left:5px solid #60a5fa; padding-left:12px; }
+  h3 { font-size: 18px; color:#0f172a; margin-top:28px; }
+  p, li { line-height:1.9; font-size:15.5px; }
+  li { margin:6px 0; }
+  blockquote { margin:18px 0; padding:12px 18px; background:#eff6ff; border-left:4px solid #3b82f6; color:#1e3a8a; }
+  table { border-collapse: collapse; width:100%; margin:18px 0; font-size:14.5px; }
+  th, td { border:1px solid #dbe3ef; padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:#f1f5f9; color:#0f172a; }
+  code { background:#eef2ff; padding:2px 5px; border-radius:4px; font-family:Consolas,monospace; font-size:13.5px; }
+  pre { background:#0f172a; color:#e2e8f0; padding:18px; border-radius:10px; overflow:auto; line-height:1.65; }
+  pre code { background:transparent; color:inherit; padding:0; }
+  a { color:#2563eb; }
+  hr { border:0; border-top:1px solid #e2e8f0; margin:32px 0; }
+  @media (max-width:640px){ article{padding:28px 16px 60px;} h1{font-size:24px;} h2{font-size:19px;} }
+</style>
+</head>
+<body>
+<article>
+<h1>欢迎来到未来 · 26 生成式软件工程（NJU）第 01 讲</h1>
+<blockquote>
+<p>一句话说清：这不是讲大模型原理的课，而是在 agent 已经能替你把活干完的时代，重新回答「CS 学生该学什么、软件工程为什么还没死」。</p>
+</blockquote>
+<h2>一句话结论</h2>
+<p>古法编程已经死了，单个任务上 AI 无人能敌；但软件工程暂时没死——因为 intention→specification→implementation 之间的 gap 只能靠「先设计再实现」补，而这正是被 reward 训成做题家的模型最不愿做的事。</p>
+<h2>分段大纲</h2>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>章节</th>
+<th>核心内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>能力日用品化</td>
+<td>1975 第一台 PC → 互联网/ICQ → 移动互联网 → 2022 ChatGPT</td>
+</tr>
+<tr>
+<td>2</td>
+<td>为什么开这门课</td>
+<td>「AI 替我上大学」的闭环焦虑；一份 AI 写的完美简历被判零分</td>
+</tr>
+<tr>
+<td>3</td>
+<td>大学还能给什么</td>
+<td>信息差；驾驭别人驾驭不了的东西</td>
+</tr>
+<tr>
+<td>4</td>
+<td>上课即生成式工程</td>
+<td>markdown 是 source of truth，紫色部分是模型添油加醋</td>
+</tr>
+<tr>
+<td>5</td>
+<td>课程 policy</td>
+<td>可以不来上课、禁止古法编程、token 自费、通过/不通过</td>
+</tr>
+<tr>
+<td>6</td>
+<td>大模型与 agent</td>
+<td>概率分布、next token、特殊 token 调工具成 loop</td>
+</tr>
+<tr>
+<td>7</td>
+<td>普通人的用法</td>
+<td>装机、邮件草稿、读书读论文、读 B 站视频</td>
+</tr>
+<tr>
+<td>8</td>
+<td>生态组合</td>
+<td>Chrome DevTools + skill = 信息处理飞轮</td>
+</tr>
+<tr>
+<td>9</td>
+<td>改卷流水线</td>
+<td>摄像头 OCR + 脚本算分 + 人工核对</td>
+</tr>
+<tr>
+<td>10</td>
+<td>二维码案例</td>
+<td>同一需求两种死法：硬编码 vs 先设计中间语言</td>
+</tr>
+<tr>
+<td>11</td>
+<td>三个空间</td>
+<td>gap 从哪来；《人月神话》焦油坑</td>
+</tr>
+<tr>
+<td>12</td>
+<td>收尾</td>
+<td>「为什么招你而不是买 200 刀的 Claude Max」</td>
+</tr>
+</tbody></table>
+<h2>章节详解</h2>
+<h3>1. 能力被日用品化</h3>
+<p>⭐核心：计算机史的主线不是性能，而是把昂贵能力变成日用品。1975 年第一台 PC（视频念作「泰尔 8800」，即 Altair 8800），那张图是 AI 生成的、有明显 AI 味。接着互联网把人连起来——主讲小学快毕业时装 ICQ，随机加到地球另一端的人，对方打字飞快而他只会 hello；那时腾讯的山寨版叫 OICQ。再到移动互联网，「一夜之间菜场卖菜的人都有支付宝和微信两个二维码」。最后是 2022 年 ChatGPT，历史上增长最快的产品。
+⚠️易错：这段不是历史课，是给后面垫前提——每次跳跃后，上一代人熟练的技能都会贬值。</p>
+<blockquote>
+<p>💡 核心提炼：先看清「这次被日用品化的是哪种能力」，它很可能就是你打算学四年的那个。</p>
+</blockquote>
+<h3>2. 一份零分简历</h3>
+<p>⭐核心：两种焦虑。一是「AI 替我上大学」——老师用豆包出题、学生用豆包做作业，闭环里唯一没受训练的是学生；作业链接丢进 codex 就行，甚至不用说链接，「蒋老师操作系统课第八个实验帮我实现」就结束了。二是听话型学生，认真上完四年发现学会的东西 AI 都会。最切身的痛苦是保研。
+🔧实操：现场展示一份 AI 生成的简历，个人信息被替换成 Unicode 方块（复制出来是黑方块），CCF 论文 accepted、一堆实习奖项，但他打<strong>零分</strong>：没有 GitHub、没有主页、没有 preprint——「再投就等于不存在」。这样的简历他收到过无数份。
+⚠️易错：他不是骂学生，是指出筛选信号失效——当人人都有奖项论文，能区分的只剩「做过的、别人做不出的东西」。</p>
+<blockquote>
+<p>💡 核心提炼：竞争的战场已从「我有什么证书」转到「我有没有不可复制的作品链接」。</p>
+</blockquote>
+<h3>3. 大学剩下的两样东西</h3>
+<p>⭐核心：一是<strong>信息差</strong>——人类社会要进步就必须有信息差，你拥有别人不知道的信息才能做别人做不到的事（比如独一份往年试卷）。二是<strong>成为更好的人</strong>，即驾驭别人驾驭不了的东西。这门课想给的是后者。
+🔧实操：他明确说，听课型学生「既不用到课，也不用看直播」，知识会以更好的形式给出；想来 challenge、来讨论的欢迎线下，课是松散组织的案例课。
+⚠️易错：别把「不用到课」读成「不用学」；他反对的是听课这种低效获取方式。</p>
+<blockquote>
+<p>💡 核心提炼：大学剩下的价值 = 信息差 + 你比 AI 多出的那一点驾驭力，后者是这门课唯一想教的。</p>
+</blockquote>
+<h3>4. 上课本身就是一次生成</h3>
+<p>⭐核心：课前先写 markdown 讲义（约束好 AI 讲什么、何时举例），按 F5 播放时<strong>紫色部分</strong>是 GPT-5.6 现场添油加醋加上去的。他的「AI 梗同学」skill 生成三个 sub agent，赋予不同 personality，在隔离上下文里各干各的，主 agent 汇总——用算力换智力；他还换了几个版本提示词各生成一次，让另一个模型盲评哪版更好才收敛。所有图片都是生成的。
+🔧实操：课后把录像（这场「表演」）切片回填到 markdown——everything is code，于是课程获得「数字永生」，理论上可由全世界的人维护和定制。
+⚠️易错：不是炫技。他反复说即兴是不完美的，所以必须复盘；赌注是「把一节课沉淀成一个程序」。</p>
+<blockquote>
+<p>💡 核心提炼：讲课 = 表演 + 复盘 + 回填源码；能被代码描述的东西，就能被切片、组合、他人接手。</p>
+</blockquote>
+<h3>5. 四条规定</h3>
+<p>⭐核心：①重新找回「上课耽误学习」的感觉，推荐不来上课去实践。②<strong>禁止古法编程</strong>——他知道大家都是机试练出来的好手，但想撕开一个小口子。③<strong>token 自费</strong>，个人观点很冲：手上没有付费 token 的同学「应该立即退学」，建议每人充 100 块。④考核<strong>通过/不通过</strong>（教务反馈说专业选修课一般不这么做），理由是这个时代分数已不那么重要。
+🔧实操：演示主力是 deepseek v4 flash（只有生成 slides 用更聪明的模型），因为够便宜、课上更快；他调侃 CS 学生都是夜猫子，夜里用更便宜，称之为「梁文峰时间」。project 建议：做一个自己的邮件管理系统，能收发他指定邮箱的邮件，跑在宿舍常开的小电脑上。
+⚠️易错：他说不清评分标准，也承认现实——为了走到保研那一刻，你仍需要 GPA，仍要 reward hacking、overfit 考题。</p>
+<blockquote>
+<p>💡 核心提炼：评价权从分数挪到简历——四年后检验你的只有那份投出去的简历。</p>
+</blockquote>
+<h3>6. 从概率分布到 agent</h3>
+<p>⭐核心：「什么是大模型」他不讲，因为大模型就是一个概率分布，和概率课抛硬币没区别。它给一段长文本，不断预测下一个 token 的概率，一次一个字符；训练很难所以 frontier lab 很牛，但<strong>这门课站在使用者视角</strong>。他第一次被按在地上打是 2023 年 GPT-4 时代：给五岁孩子解释扫描电子显微镜，他讲不下去，模型给的比方是——山看不见形状，你往各方向扔石头，有的穿过、有的弹回，靠回声反推山形；他事后查资料，发现这个比方是对的；GPT-5.6 因为有 reasoning 给的版本更严谨。
+🔧实操：agent 的关键是模型能输出一个<strong>特殊 token</strong> 去调程序，结果再送回模型，在 loop 里自主试错。对比：去年操作系统课的 agent 各种出错、做不完就停；今年非常能用，产品已经铺天盖地。</p>
+<blockquote>
+<p>💡 核心提炼：大模型是分布，agent 是这个分布接上了工具和重试——能力跃迁来自「能试错」。</p>
+</blockquote>
+<h3>7. 普通人的四个案例</h3>
+<p>⭐核心：两个最小原则——<strong>现在就开始用</strong>、<strong>随时问他</strong>。问「你是谁」，它答「生成式软件工程的教学辅助」；再问「你不就是个模型吗」，它解释这来自仓库里 AGENTS.md，是「临时的基因」。想象力是使用者的上限。
+🔧实操：</p>
+<ul>
+<li><strong>装机</strong>：以前是知乎「装机仙人」（2021 年 7 月的帖子）。现在一句话：去 mirrors.nju.edu.cn 找 debian 13 镜像装到 U 盘，确保能启动，<strong>用模拟器验证</strong>——让它在 qemu 里启动、看到登录界面、建好用户再交付。他自曝有一年把教室电脑硬盘抹了，下一位老师直接教学事故。</li>
+<li><strong>窗口与终端</strong>：tile-based WM，Win+回车开窗、Win+空格挪窗、Super+Enter 开终端；这些文档是让模型读系统配置生成的，他「没看过一眼配置文件」。他的终端把 ls 换成 eza、find 换成 fd。</li>
+<li><strong>邮件</strong>：skill 里存着他历史上所有回过的邮件，新邮件自动置已读、用他的口吻写草稿（routine 的能直接用，多数还得改）；发票附件自动归档；在备忘录加一条「把上一张发票打印出来」，后台处理完推送到手表——课上真的打出来了。</li>
+<li><strong>读书读论文</strong>：重读了《人月神话》（他说这标题起得误导，该叫「人月鬼话」）和一本软件设计哲学书。读论文的方法：假设人类已有知识全都已知，把论文里<strong>真正新的那点东西</strong>剥离出来，12 页就剩不下多少；再要求找历史类似案例、找相关工作、多 personality 先吵再收敛。</li>
+<li><strong>读视频</strong>：给一个 BVID（比如 1 小时 27 分钟的课），整理成图文时间轴，两帧间隔够大就截图拿 ground truth，再让带他记忆的 agent 去掉 trivial 部分——几分钟看完两小时。
+⚠️易错：这条路有代价——你的理解可能比从零搭积木浅；模型也会不听指令，flash 常翻车，他用它只因为快。</li>
+</ul>
+<blockquote>
+<p>💡 核心提炼：会用与不会用 agent，学习效率差 10 到 100 倍；这差距不写在简历上，却决定简历长什么样。</p>
+</blockquote>
+<h3>8. 生态：从浏览器到飞轮</h3>
+<p>⭐核心：一个任务只要合理，按 CS 定律「百分之百也有别人想做」，社区就会有脚本、skill hub 就会有 skill、插件生态就会有插件。普通人下一步是<strong>用插件把浏览器和电脑管起来</strong>。浏览器是软件工程奇迹，代码量甚至远超操作系统内核（它要和人打交道、要图形栈和性能优化），而它的开发者接口 DevTools 极其强大。
+🔧实操：F12 删掉讨厌的广告元素；看 console 里的招聘广告；copy as cURL，带着 cookie 在终端重放请求。他提到 2020 年做过把 Android 应用跑在 OpenJDK 上、算出每个按钮坐标和文本、却直接在浏览器里画出一个可点计算器的实验。现场更狠：他讨厌教务系统叫人填表，让 agent 用 DevTools 把空着的教学周历填掉（还叮嘱「不要读我的课程目录」），agent 先不听指令、翻车、自我反思、试事件注入失败、换模拟点击成功。走通一次，路径就能沉淀成脚本——「你就得到了一个自动选课抢课的系统」。
+⚠️易错：他承认这里有伦理张力（对付本科生院），没回避——能力一旦走通一次就变成可复用资产。</p>
+<blockquote>
+<p>💡 核心提炼：UNIX 管道伟大是因为程序能自由组合；skill 同理，单个是工具，组合起来才是个人能力的百倍放大器。</p>
+</blockquote>
+<h3>9. CS 视角：改卷流水线</h3>
+<p>⭐核心：一般人只会说「帮我把作业做了」，CS 出身的人知道<strong>把需求编译成什么形式可以复用</strong>。他的统分流水线：桌面俯拍摄像头对准试卷固定位置，按一次回车拍一张，离线用千问识别姓名、学号、每个小分写进文本文件；第二阶段反序再来，左手回车、右手拿笔，语音播报小分，他逐条核对（不信任 OCR，要对每个学生负责）；核对完把脚本算出的总分抄到卷面——<strong>加法绝不让大模型做</strong>；最后汇总到教务处 Excel 模板，抽样检查再提交。
+🔧实操：他知道本地有 27B 千问、能用 Ollama 跑，所以能设计同步代价最低的人机分工；140 张卷子直接丢给最好的模型说「帮我统分」，收敛不到这么快的方案。
+⚠️易错：这套流程的价值不在自动化，而在<strong>把不确定性挡在关键步骤外</strong>——识别可以错，加法不能错。</p>
+<blockquote>
+<p>💡 核心提炼：专业能力今天表现为「知道 AI 的边界在哪，并把边界设计进流程」。</p>
+</blockquote>
+<h3>10. 二维码案例：同一 spec 的两种死法</h3>
+<p>⭐核心：设在金融公司，数据能进不能出，机器管控、不信任程序不跑、不信任网页不显，唯一漏洞是远处悄悄射频。于是他写了个 Excel：任意字符串编码成<strong>二维码动画</strong>（每帧循环播放），偷偷录下来数据就出去了；全部用 Excel 2019 之前兼容的公式实现，打开就是合法 Excel。他还给了另一条路：远程桌面里上下抖鼠标是 0、左右抖鼠标是 1，等于低速虚拟网卡。
+🔧实操（关键对照）：先带 AI 做，比较顺。受控实验里把 spec 直接丢给 GPT-5.3，它思考 25 分钟、输出超 32K token 被截断，无监管跑了 6 小时；deepseek v4 pro 夜里跑，第二天发现是硬编码 base64（Python 算好贴进公式框），字符串一改就失效。两者都「完成了任务」，但代码无法维护，和教务系统同一死法：知道需求 → 直接实现 → 陷入维护泥潭。他自己的做法是少量 prompt + 200K 上下文：先设计一个中间语言/DSL（像编译器基础设施），既可翻译成 Python 执行，也可翻译成 Excel 公式，于是只需分别验证「翻译对不对」「二维码每个像素对不对」，一次成型、代码干净。反证：把工作区换个位置，两份 AI 代码都要修两小时。
+⚠️易错：AI 常栽在小 corner case 上，且第一秒就被带歪——它会想做「对任意输入都正确」的东西，而软件工程第一步是不要扩大、做最简单不会失败的版本。</p>
+<blockquote>
+<p>💡 核心提炼：AI 有足够智能设计漂亮 DSL，但第一反应永远是先上手做题；生成式软件工程要补的正是「先设计」。</p>
+</blockquote>
+<h3>11. 三个空间与焦油坑</h3>
+<p>⭐核心：需求只在三个空间流转——intention（老板说「我要一个国民级应用」）、specification（几个界面、什么功能、关系型还是 KV、schema 怎么分表）、implementation。gap 真实存在，经典梗图就是「客户说的、产品经理理解的、分析师设计的、宣传的、最后造出来的」。模型今天补 gap 的方式是<strong>猜</strong>：后训练给 reward，做对、测试通过就有奖励，于是被训成「立即上手、尽量快完成」。他引用《人月神话》的焦油坑：已失败的团队加人只会更失败；AI 已产出 slop 时，投更多 token 只会让它在烂东西上再浮一点，直到你付不起 token——教务系统就是实例，每年加功能、每年花巨款维护。
+⚠️易错：他点出教育的问题——你从高考到现在做的题全是分钟级能解决的，和模型的 reward 一样，你也被训成了做题家；没有自驱力去啃 long-horizon 问题，你就不如 agent。软件工程里杠杆最大的是<strong>需求</strong>，越早的 gap 放大得越厉害，大型系统几乎都在这里崩。</p>
+<blockquote>
+<p>💡 核心提炼：软件工程失败的定义没变——翻译错了；变的是补 gap 的执行者。</p>
+</blockquote>
+<h3>12. 收尾：导师为什么招你</h3>
+<p>⭐核心：三句话——古法编程已经死了（单任务上 AI 无人能敌）；软件工程暂时还没死；但这门课可能上到一半就过期，模型三个月就可能再突破一次。他给了一个值得记住的问题：保研面试时导师问「为什么我要招你，而不是买一个 200 刀的 Claude Max？」他承认 GPT-5.6 答得不错——「找到值得解决的问题，把未知拆成便宜的实验，用证据让坏方向及时停下，并对长期结果负责」——但直言它现在做不到。</p>
+<blockquote>
+<p>💡 核心提炼：这门课赌的是「设计品味可以被训练」，既包括 AI，也包括你。</p>
+</blockquote>
+<h2>关键数字与例子</h2>
+<table>
+<thead>
+<tr>
+<th>数字 / 例子</th>
+<th>语境</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1975 / Altair 8800</td>
+<td>开场历史线</td>
+<td>能力日用品化的起点</td>
+</tr>
+<tr>
+<td>2022 ChatGPT</td>
+<td>第四次跳跃</td>
+<td>增长最快的产品</td>
+</tr>
+<tr>
+<td>五岁孩子 + 扫描电镜</td>
+<td>GPT-4 时代</td>
+<td>好比方 = 真知识</td>
+</tr>
+<tr>
+<td>思考 25 分钟、32K token、跑 6 小时</td>
+<td>GPT-5.3 直做 QR</td>
+<td>「做完」≠「能维护」</td>
+</tr>
+<tr>
+<td>200K 上下文 + 少量 prompt</td>
+<td>他的正确姿势</td>
+<td>先设计中间语言</td>
+</tr>
+<tr>
+<td>12 页论文</td>
+<td>读论文方法</td>
+<td>减法式阅读</td>
+</tr>
+<tr>
+<td>1h27m 视频 → 几分钟</td>
+<td>B 站理解</td>
+<td>带记忆的 agent 去 trivial</td>
+</tr>
+<tr>
+<td>10 倍 / 100 倍</td>
+<td>会用与不会用 agent</td>
+<td>竞争不在同一量级</td>
+</tr>
+<tr>
+<td>140 张卷子、27B 千问</td>
+<td>改卷流水线</td>
+<td>边界内自动化</td>
+</tr>
+<tr>
+<td>每人充 100 块、200 刀 Claude Max</td>
+<td>policy 与收尾之问</td>
+<td>token 自费、不可替代性</td>
+</tr>
+</tbody></table>
+<h2>速查卡</h2>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>一句话</th>
+<th>标记</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>古法编程</td>
+<td>手写代码、靠考试练出来的编程，本课禁止</td>
+<td>☠️ 已死</td>
+</tr>
+<tr>
+<td>大模型</td>
+<td>一个学出来的概率分布，逐 token 预测</td>
+<td>⭐ 使用者视角</td>
+</tr>
+<tr>
+<td>agent</td>
+<td>特殊 token + 工具 + loop 自主试错</td>
+<td>⭐ 最强形态</td>
+</tr>
+<tr>
+<td>AGENTS.md</td>
+<td>仓库配置，agent 的「临时基因」</td>
+<td>🔧 第一课</td>
+</tr>
+<tr>
+<td>两个原则</td>
+<td>现在就开始用 / 随时问他</td>
+<td>🔧 上手</td>
+</tr>
+<tr>
+<td>三个空间</td>
+<td>intention→spec→impl，之间全是 gap</td>
+<td>⭐ 全课主线</td>
+</tr>
+<tr>
+<td>gap 的补法</td>
+<td>模型靠猜，人靠设计</td>
+<td>⚠️ 核心分歧</td>
+</tr>
+<tr>
+<td>DSL</td>
+<td>一次设计、双向翻译、分别验证</td>
+<td>🔧 正确解法</td>
+</tr>
+<tr>
+<td>Chrome DevTools</td>
+<td>让 agent 操作浏览器，走通即可沉淀脚本</td>
+<td>⚠️ 能力与风险同源</td>
+</tr>
+<tr>
+<td>焦油坑</td>
+<td>已失败的产品加人/加 token 只会更失败</td>
+<td>⚠️ 人月神话</td>
+</tr>
+<tr>
+<td>零分简历</td>
+<td>无 GitHub / 主页 / preprint</td>
+<td>⚠️ 筛选失效</td>
+</tr>
+</tbody></table>
+<h2>我的判断</h2>
+<p>这堂课真正的锋利处不在「AI 很强」——那是场面话——而在它把「强」拆成两个可验证的实验：同一个 spec 交给两个旗舰模型，产出能跑但处处硬编码的死代码；他自己用中间语言做一遍，代码干净可维护。这个对照同时解释了「AI 为什么能替代你」和「为什么还需要你」。但有两处硬伤：他说不清评分标准，一边说分数不重要、一边承认学生仍要 reward hacking 拿 GPA；「不要来上课」隐含学生已有自驱力和 token 预算，对南大 CS 成立，对更广人群就是幸存者偏差。至于「三个月后这门课可能就过期」的自嘲，反而是全场最诚实的一句——他演示的每个 skill 都是当下模型的产物，模型一变方法论就得重写；而这恰好说明他要教的东西（先设计、控边界、验证翻译）比工具活得久。</p>
+
+</article>
+</body>
+</html>
