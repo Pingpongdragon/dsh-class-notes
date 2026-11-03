@@ -6,6 +6,34 @@
 
 版本控制系统是为「单核、慢速、要开会」的人类设计的；git 已露裂缝（merge 丢作者归属、rebase 全换 commit id、stash 难管），jj 用「change 是一等公民」补一刀，而 agent 时代的答案是：**乐观并发换成悲观锁，只保快照、不再 blame**。
 
+<!-- chapters:start -->
+## 官方章节时间轴
+
+| 时间 | 章节 |
+|---|---|
+| 00:00–35:53 | 重新设计版本管理系统 |
+| 35:53–1:03:48 | 为Agent设计版本管理系统 |
+| 1:03:48–1:38:29 | 从零开始一个新项目 |
+
+### 关键画面
+
+<figure>
+<img src="../assets/04/chapter-1.jpg" alt="重新设计版本管理系统">
+<figcaption>00:00 · 重新设计版本管理系统</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/04/chapter-2.jpg" alt="为Agent设计版本管理系统">
+<figcaption>35:53 · 为Agent设计版本管理系统</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/04/chapter-3.jpg" alt="从零开始一个新项目">
+<figcaption>1:03:48 · 从零开始一个新项目</figcaption>
+</figure>
+
+<!-- chapters:end -->
+
 ## 分段大纲
 
 | 序号 | 章节 | 核心内容 |
