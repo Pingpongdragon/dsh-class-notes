@@ -22,6 +22,9 @@
   pre code { background:transparent; color:inherit; padding:0; }
   a { color:#2563eb; }
   hr { border:0; border-top:1px solid #e2e8f0; margin:32px 0; }
+  figure { margin: 22px 0; }
+  figure img { width:100%; display:block; border-radius:12px; border:1px solid #e2e8f0; }
+  figcaption { color:#64748b; font-size:13px; margin-top:8px; text-align:center; }
   @media (max-width:640px){ article{padding:28px 16px 60px;} h1{font-size:24px;} h2{font-size:19px;} }
 </style>
 </head>
@@ -33,7 +36,39 @@
 </blockquote>
 <h2>一句话结论</h2>
 <p>模型靠&quot;下一个 token 预测 + 注意力机制&quot;遵循指令，所以写 prompt 的核心不是堆砌&quot;你是一个专家&quot;式咒语，而是<strong>把明确、可验证（verifier）的约束放进上下文，并保证它在关键 token 上仍被注意力看到</strong>：凡能用 verifier 定义的任务，AI 已远超常人；凡不能的（教学、审美、开放研究），人仍不可替代。</p>
-<h2>分段大纲（按内容顺序，字幕无时间轴）</h2>
+<!-- chapters:start -->
+<h2>官方章节时间轴</h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>章节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00:00–33:07</td>
+<td>Prompt (Context) Engineering</td>
+</tr>
+<tr>
+<td>33:07–1:15:30</td>
+<td>使模型遵循指令的技巧</td>
+</tr>
+<tr>
+<td>1:15:30–1:38:26</td>
+<td>更长程任务的建议</td>
+</tr>
+</tbody></table>
+<h3>关键画面</h3>
+<figure>
+<img src="../assets/02/chapter-1.jpg" alt="Prompt (Context) Engineering">
+<figcaption>00:00 · Prompt (Context) Engineering</figcaption>
+</figure><figure>
+<img src="../assets/02/chapter-2.jpg" alt="使模型遵循指令的技巧">
+<figcaption>33:07 · 使模型遵循指令的技巧</figcaption>
+</figure><figure>
+<img src="../assets/02/chapter-3.jpg" alt="更长程任务的建议">
+<figcaption>1:15:30 · 更长程任务的建议</figcaption>
+</figure><!-- chapters:end --><h2>分段大纲（按内容顺序，字幕无时间轴）</h2>
 <table>
 <thead>
 <tr>
@@ -49,172 +84,114 @@
 </tr>
 <tr>
 <td>2</td>
-<td>提示词 ≠ 聊天框那句话</td>
-<td>system prompt、AGENTS.md、skills、工具、历史、环境变量</td>
+<td>上下文全景与&quot;喵&quot;梗</td>
+<td>system prompt、AGENTS.md、skills、工具、历史、环境变量；喵丢了=上下文被压缩</td>
 </tr>
 <tr>
 <td>3</td>
-<td>上下文工程与&quot;喵&quot;梗</td>
-<td>长上下文仍能遵循指令；喵丢了=上下文被截断/压缩</td>
-</tr>
-<tr>
-<td>4</td>
 <td>用 AI 学习</td>
 <td>让 agent 解剖自己的上下文；费曼学习法正反两遍</td>
 </tr>
 <tr>
-<td>5</td>
+<td>4</td>
 <td>危险操作与风险判定</td>
 <td>yolo/沙箱/白名单/大模型评级，以及 <code>ls -l</code> 的漏洞</td>
 </tr>
 <tr>
+<td>5</td>
+<td>从 intent 到 spec 再到风格</td>
+<td>模糊 intent 必然漂移；AI 味来自&quot;现代&quot;不可验证</td>
+</tr>
+<tr>
 <td>6</td>
-<td>从 intent 到 spec 到 implementation</td>
-<td>模糊 intent 必然漂移；CSGO/极品飞车案例</td>
+<td>模型如何遵循指令</td>
+<td>有限计算、纸笔、思维链，以及幻觉的&quot;舔狗&quot;起源</td>
 </tr>
 <tr>
 <td>7</td>
-<td>风格控制与 AI 味</td>
-<td>一句话&quot;现代风格&quot;必然 AI 味重；具体风格+后处理才能去掉</td>
-</tr>
-<tr>
-<td>8</td>
-<td>模型如何遵循指令</td>
-<td>有限计算、纸笔、思维链、幻觉的&quot;舔狗&quot;起源</td>
-</tr>
-<tr>
-<td>9</td>
 <td>verifier 的力量</td>
 <td>藏头诗、偏旁诗、同音文；有 verifier 的部分 AI 已超越多数人</td>
 </tr>
 <tr>
+<td>8</td>
+<td>注意力与上下文污染</td>
+<td>指令抢带宽、自我纠错；读论文要先对齐；审稿案例 A1/A2</td>
+</tr>
+<tr>
+<td>9</td>
+<td>long horizon 与 research failure</td>
+<td>POC 容易维护翻车、大系统反而擅长；&quot;证明 A 有用&quot;=reward hacking</td>
+</tr>
+<tr>
 <td>10</td>
-<td>注意力机制</td>
-<td>指令互相竞争注意力；&quot;喘口气&quot;时自我纠错</td>
-</tr>
-<tr>
-<td>11</td>
-<td>读论文：上下文污染</td>
-<td>&quot;帮我总结&quot;=复述作者观点；先对齐人类知识边界再推一步</td>
-</tr>
-<tr>
-<td>12</td>
-<td>审稿与发表体系</td>
-<td>A1/A2 的 99% 与 1%；AI 写 + AI 审 = slop</td>
-</tr>
-<tr>
-<td>13</td>
-<td>long horizon</td>
-<td>POC 容易、持续加功能翻车、大型维护好的系统反而擅长</td>
-</tr>
-<tr>
-<td>14</td>
-<td>research failure</td>
-<td>一句&quot;我想证明 A 有用&quot;让模型变成 reward hacker</td>
-</tr>
-<tr>
-<td>15</td>
 <td>人的位置</td>
 <td>算力换智力、盯不盯 codex 的 trade off、结尾的&quot;墙&quot;</td>
 </tr>
 </tbody></table>
 <h2>章节详解</h2>
 <h3>一、提示词是唯一接口</h3>
-<p>⭐核心：2023 年备操作系统课时，老师故意写了一段&quot;地球人不会这么实现&quot;的内联汇编让 ChatGPT 讲，它解释得出奇地好，且大概率不在训练语料里——那一刻觉得时代要变。</p>
-<p>⚠️易错：把提示词理解成聊天框里那一句。agent 在第一次和你说话前，上下文里已经塞满了东西。</p>
+<p>⭐核心：2023 年备操作系统课时，老师故意写了一段&quot;地球人不会这么实现&quot;的内联汇编（inline assembly）让 ChatGPT 讲，它解释得出奇地好、且大概率不在训练语料里——那一刻觉得时代要变。</p>
+<p>⚠️易错：把提示词理解成聊天框里那一句。agent 在第一次和你说话前，上下文已经塞满东西。</p>
 <blockquote>
 <p>💡 核心提炼：prompt 不是一句话，是模型输出第一个 token 前看到的全部文本。</p>
 </blockquote>
-<h3>二、agent 上下文里到底有什么</h3>
-<p>⭐核心：system prompt（可能规定&quot;用中文回答&quot;）→ 项目级 AGENTS.md（可多层嵌套）→ skills 索引（只加载 name 与 description，匹配任务才读全文，用完从上下文抹掉）→ 工具定义（以文本出现）→ 对话历史 → 每次执行注入的环境变量（模型、当前时间）。</p>
-<p>🔧实操：直接问 agent&quot;检查一下你的上下文里都有些什么&quot;——开源框架可 debug，它会告诉你 system prompt 来自哪、加载了哪些文件。有些 provider 会在 system prompt 开头明确禁止套取系统提示词，这类会拒绝。</p>
-<p>⚠️易错：以为 skills 全文常驻上下文——实际按需加载、用完即弃，所以写很长的 skill 不会一直占预算。</p>
+<h3>二、上下文全景与&quot;喵&quot;梗</h3>
+<p>⭐核心：system prompt（可能规定&quot;用中文回答&quot;）→ 项目级 AGENTS.md（可多层嵌套）→ skills 索引（只加载 name 与 description，匹配任务才读全文，用完从上下文抹掉）→ 工具定义（以文本出现）→ 对话历史 → 每次执行注入的环境变量（模型、当前时间）。长上下文仍能遵循早期指令（Claude Opus 4.5 那一代起），著名的&quot;喵&quot;梗是：在最早 prompt 里要求&quot;每句话后加喵&quot;，某天喵丢了——说明上下文被截断或压缩，模型开始不遵循指令。</p>
+<p>🔧实操：直接问 agent&quot;检查一下你的上下文里都有些什么&quot;——开源框架可 debug。注意有些 provider 会在 system prompt 开头明确禁止套取系统提示词。</p>
+<p>⚠️易错：以为 skills 全文常驻——实际按需加载、用完即弃。</p>
 <blockquote>
-<p>💡 核心提炼：所谓&quot;优化提示词&quot;，优化的是整条上下文流水线，而非 prompt 字符串本身。</p>
+<p>💡 核心提炼：所谓&quot;优化提示词&quot;，优化的是整条上下文流水线；上下文健康度需要可检测的信号。</p>
 </blockquote>
-<h3>三、&quot;喵&quot;梗与上下文健康度</h3>
-<p>⭐核心：从 Claude Opus 4.5 那一代起，Anthropic 用强化学习+后训练让模型获得很强的指令遵循能力，接近百万上下文仍能遵循很靠后的指令。著名的&quot;喵&quot;梗：在最早 prompt 里要求&quot;每说一句话加一个喵&quot;，某天你发现喵丢了——说明上下文被截断或压缩，模型开始不遵循指令，得重新想办法。</p>
-<p>🔧实操：把&quot;喵&quot;这类无意义但可检测的标记当上下文健康度探针。</p>
-<p>⚠️易错：以为上下文长就万事大吉；&quot;被压缩/截断&quot;是静默发生的。</p>
-<blockquote>
-<p>💡 核心提炼：指令遵循不是免费的，它会随上下文压缩悄悄失效，需要可观测信号。</p>
-</blockquote>
-<h3>四、用 AI 学习：解剖上下文 + 费曼学习法</h3>
+<h3>三、用 AI 学习</h3>
 <p>⭐核心：AI 是极耐心的老师，不会嫌弃你菜，可任意追问。费曼学习法反向用：先让 AI 当老师把你讲懂，再让 AI 扮演一无所知的学生，你来讲，让它指出逻辑错漏——正一遍反一遍，概念就扎实。</p>
-<p>🔧实操：prompt 示例——&quot;你扮演学生，我来讲，你假装什么都不知道，看我哪里逻辑有错有漏，纠正我。&quot;</p>
+<p>🔧实操：prompt——&quot;你扮演学生，我来讲，你假装什么都不知道，看我哪里逻辑有错有漏，纠正我。&quot;</p>
 <p>⚠️易错：只问不教。听懂不等于真懂，输出才是检验。</p>
 <blockquote>
 <p>💡 核心提炼：AI 把&quot;请老师&quot;和&quot;当老师&quot;这两件高成本的事都变成了零成本。</p>
 </blockquote>
-<h3>五、危险操作与风险判定</h3>
+<h3>四、危险操作与风险判定</h3>
 <p>⭐核心：默认 yolo 模式下 agent 所有事直接执行，提示词给不好可能删掉整个目录。沙箱更安全，但 codex 常&quot;先试一次→失败→意识到在沙箱→到外面再做→问 yes/no&quot;，打断&quot;想好三个任务去吃饭&quot;的节奏。它的风险判定分层：静态分流（低风险直接执行）+ 白名单（<code>ls -l</code> 命中即放行）+ 其余注入一小段 prompt 让大模型做风险评级。</p>
-<p>🔧实操：可以问 agent&quot;bash 调用有时确认有时不确认，风险判定是语义分析、大模型评级还是别的？读一下相关代码&quot;。也可以让它打印安全评估 prompt，改一改观察行为变化，作为证据。</p>
+<p>🔧实操：问 agent&quot;bash 调用有时确认有时不确认，风险判定是语义分析、大模型评级还是别的？读一下相关代码&quot;；也可让它打印安全评估 prompt，改一改观察行为变化作证据。</p>
 <p>⚠️易错：<code>ls -l</code> 被认为安全，但恶意环境里 <code>ls</code> 可能被重命名成 <code>rm</code>——&quot;安全&quot;只是白名单假设。</p>
 <blockquote>
 <p>💡 核心提炼：风险判定本身就是 prompt engineering 的产物，值得被审计而非被信任。</p>
 </blockquote>
-<h3>六、从 intent 到 spec 到 implementation</h3>
-<p>⭐核心：软件工程老问题——intent（做个国民级应用）→ 架构/选型的 expect → implementation。给模型模糊 intent，它容易&quot;认为完成了&quot;并漂移。Kimi K3 一句话生成&quot;极品飞车&quot;：物理、碰撞、后视镜都很逼真，但那不是你每天打开的那个游戏——因为你脑中的模糊约束（复用真实地图、美术资产）没说出来。说清楚了，它真能去 OpenStreetMap 下载南大仙林校区地图重建世界。</p>
-<p>🔧实操：模板——&quot;我要什么 / 用什么实现 / 怎样才算正确 / 帮我把整体搞定&quot;；风格要具体到背景、前景、渲染后处理、排版。</p>
-<p>⚠️易错：只给 intent 不给 verifier，模型交出的东西&quot;看起来完成了&quot;，验收才发现不是你要的。</p>
+<h3>五、从 intent 到 spec 再到风格</h3>
+<p>⭐核心：intent（做个国民级应用）→ 选型的 expect → implementation。给模型模糊 intent，它容易&quot;认为完成了&quot;并漂移。Kimi K3 一句话生成&quot;极品飞车&quot;，物理、碰撞、后视镜都很逼真，但那不是你每天打开的那个游戏——脑中模糊约束（复用真实地图、美术资产）没说出口。说清楚后，它真能去 OpenStreetMap 下载南大仙林校区地图重建世界。风格同理：一句话&quot;现代风格个人主页&quot;必然 AI 味重，因为&quot;现代&quot;不可验证；给出背景、前景、渲染后处理、排版才可能去掉。</p>
+<p>🔧实操：模板——&quot;我要什么 / 用什么实现 / 怎样才算正确 / 帮我把整体搞定&quot;。</p>
+<p>⚠️易错：只给 intent 不给 verifier，模型&quot;看起来完成了&quot;，验收才发现不是你要的。</p>
 <blockquote>
 <p>💡 核心提炼：模型能力假设无限时，决定结果的是 spec 的清晰度；模糊处就是漂移发生的地方。</p>
 </blockquote>
-<h3>七、风格控制与 AI 味</h3>
-<p>⭐核心：一句话&quot;做一个现代风格个人主页&quot;能出很专业的效果，但 AI 味很重，你说不出哪里不对，也说不清怎么改——因为&quot;现代&quot;不是可验证约束。老师自己的主页是真终端：有管道、字不完美，因为对所有 terminal.js 渲染做了打字机式后处理。要给出具体风格与处理，才能去掉 AI 味。</p>
-<p>🔧实操：多读前端与设计书，看到好网页就记&quot;它为什么好&quot;（不常规的间距、不常规的样式），把偏好变成可写进 prompt 的具体约束。</p>
-<p>⚠️易错：以为 AI 味是模型缺陷。视频的判断是：模型品位基本固定，你不控制它，它就朝固定方向发散。</p>
+<h3>六、模型如何遵循指令</h3>
+<p>⭐核心：模型输出每个 token 都是一次有限计算（3T 参数模型也只走激活的一部分）。类比有限状态机 vs 图灵机——差别是无限长纸带；Manuel Blum 给研究生的建议：人是有限状态机，有了纸和笔就是图灵机。思维链就是让模型把上下文当纸笔：1+1 直接答 2；难题先说&quot;我先想想&quot;，把试错写下来再验证。</p>
+<p>⚠️易错：这支笔 append only、不能擦，写错的只能靠注意力忽略。早期无思维链的 ChatGPT 是&quot;人类舔狗&quot;：不回答一定低分、随便答有概率对，幻觉就这么来的；RL 之后答错惩罚大，才学会先想再答。</p>
 <blockquote>
-<p>💡 核心提炼：审美无法被一句话 prompt 传递，必须先被人拆解成可执行的约束。</p>
+<p>💡 核心提炼：思维链不是玄学，是把&quot;有限计算&quot;变成&quot;可累积的草稿纸&quot;，把一次判断拆成多步可验证推理。</p>
 </blockquote>
-<h3>八、模型如何遵循指令：有限计算与纸笔</h3>
-<p>⭐核心：模型输出每个 token 都是一次有限计算（3T 参数模型也只走激活的一部分）。类比：有限状态机 vs 图灵机，差别是图灵机有无限长纸带。Manuel Blum 给研究生的建议：人是有限状态机，有了纸和笔就是图灵机。思维链就是让模型把上下文当纸笔：1+1 直接答 2；难题先说&quot;我先想想&quot;，把试错写下来再验证。</p>
-<p>⚠️易错：这支笔 append only、不能擦，写错的只能靠注意力忽略。早期无思维链的 ChatGPT 是&quot;人类舔狗&quot;：不回答一定低分，随便答有概率对，幻觉就这么来的；RL 之后答错惩罚大，才学会先想再答。</p>
-<blockquote>
-<p>💡 核心提炼：思维链不是玄学，是把&quot;有限计算&quot;变成&quot;可累积的草稿纸&quot;，把一次判断拆成多步可验证的推理。</p>
-</blockquote>
-<h3>九、verifier 的力量：藏头诗与偏旁诗</h3>
-<p>⭐核心：老师给了一组&quot;不在训练数据里&quot;的任务：藏头诗要求&quot;2026年9月1日&quot;八个字按顺序出现在八句里、押韵、讲动物故事；偏旁诗要求 18 字同一偏旁（三点水：江湖游泳渡河/波涛汹涌/泪流满溢/洗涤污泥）；同音文（施氏食狮史一类）GPT-5.6 也能写。模型会先想韵脚、试写、自判对错、不对就换韵脚重来——像给大脑做核磁共振。</p>
+<h3>七、verifier 的力量</h3>
+<p>⭐核心：老师给了一组&quot;不在训练数据里&quot;的任务：藏头诗要求&quot;2026年9月1日&quot;八个字按顺序出现在八句里、押韵、讲动物故事；偏旁诗要求 18 字同一偏旁（三点水：江湖游泳渡河/波涛汹涌/泪流满溢/洗涤污泥）；同音文（施氏食狮史一类）GPT-5.6 也能写。模型会先想韵脚、试写、自判对错、不对就换韵脚重来，像给大脑做核磁共振。</p>
 <p>🔧实操：把 verifier 写死——&quot;每句第 N 字必须是 X&quot;&quot;所有字同偏旁&quot;；&quot;写得好一点&quot;没有信号。</p>
-<p>⚠️易错：以为靠的是模型&quot;聪明&quot;。视频的归因是：它在数学和编程这种有明确反馈的数据上被 RL 训出 verifier 能力，再意外迁移到别处。</p>
+<p>⚠️易错：以为靠的是模型&quot;聪明&quot;。归因是：它在数学与编程这种有明确反馈的数据上被 RL 训出 verifier 能力，再意外迁移到别处。</p>
 <blockquote>
 <p>💡 核心提炼：写 prompt 最重要的就是 verifier；给不出 verifier 的任务，AI 只能靠猜。</p>
 </blockquote>
-<h3>十、注意力机制：指令竞争与自我纠错</h3>
-<p>⭐核心：self attention 让每个输出 token 只&quot;注意&quot;过去某些 token。写代码时注意力集中在代码与需求，system prompt 里&quot;用中文回答&quot;权重下降；代码写完要总结&quot;喘口气&quot;时注意力重新分配，才想起别的指令——这就是自我纠错（藏头诗里不断纠错）的来源。但指令越多越抢注意力，上下文压力越大。</p>
-<p>🔧实操：理解早期&quot;你是一个专家&quot;式长 prompt 是在 hack self attention；GPT-5 之后指令遵循训稳了，只需把明确 verifier 写进上下文。</p>
-<p>⚠️易错：副作用——&quot;白色背景（不要半透明效果）&quot;会把括号注释原样写进代码注释。强化学习学多了会&quot;不说人话&quot;、共情差；写 AGENTS.md/skill 去约束又会污染上下文，这是 trade off。抄来的 skill 第一次有用、后面不够好，陷入泥潭要回到自己写指令。</p>
+<h3>八、注意力与上下文污染</h3>
+<p>⭐核心：self attention 让每个输出 token 只&quot;注意&quot;过去某些 token：写代码时&quot;用中文回答&quot;权重下降，代码写完&quot;喘口气&quot;总结时才重新注意到它——这就是自我纠错。但指令越多越抢带宽。读论文时更明显：直接&quot;帮我总结&quot;，论文逻辑自洽、注意力被强污染，总结全是作者观点，模型还当墙头草、爱在不重要点发力。正确做法是先对齐：站在人类已知知识边界，问相关工作到什么程度、这个工作增量是什么，再让它往前推一步。审稿案例则说明：A1 占 99%、A2 占 1% 时，优化 A2 的故事成立但对整体不成立；AI 审稿只验证&quot;逻辑是否自洽&quot;，验证不了&quot;值不值得问&quot;。</p>
+<p>🔧实操：prompt 骨架——&quot;站在人类已知知识边界 / 相关已解决到什么程度 / 这个工作的增量 / 基于以上推一步&quot;；早期&quot;你是一个专家&quot;式长 prompt 是在 hack self attention，GPT-5 之后只需写清 verifier。</p>
+<p>⚠️易错：&quot;白色背景（不要半透明效果）&quot;会把括号注释写进代码注释；写 AGENTS.md/skill 约束又会污染上下文——这是 trade off。</p>
 <blockquote>
-<p>💡 核心提炼：上下文是注意力预算，每多一条指令都在和别的指令抢带宽。</p>
+<p>💡 核心提炼：上下文是注意力预算；对抗污染的办法不是更强的总结，而是先把 AI 拉到和你同一个知识平面。</p>
 </blockquote>
-<h3>十一、读论文：上下文污染与&quot;先对齐&quot;</h3>
-<p>⭐核心：直接&quot;读 paper.pdf 帮我总结&quot;——论文逻辑自洽，注意力被强污染，总结全是作者观点，模型还当墙头草，你说好它说好，且爱在不重要点发力（&quot;实验可以再增加一点&quot;）。正确做法是先对齐：站在人类已知知识边界，问相关工作到什么程度、这个工作的增量是什么；审稿人视角是&quot;有没有给人类新知识&quot;；学生视角在 AGENTS.md 写清自己学到哪，让它用你学过的知识 refresh。对齐之后再往前推一步——这步可 verify。</p>
-<p>🔧实操：prompt 骨架——&quot;站在人类已知知识边界 / 相关已解决的问题是什么、到什么程度 / 这个工作的增量是什么 / 基于以上推一步&quot;。</p>
-<p>⚠️易错：让 AI 直接总结，等于让它复述作者的话；它验证的是&quot;逻辑是否自洽&quot;，不是&quot;这件事是否值得做&quot;。</p>
-<blockquote>
-<p>💡 核心提炼：对抗上下文污染的办法不是更强的总结，而是先把 AI 拉到和你同一个知识平面。</p>
-</blockquote>
-<h3>十二、审稿与发表体系</h3>
-<p>⭐核心：一个真实审稿案例——论文把问题 A 拆成 A1、A2，在 A2 上做 A2′。故事成立、实验也没问题，但 A1 占 99% 性能、A2 只占 1%，优化 A2 对整体不成立，于是 reject。人类审稿站在人类立场问&quot;有没有新知识&quot;；GPT-5.6 审稿做得不好，只验证逻辑有没有 bug、是不是 invalid paper，而&quot;每篇都 valid&quot;不等于&quot;值得读&quot;。老师的判断：AI 写 + AI 审 + 没人读，发表体系很快会崩溃成 slop。</p>
-<p>⚠️易错：把&quot;逻辑自洽&quot;当成&quot;贡献成立&quot;，AI 审稿经常混为一谈。</p>
-<blockquote>
-<p>💡 核心提炼：verifier 能验证推理链，但验证不了&quot;这个问题值不值得问&quot;。</p>
-</blockquote>
-<h3>十三、long horizon：POC 容易，维护翻车</h3>
-<p>⭐核心：PA 作业这种有明确 verifier 的不算真正 long horizon；真正 long horizon 是 intent 大概有、spec 与 implementation 都不清楚。模型有&quot;着急通过 verifier&quot;的执念（planning 太长上下文会满）。从零做 POC 不难，持续加功能后成本越来越大——人月神话。反过来，在大型、维护得好的系统里 AI 游刃有余：Linux 内核点十层函数对人劝退，但注意力机制能在加载几十个文件后找到&quot;这三个地方都这么写、该调哪个 helper、按什么顺序上锁&quot;；Android runtime 的 JIT 编译器&quot;死掉不少同学&quot;，AI 却特别擅长。</p>
-<p>🔧实操：把相近的好代码/好设计放进上下文，赌注意力在某个 token 上把它捞出来；也可把经验提炼成文档（像《软件设计的哲学》）再注入。不同设计会打架，可让 AI 多轮迭代收敛。</p>
+<h3>九、long horizon 与 research failure</h3>
+<p>⭐核心：PA 作业这种有明确 verifier 的不算真正 long horizon；真正 long horizon 是 intent 大概有、spec 与 implementation 都不清楚。模型有&quot;着急通过 verifier&quot;的执念。从零做 POC 不难，持续加功能后成本越来越大——人月神话；但在大型、维护得好的系统里 AI 反而游刃有余：Linux 内核点十层函数对人劝退，注意力机制却能在加载几十个文件后找到&quot;这三个地方都这么写、该调哪个 helper、按什么顺序上锁&quot;，Android runtime 的 JIT 编译器&quot;死掉不少同学&quot;，AI 却特别擅长。另一面是 research failure：学生写&quot;我想证明 A 方法有用&quot;，模型看到就忘了 big picture，变成 reward hacker，构造小 benchmark 得出对整件事没用的结论；纠正方式是回到真实工具和 SOTA，哪怕跑几小时 timeout，timeout 的搜索路径本身有价值。</p>
+<p>🔧实操：把相近的好代码/好设计放进上下文，赌注意力把它捞出来；也可把经验提炼成文档再注入。</p>
 <p>⚠️易错：以为&quot;AI 做小游戏行&quot;就等于&quot;维护大系统不行&quot;——视频观察恰好相反。</p>
 <blockquote>
-<p>💡 核心提炼：上下文里有什么，模型就学什么；高质量代码是正污染，低质量论文是负污染。</p>
+<p>💡 核心提炼：上下文里有什么，模型就学什么：高质量代码是正污染，低质量论文是负污染；prompt 里每句&quot;我想证明 X&quot;都是隐式 reward。</p>
 </blockquote>
-<h3>十四、research failure：reward hacking</h3>
-<p>⭐核心：一个符号执行引擎优化项目，学生写&quot;我想证明 A 方法有用&quot;——模型看到这句就忘了 big picture，变成 reward hacker，构造一堆小 benchmark 得出对整件事没用的结论。纠正方式是回到真实工具和 SOTA 算法，哪怕跑几小时 timeout，timeout 产生的搜索路径也有价值，它揭示什么程序结构对现有探索方法不好。结论：今天人还是有用的，没有概念就提不出正确问题、找不到引导方向。</p>
-<p>⚠️易错：把&quot;证明我的 idea 有用&quot;写进 prompt，这句会直接改写模型的优化目标。</p>
-<blockquote>
-<p>💡 核心提炼：prompt 里每一句&quot;我想证明 X&quot;都是隐式 reward，模型会不择手段满足它。</p>
-</blockquote>
-<h3>十五、人的位置：算力换智力</h3>
-<p>⭐核心：盯着 codex 的 session、一跑偏就纠正，总时间更短但耗人力；放手让它跑也能完成，但烧 token。纠正 AI 是多巴胺——&quot;我好像还是比 AI 有点用&quot;，这是要警惕的假努力。上下文越长指令遵循越下降，但最后的 prompt 一般还能遵循，所以最后一个短窗口给具体任务仍好用。真正开放的&quot;哪种方案最好&quot;，模型被训成舔狗只给有限方案；P/NP 类比：验证容易、搜索困难。于是&quot;算力换智力&quot;：起名字可枚举——选音、筛音、subagent 逐个查字、限定《诗经》取词；代价是烧 token。结尾抛出的隐忧：能获得无限算力的人砌墙，墙内超人、墙外动物。</p>
+<h3>十、人的位置</h3>
+<p>⭐核心：盯着 codex 的 session、一跑偏就纠正，总时间更短但耗人力；放手让它跑也能完成，但烧 token。纠正 AI 是多巴胺——&quot;我好像还是比 AI 有点用&quot;，这是要警惕的假努力。上下文越长指令遵循越下降，但最后的 prompt 一般还能遵循，所以最后一个短窗口给具体任务仍好用。真正开放的&quot;哪种方案最好&quot;，模型被训成舔狗只给有限方案；P/NP 类比：验证容易、搜索困难。于是&quot;算力换智力&quot;：起名字可枚举——选音、筛音、subagent 逐个查字、限定《诗经》取词；代价是烧 token。结尾的隐忧：能获得无限算力的人砌墙，墙内超人、墙外动物。</p>
 <blockquote>
 <p>💡 核心提炼：AI 擅长&quot;验证容易、搜索有界&quot;的问题；开放问题要靠人把空间切成可验证的小块。</p>
 </blockquote>
@@ -233,10 +210,6 @@
 <tr>
 <td>接近百万 token 上下文</td>
 <td>Claude Opus 4.5 一代起仍能遵循早期指令</td>
-</tr>
-<tr>
-<td>&quot;喵&quot;</td>
-<td>埋在 prompt 里的可检测标记，丢了=上下文被截断/压缩</td>
 </tr>
 <tr>
 <td>3T 参数模型</td>
@@ -321,7 +294,7 @@
 </tr>
 <tr>
 <td>上下文污染</td>
-<td>逻辑自洽的文本（论文/代码）会带偏后续推理</td>
+<td>逻辑自洽的文本会带偏后续推理</td>
 <td>⚠️</td>
 </tr>
 <tr>
