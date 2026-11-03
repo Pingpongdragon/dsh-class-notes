@@ -41,45 +41,28 @@
 <li><strong>时长</strong>：99:42</li>
 </ul>
 <!-- chapters:start -->
-<h2>官方章节时间轴</h2>
-<table>
-<thead>
-<tr>
-<th>时间</th>
-<th>章节</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>00:00–14:17</td>
-<td>回顾</td>
-</tr>
-<tr>
-<td>14:17–49:21</td>
-<td>阅读经典</td>
-</tr>
-<tr>
-<td>49:21–1:19:04</td>
-<td>典型的系统架构</td>
-</tr>
-<tr>
-<td>1:19:04–1:39:41</td>
-<td>应对复杂性</td>
-</tr>
-</tbody></table>
-<h3>关键画面</h3>
+<h2>章节图文</h2>
+<h3>00:00–14:17 · 回顾</h3>
 <figure>
 <img src="../assets/07/chapter-1.jpg" alt="回顾">
 <figcaption>00:00 · 回顾</figcaption>
-</figure><figure>
+</figure><p><strong>这一节讲什么：</strong> 承接上讲：做设计决定就背技术债，Brooks 说本质是驾驭复杂性，选课的容量、先修、教室冲突是消不掉的本质复杂性；文件系统好 hack 却没事务，数据库给事务却要穿过中间层调试。再以「登录」演示需求怎么滚成泥潭。</p>
+<h3>14:17–49:21 · 阅读经典</h3>
+<figure>
 <img src="../assets/07/chapter-2.jpg" alt="阅读经典">
 <figcaption>14:17 · 阅读经典</figcaption>
-</figure><figure>
+</figure><p><strong>这一节讲什么：</strong> 用 AI 重读老 paper：Dijkstra 说人脑很小，只能靠抽象与层次分解，把不能一次理解的东西变成可逐层理解的；再用动态规划说明「抽象丢失」。Guy Steele 全篇只用单音节词，主张语言要小、要有形式语义、扩展必须是一等公民且可组合。</p>
+<h3>49:21–1:19:04 · 典型的系统架构</h3>
+<figure>
 <img src="../assets/07/chapter-3.jpg" alt="典型的系统架构">
 <figcaption>49:21 · 典型的系统架构</figcaption>
-</figure><figure>
+</figure><p><strong>这一节讲什么：</strong> 三个可生长架构：UNIX 每个工具只做一件事、用文本流协作，管道把人与程序统一起来；关系数据库用二维表加 SQL，把优化器与事务藏在接口后；Internet 只做连通性，RFC 1958 说唯一该永存的原则是变化本身。</p>
+<h3>1:19:04–1:39:41 · 应对复杂性</h3>
+<figure>
 <img src="../assets/07/chapter-4.jpg" alt="应对复杂性">
 <figcaption>1:19:04 · 应对复杂性</figcaption>
-</figure><!-- chapters:end --><h2>讲了什么</h2>
+</figure><p><strong>这一节讲什么：</strong> 业务系统里每个功能等于一个数据库事务，MVC 与 MVVM 把模型、页面状态都形式化。但长流程撑不住：订单表只加一列状态就会出现「既该毕业又不该毕业」；于是引入复式记账与事件溯源，只追加事实、重放出报表，让派生状态可溯源。</p>
+<!-- chapters:end --><h2>讲了什么</h2>
 <p>开场承接上一讲：需求与架构分不开，因为只要做设计决定，就背上技术债。Brooks 说软件工程的本质是驾驭复杂性；选课系统的容量、先修、时间冲突、教室、师生借教室，这些是问题域里的 essential complexity，消不掉，只能用架构隔离。任何技术选型都是 trade-off：文件系统好 hack、UNIX 工具能直接组合，但没有原子事务和并发控制；数据库给你 transaction、备份、scale，代价是调试要穿过中间层，不能像文件一样随手用工具看。</p>
 <p>他用「登录」说明需求会怎样滚成泥潭：直接让 GPT 做 login，它会猜一个用户名密码方案；有了注册就要确认密码，然后用户一定会忘密码，于是要忘记密码；发邮件要选邮件服务，发短信要通道；想用微信/支付宝登录，个人开发者可能连公司实体都没有。所以需求阶段要 DFS 做 MVP 验证最重要的点，也要 BFS 比较登录方式、首页布局这些分叉；最后总要把需求写出来，但代码本身也可以是需求——把文档删掉让 AI 读代码，也能还原出需求点，只是会非常长。</p>
 <p>架构的作用有两个：分解 essential complexity（数据库把存储、可靠性、原子性收进一个 contract，你只管业务）；收缩 spec→implementation 的可能性。需求收缩 intent→spec 的不确定性，架构收缩 spec→implementation 的不确定性，代价还是技术债。</p>
