@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepSeek Harness [09] 笔记</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin:0; background:#f4f7fb; color:#1f2937; font-family:"Microsoft YaHei","PingFang SC",system-ui,-apple-system,sans-serif; }
+  article { max-width: 900px; margin: 0 auto; padding: 48px 28px 80px; background:#fff; box-shadow: 0 0 40px rgba(15,23,42,.06); }
+  h1 { font-size: 30px; line-height:1.35; color:#0f172a; border-bottom:3px solid #dbeafe; padding-bottom:16px; }
+  h2 { font-size: 22px; color:#1d4ed8; margin-top:42px; border-left:5px solid #60a5fa; padding-left:12px; }
+  h3 { font-size: 18px; color:#0f172a; margin-top:28px; }
+  p, li { line-height:1.9; font-size:15.5px; }
+  li { margin:6px 0; }
+  blockquote { margin:18px 0; padding:12px 18px; background:#eff6ff; border-left:4px solid #3b82f6; color:#1e3a8a; }
+  table { border-collapse: collapse; width:100%; margin:18px 0; font-size:14.5px; }
+  th, td { border:1px solid #dbe3ef; padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:#f1f5f9; color:#0f172a; }
+  code { background:#eef2ff; padding:2px 5px; border-radius:4px; font-family:Consolas,monospace; font-size:13.5px; }
+  pre { background:#0f172a; color:#e2e8f0; padding:18px; border-radius:10px; overflow:auto; line-height:1.65; }
+  pre code { background:transparent; color:inherit; padding:0; }
+  a { color:#2563eb; }
+  hr { border:0; border-top:1px solid #e2e8f0; margin:32px 0; }
+  @media (max-width:640px){ article{padding:28px 16px 60px;} h1{font-size:24px;} h2{font-size:19px;} }
+</style>
+</head>
+<body>
+<article>
+<h1>软件仓库管理（2）：git 的裂缝与 agent 时代的版本管理</h1>
+<blockquote>
+<p>从「为什么文件系统管不好项目」讲到 git 的模型缺陷、jj 把 change 变成一等公民，最后推演：当提交速度从「人·小时」变成「agent·秒」，版本控制该换一套并发控制模型。</p>
+</blockquote>
+<h2>一句话结论</h2>
+<p>版本控制系统是为「单核、慢速、要开会」的人类设计的；git 的模型已露裂缝（merge 丢作者归属、rebase 全换 commit id、stash 难管），jj 用「change 是一等公民」补一刀，而 agent 时代的答案是：<strong>乐观并发换成悲观锁 + 只保快照、不再 blame</strong>。</p>
+<h2>分段大纲</h2>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>章节</th>
+<th>核心内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>作业开场</td>
+<td>lab1「会成长的个人助手」；让你亲手踩一遍焦油坑</td>
+</tr>
+<tr>
+<td>2</td>
+<td>项目是什么</td>
+<td>intent → spec → code；ReadMe 该短不该长</td>
+</tr>
+<tr>
+<td>3</td>
+<td>文件系统的原罪</td>
+<td>历史遗留 + 隐藏关联表达不了 → 技术债与 traceability</td>
+</tr>
+<tr>
+<td>4</td>
+<td>未来的仓库</td>
+<td>切片成对象/实体，有环图落进 repo.db；AI 生成视图</td>
+</tr>
+<tr>
+<td>5</td>
+<td>git 的裂缝</td>
+<td>快照、两路 merge 的作者漂移、rebase 产生新 id</td>
+</tr>
+<tr>
+<td>6</td>
+<td>jj / Jujutsu</td>
+<td>change 一等公民、无 staging area、改一字即提交</td>
+</tr>
+<tr>
+<td>7</td>
+<td>慢人与快 agent</td>
+<td>小时级 → 秒级提交；worktree 的意外价值</td>
+</tr>
+<tr>
+<td>8</td>
+<td>不再 blame</td>
+<td>agent 不会被开除；历史从追责变修复</td>
+</tr>
+<tr>
+<td>9</td>
+<td>并发控制换向</td>
+<td>git 像乐观并发；agent 快百千倍就该上锁</td>
+</tr>
+<tr>
+<td>10</td>
+<td>工具之外</td>
+<td>真正的难题是任务分解与人月神话</td>
+</tr>
+<tr>
+<td>11</td>
+<td>现场 demo</td>
+<td>「每句都对，整体错了」；MVP 与文件优先</td>
+</tr>
+<tr>
+<td>12</td>
+<td>收尾</td>
+<td>记住现在、记住历史、记住教训</td>
+</tr>
+</tbody></table>
+<h2>章节详解</h2>
+<h3>1. 作业开场：为什么让你亲手做一遍</h3>
+<p>⭐核心：lab1 不限做法，选做自愿，最后由机器人按链接验收。目的是体验 tar pit（焦油坑）：AI 一上手就做出很多<strong>看起来合理、却让项目越来越难维护</strong>的决定，直到你决心删库重做。他预告下一个 lab 与 lab1 强冲突，逼你越改越崩。</p>
+<p>🔧实操：把专业资料/文献做成个人数据库，与邮箱关联做到 always-on；一两百块的嵌入式设备就能在宿舍常跑 agent loop。</p>
+<p>⚠️易错：不要一上来把需求整包丢给 AI——「看起来都在能力范围内」正是陷阱。</p>
+<blockquote>
+<p>💡 核心提炼：这个 lab 考的不是功能，是让你亲身体验一次「AI 帮你挖坑」。</p>
+</blockquote>
+<h3>2. 项目是什么，ReadMe 该写什么</h3>
+<p>⭐核心：项目是文件集合，分层为 intent（想做什么产品、什么效果）→ spec（数据库、语言、接口、结构）→ code。他反对 AI 写超长 ReadMe：只需初衷 + 两张截图 + 最重要的设计——「你要说服一个 CS 同学跟你创业挣一个亿，一份短 ReadMe 就够」，怎么支撑 1 到 10 万用户是对方的能力。</p>
+<p>⚠️易错：把 spec 和 intent 混进一份长文档，等于把「为什么做」稀释掉。</p>
+<blockquote>
+<p>💡 核心提炼：ReadMe 是给未来的合作者看的一页纸，不是给 AI 交的作业。</p>
+</blockquote>
+<h3>3. 文件系统的原罪</h3>
+<p>⭐核心：用文件系统管项目纯属<strong>历史遗留</strong>——1950/60 年代只有文件，关系数据库还没发明。它丢失了大量不适合用文件表达的信息：一条文档里你为什么这么想、测试的输入输出与断言。</p>
+<p>典型例子：AI 把链表换成树，代码干净了，但某个 markdown 里随手写着「用链表管理数据」。文档先写、代码后到，两者<strong>没有强制关联</strong>——这就是 technical debt；不一致只会越推越多。等你想追问「文档对还是代码对」，聊天记录没了、换了电脑，只剩 git 里一点变更日志，<strong>根本判断不了</strong>。这就是研究了很久的 <strong>traceability（可追踪性）</strong>：文档、测试、乃至一行代码的关联能否在演进中维持（他引的是 2014 年一篇综述，review 更早的文章）。</p>
+<p>⚠️易错：以为打压缩包发出去能撑住协作——撑不住，才有 SVN、才有 git。</p>
+<blockquote>
+<p>💡 核心提炼：文件系统只是「恰好能存」，丢失的是关联，付出的是技术债。</p>
+</blockquote>
+<h3>4. 未来的仓库：图数据库 + AI 生成视图</h3>
+<p>⭐核心：如果人几乎不写代码了，仓库就不该是文件树，而是<strong>切片化的实体</strong>：文档、实现、测试各自是 object，「实现此文档」「此测试验证此文档」是关系——一个<strong>有环的图</strong>，树状表达不了，天然该进 <code>repo.db</code>。人类没法用 UNIX 工具维护，就「用魔法打败魔法」：训练 AI 理解 repo，自动维护 artifacts 一致性（文档说链表，实现就必须是链表）。</p>
+<p>🔧实操：小步前进时绝大部分内容与这一步无关；让 AI 按 chat 把相关文件、测试、文档「摘出来」，生成<strong>视图（view，借数据库的概念）</strong>，以看板问你改什么，改完从 v0 到 v1。前提是 everything is code / content as code。</p>
+<p>⚠️易错：他讨厌 Cursor 默认进 agent mode、藏起熟悉的 IDE——这是掌控欲与审美的冲突，不是技术判断。</p>
+<blockquote>
+<p>💡 核心提炼：模型没变（快照、小步、可追踪），变的是底层从文件树换成图、界面从文件列表换成视图。</p>
+</blockquote>
+<h3>5. git 的模型与裂缝</h3>
+<p>⭐核心：git 管的是目录快照；一次修改 = commit + 与 parent 的关系，<strong>没有独立 change 对象，用 commit 顶替</strong>。</p>
+<p>裂缝一（merge）：两路合并有两个 parent，能保住双方历史，但 ownership 会漂——B 写的代码经 A 解决冲突后，作者追成了 A，这是一次隐藏的作者修改。</p>
+<p>裂缝二（rebase）：努力把 B 的 feature 挪到 A 之后，成功则线性；但一冲突「瞬间就不知道该怎么办」。更麻烦的是<strong>每搬一次就造一个新 commit 新 id</strong>（base 变了），搬 feature 可能失败、搬 test 又失败，历史被反复改写。</p>
+<blockquote>
+<p>💡 核心提炼：git 缺的不是功能，是 change 这个一等公民——缺了它，rebase 只能靠重造 commit 来假装「搬一个修改」。</p>
+</blockquote>
+<h3>6. jj：把 change 变成一等公民</h3>
+<p>⭐核心：底层与 git <strong>完全兼容</strong>（可直接当 git 用），但引入 change：rebase 搬的是 change，冲突记录跟着 change 一路带下，到终点再 resolve。</p>
+<p>🔧实操：jj <strong>没有 staging area</strong>。他讲 git 最讨厌的场景：改到一半编译不过、导师来电话要一分钟修高优 bug，只能 stash；再被打断再 stash，于是要管一个 stash stack，还得 rebase stash。jj 近乎「改一个字节就立即 commit」，并<strong>抹掉上一次的 commit</strong>、用当前修改替代——你永远处于已提交状态。</p>
+<p>⚠️易错：jj 不消灭冲突，只是把冲突装进 change 对象带走。</p>
+<blockquote>
+<p>💡 核心提炼：git 的设计者当年没想到 rebase 影响这么大，「有 merge 就够了」，概念模型没想干净——这是留给下一代的机会。</p>
+</blockquote>
+<h3>7. 慢人与快 agent</h3>
+<p>⭐核心：现有 VCS 的隐含假设是「使用者是人」，而人是 <strong>single-core</strong>：并发里 load/store 不能同时；人观察世界时手要背在身后，要 write 时必须闭眼——读到的值已过期，可能刚被换下 CPU，扔出去的粉笔就错了。所以人以<strong>小时</strong>为单位写代码，一个模块十几人已不小，团队最细也就 <strong>10 分钟一个提交</strong>；而问一句只要二三十秒，或早上开会半小时切好 scope——这就是 stash 合理的原因（打断会发生，但「修到一半再被打断」概率低，stash 通常只有一层）。</p>
+<p>agent 呢？分钟级，上下文热时几十秒甚至几秒一个原子提交，10x~100x 团队更是秒级；即便有测试流水线门控，整体仍被加速。<strong>git 这套为人设计的模型跟不上了。</strong></p>
+<p>🔧实操：土办法是每个 agent 一台容器 + 各自 clone，主 agent（他自称 master，两个 session 叫 slave）协调、看报告；也可 codex 设计 + claude review 互相打架。更轻的是 <strong>git worktree</strong>：共享同一个 git 目录、各自独立提交、<strong>本地互相可见不必 push</strong>。他现场让 agent 演示，并解释 <code>.git</code> 有两种形态：普通仓库里是目录（logs、objects 等三类对象），worktree 里是一个文本文件，内容 <code>gitdir:</code> 指向主仓库的 tree——git 最大程度复用了操作系统的机制。</p>
+<p>⚠️易错：worktree 不解决冲突，有冲突仍要 merge/rebase。</p>
+<blockquote>
+<p>💡 核心提炼：git 的形状 = 人的带宽；带宽一变，前提就塌了。</p>
+</blockquote>
+<h3>8. 不再需要 blame</h3>
+<p>⭐核心：为什么需要版本管理？因为人有物理屏障（你不能理解我的思想，我只有一双手一对眼睛），沟通成本高，团队越大效率越低——100 人做不到 10 人的 10 倍，<strong>2~3 倍就不错</strong>，所以团队长不大，所以要快照、小步、可追溯。</p>
+<p>但 agent team 里 <strong>blame 失去意义</strong>：人被 blame 多了会被开掉，agent 没有「被开除」的能力；模型还是同构克隆，同 prompt 大概率收敛到相同结果——不必知道哪个提交引入错误，<strong>只要知道这里错了、修好它</strong>。历史价值从「谁写错了」变成「我怎么修好」。</p>
+<p>⚠️易错：不是不要历史。方向走错时回退到某个 snapshot 远比往前硬修便宜；只是一般不再回头看细节。</p>
+<blockquote>
+<p>💡 核心提炼：保快照、不追责；git log 从审计档案降级成演化笔记。</p>
+</blockquote>
+<h3>9. 并发控制换向：从乐观到悲观</h3>
+<p>⭐核心：git 像数据库的<strong>乐观并发控制</strong>——假设不冲突，先跑，提交时才发现问题再 rollback。这假设在教务系统里成立：每人读写自己那块数据，全局冲突概率极低。</p>
+<p>但 agent 快百倍千倍，主位一次分出去很多任务，就会更频繁触发冲突乃至死锁（两事务互等对方持有的对象）。而 AI 时代冲突不是大问题——出错它就修。真正的机会是换成操作系统课那种<strong>悲观锁</strong>：先 declare 对某 scope 的使用权（「一把大锁保平安」），锁住再改、改完 commit，别人想锁同一处就等释放；粒度可到<strong>文件级</strong>，避免两个 agent 同改一个测试或配置。因为 agent 够多，串行化一部分之后整体仍能推进。</p>
+<p>⚠️易错：锁不是消灭并行，是把并行退回串行的一小段；要的是 scope 划分能力，不是无限上锁。</p>
+<blockquote>
+<p>💡 核心提炼：agent 时代的 VCS = 快照 + change 对象 + 锁。这是本课最像「设计题答案」的一句。</p>
+</blockquote>
+<h3>10. 工具之外：真正难的是团队管理</h3>
+<p>⭐核心：版本控制只是工具，蒸馏的是人类经验；真正难的是进度与团队管理。只要还做不到「老板一句话就直出高质量产品」，软件工程就还活着。AI 今天仍不会做团队管理，因为<strong>每多一个人，沟通关系平方级上升</strong>（《人月神话》）——所以最难招的不是码农，是能把「造个微信」拆成 100 人 × 10 个小团队、拼起来还是整体的人。</p>
+<p>🔧实操：现在就把自己当主 agent，练「怎么分解任务、什么时候提交、什么时候合并」。</p>
+<blockquote>
+<p>💡 核心提炼：工具会换代，任务分解不会；平方级沟通成本是 AI 也压不平的墙。</p>
+</blockquote>
+<h3>11. 现场 demo：「每句都对，整体错了」</h3>
+<p>⭐核心：他<strong>没有预先准备</strong>，直接把作业丢给 agent。结果做出了入口层/编排层/能力层/数据层、<code>assistant.db</code>、手机端 HTTP 服务，最后还有一个提交——但<strong>没有邮箱、没初始化 git 仓库</strong>，做的其实是一个「看起来像教务系统」的业务系统。原因：提示词每个词 self-attention 都看到，模型被训练成「prompt 的舔狗」会<strong>过度遵循</strong>；而需求是开放讨论稿，言外之意只有一句「实现一个持续为你工作的个人助手」。他真正要的先是 <strong>browser-use agent</strong>（一号只是测试出口），在教务系统上做设计属于过度设计。</p>
+<p>⭐核心：更该从 <strong>MVP</strong> 起步——<em>the biggest risk in product development is building something nobody wants</em>。MVP 逼你想清「什么绝对要」；他只要两条：提升学习/工作效率，所以第一版<strong>可以没有数据库</strong>。</p>
+<p>🔧实操：<strong>先文件系统，别急上数据库</strong>。目录膨胀了让 agent 一句「按这个组织提炼数据库」即可；一旦有数据库，每次重构都要迁移，而调目录结构的心智负担远低于调 schema。他自己的回邮件 agent 就<strong>没有数据库</strong>：收信 → email id 与解析出的草稿、分类、是否垃圾邮件放进共享云盘同步 → 下一级流水线处理。先想清有哪几级流水线、怎么协作。</p>
+<p>⚠️易错：早期 prompt 对项目走向影响最大。「我要一个 MVP」这句会决定后面全部。</p>
+<blockquote>
+<p>💡 核心提炼：架构的目标是以不变应万变——需求根本变化时你的改动是否可控，这才是软件工程区别于 OS/数据库课的地方。</p>
+</blockquote>
+<h3>12. 收尾：版本管理就三件事</h3>
+<p>⭐核心：<strong>记住现在</strong>（必须有 repository 把文件管起来）、<strong>记住历史</strong>（删掉的东西有一天要捞回来）、<strong>记住教训</strong>（看清自己怎么演进到某点、怎么失败、怎么换条路）。</p>
+<blockquote>
+<p>💡 核心提炼：这三件事在古法编程与 agent 时代都成立，变的是实现方式，不是目的。</p>
+</blockquote>
+<h2>关键数字与例子</h2>
+<table>
+<thead>
+<tr>
+<th>数字 / 例子</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1950/60 年代</td>
+<td>系统只给文件、关系数据库未发明 → 文件管项目是遗留</td>
+</tr>
+<tr>
+<td>2014 年综述</td>
+<td>traceability 引用文献的年份（review 更早的文章）</td>
+</tr>
+<tr>
+<td>十几人</td>
+<td>一个模块的团队规模，已不算小</td>
+</tr>
+<tr>
+<td>10 分钟</td>
+<td>十几人 × 小时级 ⇒ 团队最细的提交粒度</td>
+</tr>
+<tr>
+<td>1→10→100 万→1 亿</td>
+<td>用户规模扩张，spec 要回答的问题</td>
+</tr>
+<tr>
+<td>100 / 1000 倍</td>
+<td>agent 比人快的量级（他先后说了两个）</td>
+</tr>
+<tr>
+<td>100 人 vs 10 人</td>
+<td>效率只有 2~3 倍，不是 10 倍</td>
+</tr>
+<tr>
+<td>一两百块</td>
+<td>宿舍常跑 agent loop 的嵌入式设备价格</td>
+</tr>
+<tr>
+<td>3 年</td>
+<td>那位研究生做「自动填表系统」做了 3 年，毕业时遇上 ChatGPT</td>
+</tr>
+<tr>
+<td>2 个 parent</td>
+<td>merge 的父节点数；rebase 每次搬移产生新 commit id</td>
+</tr>
+<tr>
+<td>1000 元</td>
+<td>他参加 DPC Harness 内测获赠的额度（demo 烧 token 时自嘲）</td>
+</tr>
+<tr>
+<td>3 个盘子</td>
+<td>汉诺塔「只能单向移动」变体，最优解是最大盘子总向右移一格</td>
+</tr>
+</tbody></table>
+<h2>速查卡</h2>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>一句话</th>
+<th>标记</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>traceability</td>
+<td>文档/测试/代码的关联能否在演进中维持</td>
+<td>⭐核心</td>
+</tr>
+<tr>
+<td>technical debt</td>
+<td>文档说链表、代码用树，且无强制关联</td>
+<td>⚠️易错</td>
+</tr>
+<tr>
+<td>repo.db</td>
+<td>把 artifacts 与关系存成有环图，而非文件树</td>
+<td>⭐核心</td>
+</tr>
+<tr>
+<td>view</td>
+<td>AI 按当前小步摘出片段、生成看板</td>
+<td>🔧实操</td>
+</tr>
+<tr>
+<td>commit ≈ change</td>
+<td>git 无独立 change 对象，用 commit 顶替</td>
+<td>⚠️易错</td>
+</tr>
+<tr>
+<td>jj</td>
+<td>change 一等公民、无 staging area、改一字即提交</td>
+<td>⭐核心</td>
+</tr>
+<tr>
+<td>stash</td>
+<td>「小时级提交 + 低打断率」催生的补丁设计</td>
+<td>⚠️易错</td>
+</tr>
+<tr>
+<td>worktree</td>
+<td>共享 .git 的并行工作区，本地可见不必 push</td>
+<td>🔧实操</td>
+</tr>
+<tr>
+<td>乐观 / 悲观</td>
+<td>git 像乐观并发；agent 时代按 scope 上锁</td>
+<td>⭐核心</td>
+</tr>
+<tr>
+<td>MVP</td>
+<td>最大风险是做出没人要的东西</td>
+<td>⭐核心</td>
+</tr>
+<tr>
+<td>三件事</td>
+<td>记住现在、记住历史、记住教训</td>
+<td>💡收尾</td>
+</tr>
+</tbody></table>
+<h2>我的判断</h2>
+<p>最锋利的一处不是讲 jj，而是<strong>把工具的形状归因到人的带宽</strong>：人 single-core、小时级、十几人就要开会，所以才有 commit、stash、blame、10 分钟粒度。这个归因一旦成立，「agent 快百倍所以 git 不够用」就不是修辞而是推论——这是全课唯一一处真正的第一性原理推导，其余多是类比。</p>
+<p>但有两处被绕过了。其一，<strong>锁与「小步并行」是矛盾的</strong>：他自己说「一把大锁保平安的本质是不要并行」，又说 agent 多所以整体仍快，中间缺「scope 怎么切才不互相等待」——而这恰恰是他承认最难招的那种能力，难题只是搬了个位置。其二，「不再需要 blame」依赖「同构克隆会收敛」，可同一段里他也说「模型还有不确定性」：真收敛则多 agent 互审价值存疑，不收敛则「不必知道哪个提交引入错误」只是自我安慰。现场 demo 正好印证：每句都对、整体不要，可这种偏差<strong>没有任何一个 commit 该背锅，项目已经偏了</strong>。</p>
+<p>jj 那段讲得漂亮但偏教学：「从 change 是一等公民出发就能自己发明 VCS」是好 prompt，不是证明。最后那句「你们还没形成肌肉记忆，直接用对的设计」最实用，也最容易被误读成「不用学 git」——他讲的两小时恰恰全是 git 的模型。这节课给的是可以质疑 git 的坐标系，不是替代品。</p>
+
+</article>
+</body>
+</html>
