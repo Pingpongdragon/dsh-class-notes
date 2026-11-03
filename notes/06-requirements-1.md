@@ -7,6 +7,40 @@
 - **播放量**：17210
 - **时长**：96:51
 
+<!-- chapters:start -->
+## 官方章节时间轴
+
+| 时间 | 章节 |
+|---|---|
+| 00:00–15:03 | 引言 (后半音频翻车) |
+| 15:03–44:28 | 需求工程 |
+| 44:28–1:12:32 | 无处不在的架构 |
+| 1:12:32–1:36:50 | 回到教务系统 |
+
+### 关键画面
+
+<figure>
+<img src="../assets/06/chapter-1.jpg" alt="引言 (后半音频翻车)">
+<figcaption>00:00 · 引言 (后半音频翻车)</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/06/chapter-2.jpg" alt="需求工程">
+<figcaption>15:03 · 需求工程</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/06/chapter-3.jpg" alt="无处不在的架构">
+<figcaption>44:28 · 无处不在的架构</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/06/chapter-4.jpg" alt="回到教务系统">
+<figcaption>1:12:32 · 回到教务系统</figcaption>
+</figure>
+
+<!-- chapters:end -->
+
 ## 讲了什么
 
 开场回顾 Royce 的瀑布模型：intent → spec → implementation → 维护，每一层之间是 data dependency，错了会往回污染一大片，所以需要 traceability、UML 这些工具。他补了一个「软件不软」的论证：软件是纯逻辑制品，容不下细微差错。比如程序读入 N=1，如果宇宙射线把 unsigned int 的最高位翻成 1，N 就变成巨大数，程序会无限读数直到 memory error；数据中心里也会因热噪声出现 silent error，同一条指令在不同机器上结果不同。所以「软」只是错觉。
