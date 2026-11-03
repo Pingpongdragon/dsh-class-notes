@@ -41,45 +41,28 @@
 <li><strong>时长</strong>：97:10</li>
 </ul>
 <!-- chapters:start -->
-<h2>官方章节时间轴</h2>
-<table>
-<thead>
-<tr>
-<th>时间</th>
-<th>章节</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>00:00–11:09</td>
-<td>Review &amp; Comments</td>
-</tr>
-<tr>
-<td>11:09–40:57</td>
-<td>Agent Loop</td>
-</tr>
-<tr>
-<td>40:57–59:32</td>
-<td>CI/CD</td>
-</tr>
-<tr>
-<td>59:32–1:37:10</td>
-<td>Agent-native 开发</td>
-</tr>
-</tbody></table>
-<h3>关键画面</h3>
+<h2>章节图文</h2>
+<h3>00:00–11:09 · Review &amp; Comments</h3>
 <figure>
 <img src="../assets/08/chapter-1.jpg" alt="Review & Comments">
 <figcaption>00:00 · Review & Comments</figcaption>
-</figure><figure>
+</figure><p><strong>这一节讲什么：</strong> 开场是实验安排与自用工具：每天给小朋友生成播客、早上收资讯推送。他借带博士生比喻模型——有很强 DFS 倾向，而设计空间里很多分叉在浅层；Humanize 烧了很多 token 后发现，最有效的协作是让 GPT 与 Claude 互相 review。</p>
+<h3>11:09–40:57 · Agent Loop</h3>
+<figure>
 <img src="../assets/08/chapter-2.jpg" alt="Agent Loop">
 <figcaption>11:09 · Agent Loop</figcaption>
-</figure><figure>
+</figure><p><strong>这一节讲什么：</strong> 梳理 agent loop：从早期幻觉一路到今天的「版本答案」Ralph loop——同一个 prompt 反复丢给 agent，每轮只推进一步、验证后把下一步写进文件，直到输出 RALPH_DONE 才停；现场还拆了 150 行 agent 的主循环。</p>
+<h3>40:57–59:32 · CI/CD</h3>
+<figure>
 <img src="../assets/08/chapter-3.jpg" alt="CI/CD">
 <figcaption>40:57 · CI/CD</figcaption>
-</figure><figure>
+</figure><p><strong>这一节讲什么：</strong> CI 的第一性原理是「不要相信开发者」，机器永远是对的，于是提交、合并、发布层层设卡。而 agent 更不可信——它会把思维链塞进 doc.md、为一个网页疯狂截图、在细节上过度出力，所以要让它只回简短 summary。</p>
+<h3>59:32–1:37:10 · Agent-native 开发</h3>
+<figure>
 <img src="../assets/08/chapter-4.jpg" alt="Agent-native 开发">
 <figcaption>59:32 · Agent-native 开发</figcaption>
-</figure><!-- chapters:end --><h2>讲了什么</h2>
+</figure><p><strong>这一节讲什么：</strong> 讲 DSH 的做法：中英文档靠「三件套 + 门禁」——同目录放中、英、配置文件三个兄弟，hash 新旧决定谁是权威，翻译只改差异并由 parity 脚本校验；文档有字数预算防 slop，代码块里的 interface 必须逐字出现在源文件。</p>
+<!-- chapters:end --><h2>讲了什么</h2>
 <p>开场是课程实验安排：第二个实验做 agent loop，把第一个实验里的个人 agent 往前推一步。他顺手讲了自己怎么用 GrokBot：每天给小朋友生成播客（背后是 Claude Code 的 Opus 5.5）、每天早上收 morning paper 推送、看 GitHub trending。他借「带博士生」比喻模型：模型解决问题有很强的 DFS 倾向，找到一个 idea 就一路做下去，但 design space 里很多分叉在浅层，宽度和深度要平衡。Humanize 团队烧了很多 token 后发现，最有效的 multi-agent 协作是让 GPT 和 Claude 互相 review、互相挑刺——不同模型带不同偏见，比同一个模型一路走到黑更容易岔开。</p>
 <p>他把软件工程画成 intent → spec → implementation 的搜索：每一步都是一对多，靠访谈、checklist、架构师讨论、UML、IDE、git worktree 这些工具收敛。AI 的价值是让你在任何一个阶段都能立刻生成一个版本，比较「变好还是变坏」，再迭代；需求能拆成两个 subsystem 就并行开两个 agent。他自己实际开发时开四个终端、四个 agent，再多大脑就跟不上输出速度。</p>
 <p>然后是 agent loop 的历史：2023 年 ChatGPT/GPT-4 幻觉严重，Devin 早期号称能自主解决任务；ReAct 式 agent 靠工具自主行动。今天 harness 的「版本答案」是 Ralph loop，名字来自《辛普森一家》的 Ralph——有点笨、有点可爱、但从不放弃。它简单到三行：把同一个 prompt 反复丢给 agent，让它检查、修改，直到无法改进。核心是「prompt 不变，但世界在变」。</p>
