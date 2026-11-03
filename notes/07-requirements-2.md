@@ -1,3 +1,12 @@
+# 需求和架构 (2) [07-Raw/26生成式软件工程/NJU]
+
+> 这一讲把「需求怎么收敛、架构怎么隔离复杂性」讲成了历史课：从 Dijkstra 的结构化程序、Guy Steele 的 Growing a Language，到 UNIX、关系数据库、MVC/MVVM，最后落到 event sourcing 为什么能治「当前状态数据库」的不一致。
+
+- **UP**：绿导师原谅你了（南京大学 蒋炎岩）
+- **链接**：https://www.bilibili.com/video/BV1JGap6LE74
+- **播放量**：12502
+- **时长**：99:42
+
 <!-- chapters:start -->
 ## 官方章节时间轴
 
@@ -31,15 +40,6 @@
 </figure>
 
 <!-- chapters:end -->
-
-# 需求和架构 (2) [07-Raw/26生成式软件工程/NJU]
-
-> 这一讲把「需求怎么收敛、架构怎么隔离复杂性」讲成了历史课：从 Dijkstra 的结构化程序、Guy Steele 的 Growing a Language，到 UNIX、关系数据库、MVC/MVVM，最后落到 event sourcing 为什么能治「当前状态数据库」的不一致。
-
-- **UP**：绿导师原谅你了（南京大学 蒋炎岩）
-- **链接**：https://www.bilibili.com/video/BV1JGap6LE74
-- **播放量**：12502
-- **时长**：99:42
 
 ## 讲了什么
 
