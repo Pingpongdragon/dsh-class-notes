@@ -46,6 +46,40 @@ mindmap
 
 ---
 
+<!-- chapters:start -->
+## 官方章节时间轴
+
+| 时间 | 章节 |
+|---|---|
+| 00:00–23:27 | 需求 |
+| 23:27–38:21 | 架构 |
+| 38:21–1:05:56 | 设计 |
+| 1:05:56–1:29:24 | 生态 |
+
+### 关键画面
+
+<figure>
+<img src="../assets/09/chapter-1.jpg" alt="需求">
+<figcaption>00:00 · 需求</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/09/chapter-2.jpg" alt="架构">
+<figcaption>23:27 · 架构</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/09/chapter-3.jpg" alt="设计">
+<figcaption>38:21 · 设计</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/09/chapter-4.jpg" alt="生态">
+<figcaption>1:05:56 · 生态</figcaption>
+</figure>
+
+<!-- chapters:end -->
+
 ## 分段大纲
 
 | # | 章节 | 时间（约） | 核心内容 |
