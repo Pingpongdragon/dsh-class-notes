@@ -6,6 +6,46 @@
 
 古法编程已经死了，单任务上 AI 无人能敌；但软件工程暂时没死——因为 intention→specification→implementation 之间的 gap 只能靠「先设计再实现」补，而这正是被 reward 训成做题家的模型最不愿做的事。
 
+<!-- chapters:start -->
+## 官方章节时间轴
+
+| 时间 | 章节 |
+|---|---|
+| 00:00–29:44 | 课程简介 |
+| 29:44–48:34 | 实操 (1) |
+| 48:34–1:05:10 | 视频恢复—实操 (2) |
+| 1:05:10–1:14:40 | 实操 (3) |
+| 1:14:40–1:40:00 | 软件工程 |
+
+### 关键画面
+
+<figure>
+<img src="../assets/01/chapter-1.jpg" alt="课程简介">
+<figcaption>00:00 · 课程简介</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/01/chapter-2.jpg" alt="实操 (1)">
+<figcaption>29:44 · 实操 (1)</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/01/chapter-3.jpg" alt="视频恢复—实操 (2)">
+<figcaption>48:34 · 视频恢复—实操 (2)</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/01/chapter-4.jpg" alt="实操 (3)">
+<figcaption>1:05:10 · 实操 (3)</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/01/chapter-5.jpg" alt="软件工程">
+<figcaption>1:14:40 · 软件工程</figcaption>
+</figure>
+
+<!-- chapters:end -->
+
 ## 分段大纲
 
 | 序号 | 章节 | 核心内容 |
