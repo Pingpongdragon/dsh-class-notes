@@ -37,38 +37,23 @@
 <h2>一句话结论</h2>
 <p>版本控制系统是为「单核、慢速、要开会」的人类设计的；git 已露裂缝（merge 丢作者归属、rebase 全换 commit id、stash 难管），jj 用「change 是一等公民」补一刀，而 agent 时代的答案是：<strong>乐观并发换成悲观锁，只保快照、不再 blame</strong>。</p>
 <!-- chapters:start -->
-<h2>官方章节时间轴</h2>
-<table>
-<thead>
-<tr>
-<th>时间</th>
-<th>章节</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>00:00–35:53</td>
-<td>重新设计版本管理系统</td>
-</tr>
-<tr>
-<td>35:53–1:03:48</td>
-<td>为Agent设计版本管理系统</td>
-</tr>
-<tr>
-<td>1:03:48–1:38:29</td>
-<td>从零开始一个新项目</td>
-</tr>
-</tbody></table>
-<h3>关键画面</h3>
+<h2>章节图文</h2>
+<h3>00:00–35:53 · 重新设计版本管理系统</h3>
 <figure>
 <img src="../assets/04/chapter-1.jpg" alt="重新设计版本管理系统">
 <figcaption>00:00 · 重新设计版本管理系统</figcaption>
-</figure><figure>
+</figure><p><strong>这一节讲什么：</strong> 从实验一「会成长的个人助手」让你亲手踩一次焦油坑讲起，说项目是意图→规格→代码的分层、ReadMe 该短；再论证文件系统管项目是历史遗留——文档说链表、代码已换成树且无强制关联，这就是技术债与可追踪性，于是设想改成存关系的 repo.db。</p>
+<h3>35:53–1:03:48 · 为Agent设计版本管理系统</h3>
+<figure>
 <img src="../assets/04/chapter-2.jpg" alt="为Agent设计版本管理系统">
 <figcaption>35:53 · 为Agent设计版本管理系统</figcaption>
-</figure><figure>
+</figure><p><strong>这一节讲什么：</strong> git 有两道裂缝：merge 丢作者归属、rebase 每搬一次就造新 id；jj 让 change 成一等公民、改一字节即提交。再论证版本控制假设「人单核、小时级」，agent 却秒级提交，所以要 worktree、不再需要 blame、并发换成悲观锁。</p>
+<h3>1:03:48–1:38:29 · 从零开始一个新项目</h3>
+<figure>
 <img src="../assets/04/chapter-3.jpg" alt="从零开始一个新项目">
 <figcaption>1:03:48 · 从零开始一个新项目</figcaption>
-</figure><!-- chapters:end --><h2>分段大纲</h2>
+</figure><p><strong>这一节讲什么：</strong> 现场把作业直接丢给 agent：它做出入口层、编排层、能力层和一个数据库，却没有邮箱、也没初始化仓库，成了「看着像教务系统」的业务系统——每句都对、整体错了。于是回到最小原型：先文件系统别急上数据库；收尾是记住现在、历史与教训。</p>
+<!-- chapters:end --><h2>分段大纲</h2>
 <table>
 <thead>
 <tr>
