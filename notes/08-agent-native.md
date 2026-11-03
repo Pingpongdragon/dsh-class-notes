@@ -1,3 +1,12 @@
+# Agent-native 开发 [08-Raw/26生成式软件工程/NJU]
+
+> 把 agent 开发拆成三件事：Ralph loop 怎么把长任务变成状态机、CI/CD 门禁为什么在 agent 时代更值钱、以及 DeepSeek Harness 如何用一套「文档配对 + 门禁」把 AI slop 挡在主干之外。
+
+- **UP**：绿导师原谅你了（南京大学 蒋炎岩）
+- **链接**：https://www.bilibili.com/video/BV11LWw6VEHW
+- **播放量**：15426
+- **时长**：97:10
+
 <!-- chapters:start -->
 ## 官方章节时间轴
 
@@ -31,15 +40,6 @@
 </figure>
 
 <!-- chapters:end -->
-
-# Agent-native 开发 [08-Raw/26生成式软件工程/NJU]
-
-> 把 agent 开发拆成三件事：Ralph loop 怎么把长任务变成状态机、CI/CD 门禁为什么在 agent 时代更值钱、以及 DeepSeek Harness 如何用一套「文档配对 + 门禁」把 AI slop 挡在主干之外。
-
-- **UP**：绿导师原谅你了（南京大学 蒋炎岩）
-- **链接**：https://www.bilibili.com/video/BV11LWw6VEHW
-- **播放量**：15426
-- **时长**：97:10
 
 ## 讲了什么
 
