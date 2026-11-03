@@ -22,6 +22,9 @@
   pre code { background:transparent; color:inherit; padding:0; }
   a { color:#2563eb; }
   hr { border:0; border-top:1px solid #e2e8f0; margin:32px 0; }
+  figure { margin: 22px 0; }
+  figure img { width:100%; display:block; border-radius:12px; border:1px solid #e2e8f0; }
+  figcaption { color:#64748b; font-size:13px; margin-top:8px; text-align:center; }
   @media (max-width:640px){ article{padding:28px 16px 60px;} h1{font-size:24px;} h2{font-size:19px;} }
 </style>
 </head>
@@ -34,7 +37,39 @@
 <h2>一句话结论</h2>
 <p>git 的本质是<strong>一个可回溯的目录树数据结构</strong>——只在改动路径上复制、其余靠指针共享，所以百万文件的项目也只需极小增量就能存下整棵快照树；而真正难学的不是 <code>add/commit/push</code>，是水面下那套 best practice（提交信息、提交粒度、<code>.gitignore</code>、原子提交、线性历史），每一条都是血和泪的教训。</p>
 <hr>
-<h2>分段大纲</h2>
+<!-- chapters:start -->
+<h2>官方章节时间轴</h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>章节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00:00–24:40</td>
+<td>开场 &amp; 版本管理</td>
+</tr>
+<tr>
+<td>24:40–1:03:08</td>
+<td>Git 入门与一些  最佳实践</td>
+</tr>
+<tr>
+<td>1:03:08–1:40:14</td>
+<td>学习 Git</td>
+</tr>
+</tbody></table>
+<h3>关键画面</h3>
+<figure>
+<img src="../assets/03/chapter-1.jpg" alt="开场 & 版本管理">
+<figcaption>00:00 · 开场 & 版本管理</figcaption>
+</figure><figure>
+<img src="../assets/03/chapter-2.jpg" alt="Git 入门与一些  最佳实践">
+<figcaption>24:40 · Git 入门与一些  最佳实践</figcaption>
+</figure><figure>
+<img src="../assets/03/chapter-3.jpg" alt="学习 Git">
+<figcaption>1:03:08 · 学习 Git</figcaption>
+</figure><!-- chapters:end --><h2>分段大纲</h2>
 <table>
 <thead>
 <tr>
