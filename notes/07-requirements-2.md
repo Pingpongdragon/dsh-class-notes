@@ -1,3 +1,37 @@
+<!-- chapters:start -->
+## 官方章节时间轴
+
+| 时间 | 章节 |
+|---|---|
+| 00:00–14:17 | 回顾 |
+| 14:17–49:21 | 阅读经典 |
+| 49:21–1:19:04 | 典型的系统架构 |
+| 1:19:04–1:39:41 | 应对复杂性 |
+
+### 关键画面
+
+<figure>
+<img src="../assets/07/chapter-1.jpg" alt="回顾">
+<figcaption>00:00 · 回顾</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/07/chapter-2.jpg" alt="阅读经典">
+<figcaption>14:17 · 阅读经典</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/07/chapter-3.jpg" alt="典型的系统架构">
+<figcaption>49:21 · 典型的系统架构</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/07/chapter-4.jpg" alt="应对复杂性">
+<figcaption>1:19:04 · 应对复杂性</figcaption>
+</figure>
+
+<!-- chapters:end -->
+
 # 需求和架构 (2) [07-Raw/26生成式软件工程/NJU]
 
 > 这一讲把「需求怎么收敛、架构怎么隔离复杂性」讲成了历史课：从 Dijkstra 的结构化程序、Guy Steele 的 Growing a Language，到 UNIX、关系数据库、MVC/MVVM，最后落到 event sourcing 为什么能治「当前状态数据库」的不一致。
