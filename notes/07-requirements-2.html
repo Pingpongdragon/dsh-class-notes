@@ -30,6 +30,16 @@
 </head>
 <body>
 <article>
+<h1>需求和架构 (2) [07-Raw/26生成式软件工程/NJU]</h1>
+<blockquote>
+<p>这一讲把「需求怎么收敛、架构怎么隔离复杂性」讲成了历史课：从 Dijkstra 的结构化程序、Guy Steele 的 Growing a Language，到 UNIX、关系数据库、MVC/MVVM，最后落到 event sourcing 为什么能治「当前状态数据库」的不一致。</p>
+</blockquote>
+<ul>
+<li><strong>UP</strong>：绿导师原谅你了（南京大学 蒋炎岩）</li>
+<li><strong>链接</strong>：<a href="https://www.bilibili.com/video/BV1JGap6LE74">https://www.bilibili.com/video/BV1JGap6LE74</a></li>
+<li><strong>播放量</strong>：12502</li>
+<li><strong>时长</strong>：99:42</li>
+</ul>
 <!-- chapters:start -->
 <h2>官方章节时间轴</h2>
 <table>
@@ -69,17 +79,7 @@
 </figure><figure>
 <img src="../assets/07/chapter-4.jpg" alt="应对复杂性">
 <figcaption>1:19:04 · 应对复杂性</figcaption>
-</figure><!-- chapters:end --><h1>需求和架构 (2) [07-Raw/26生成式软件工程/NJU]</h1>
-<blockquote>
-<p>这一讲把「需求怎么收敛、架构怎么隔离复杂性」讲成了历史课：从 Dijkstra 的结构化程序、Guy Steele 的 Growing a Language，到 UNIX、关系数据库、MVC/MVVM，最后落到 event sourcing 为什么能治「当前状态数据库」的不一致。</p>
-</blockquote>
-<ul>
-<li><strong>UP</strong>：绿导师原谅你了（南京大学 蒋炎岩）</li>
-<li><strong>链接</strong>：<a href="https://www.bilibili.com/video/BV1JGap6LE74">https://www.bilibili.com/video/BV1JGap6LE74</a></li>
-<li><strong>播放量</strong>：12502</li>
-<li><strong>时长</strong>：99:42</li>
-</ul>
-<h2>讲了什么</h2>
+</figure><!-- chapters:end --><h2>讲了什么</h2>
 <p>开场承接上一讲：需求与架构分不开，因为只要做设计决定，就背上技术债。Brooks 说软件工程的本质是驾驭复杂性；选课系统的容量、先修、时间冲突、教室、师生借教室，这些是问题域里的 essential complexity，消不掉，只能用架构隔离。任何技术选型都是 trade-off：文件系统好 hack、UNIX 工具能直接组合，但没有原子事务和并发控制；数据库给你 transaction、备份、scale，代价是调试要穿过中间层，不能像文件一样随手用工具看。</p>
 <p>他用「登录」说明需求会怎样滚成泥潭：直接让 GPT 做 login，它会猜一个用户名密码方案；有了注册就要确认密码，然后用户一定会忘密码，于是要忘记密码；发邮件要选邮件服务，发短信要通道；想用微信/支付宝登录，个人开发者可能连公司实体都没有。所以需求阶段要 DFS 做 MVP 验证最重要的点，也要 BFS 比较登录方式、首页布局这些分叉；最后总要把需求写出来，但代码本身也可以是需求——把文档删掉让 AI 读代码，也能还原出需求点，只是会非常长。</p>
 <p>架构的作用有两个：分解 essential complexity（数据库把存储、可靠性、原子性收进一个 contract，你只管业务）；收缩 spec→implementation 的可能性。需求收缩 intent→spec 的不确定性，架构收缩 spec→implementation 的不确定性，代价还是技术债。</p>
