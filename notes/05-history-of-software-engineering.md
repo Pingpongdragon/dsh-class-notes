@@ -6,6 +6,40 @@
 
 软件工程诞生于 intent（想要什么）→ specification（写下来的规格）→ implementation（代码）三者之间的 gap，而需求本身是拍脑袋想出来、客户自己也说不清的，所以全部方法学的本质只有一条：**把发现问题的时间点提前**。AI 抹平了「自然语言对不齐」和「checklist 不好查」，但这个 gap 还在，所以这门课仍然成立。
 
+<!-- chapters:start -->
+## 官方章节时间轴
+
+| 时间 | 章节 |
+|---|---|
+| 00:00–17:37 | 新闻播报 |
+| 17:37–39:01 | 回到软件开发 |
+| 39:01–1:15:06 | 从软件危机到软件工程 |
+| 1:15:06–1:39:59 | 软件工程给世界带来了什么 |
+
+### 关键画面
+
+<figure>
+<img src="../assets/05/chapter-1.jpg" alt="新闻播报">
+<figcaption>00:00 · 新闻播报</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/05/chapter-2.jpg" alt="回到软件开发">
+<figcaption>17:37 · 回到软件开发</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/05/chapter-3.jpg" alt="从软件危机到软件工程">
+<figcaption>39:01 · 从软件危机到软件工程</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/05/chapter-4.jpg" alt="软件工程给世界带来了什么">
+<figcaption>1:15:06 · 软件工程给世界带来了什么</figcaption>
+</figure>
+
+<!-- chapters:end -->
+
 ## 分段大纲
 
 | 序号 | 章节 | 核心内容 |
