@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepSeek Harness [09] 笔记</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin:0; background:#f4f7fb; color:#1f2937; font-family:"Microsoft YaHei","PingFang SC",system-ui,-apple-system,sans-serif; }
+  article { max-width: 900px; margin: 0 auto; padding: 48px 28px 80px; background:#fff; box-shadow: 0 0 40px rgba(15,23,42,.06); }
+  h1 { font-size: 30px; line-height:1.35; color:#0f172a; border-bottom:3px solid #dbeafe; padding-bottom:16px; }
+  h2 { font-size: 22px; color:#1d4ed8; margin-top:42px; border-left:5px solid #60a5fa; padding-left:12px; }
+  h3 { font-size: 18px; color:#0f172a; margin-top:28px; }
+  p, li { line-height:1.9; font-size:15.5px; }
+  li { margin:6px 0; }
+  blockquote { margin:18px 0; padding:12px 18px; background:#eff6ff; border-left:4px solid #3b82f6; color:#1e3a8a; }
+  table { border-collapse: collapse; width:100%; margin:18px 0; font-size:14.5px; }
+  th, td { border:1px solid #dbe3ef; padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:#f1f5f9; color:#0f172a; }
+  code { background:#eef2ff; padding:2px 5px; border-radius:4px; font-family:Consolas,monospace; font-size:13.5px; }
+  pre { background:#0f172a; color:#e2e8f0; padding:18px; border-radius:10px; overflow:auto; line-height:1.65; }
+  pre code { background:transparent; color:inherit; padding:0; }
+  a { color:#2563eb; }
+  hr { border:0; border-top:1px solid #e2e8f0; margin:32px 0; }
+  @media (max-width:640px){ article{padding:28px 16px 60px;} h1{font-size:24px;} h2{font-size:19px;} }
+</style>
+</head>
+<body>
+<article>
+<h1>软件仓库管理（NJU 生成式软件工程 第 03 讲）</h1>
+<blockquote>
+<p>这节课表面在讲 git 的命令与对象，实际在讲一句话：仓库就是「用原子化改动（atomic change）推进的一串快照」。</p>
+</blockquote>
+<h2>一句话结论</h2>
+<p>git 的本质是<strong>一个可回溯的目录树数据结构</strong>——只在改动路径上复制、其余靠指针共享，所以百万文件的项目也只需极小增量就能存下整棵快照树；而真正难学的不是 <code>add/commit/push</code>，是水面下那套 best practice（提交信息、提交粒度、<code>.gitignore</code>、原子提交、线性历史），每一条都是血和泪的教训。</p>
+<hr>
+<h2>分段大纲</h2>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>章节</th>
+<th>核心内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>开场：AI 又进步了</td>
+<td>GPT6 的惊喜在空间感知与数学，编程「品味」没学会；代码越来越紧凑，人类越来越不想 review</td>
+</tr>
+<tr>
+<td>2</td>
+<td>还要不要学基础</td>
+<td>汽车刚发明时司机必须懂原理，今天上车说一句就走；结论仍是「要学」，但怎么学老师说自己也不知道</td>
+</tr>
+<tr>
+<td>3</td>
+<td>软件是什么</td>
+<td>课本定义是「代码+文档的集合」；老师定义为「人类需求在信息世界里的投影」，今天这个投影是<strong>一个目录</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>前 git 时代</td>
+<td>U 盘拷代码、压缩包发邮件、<code>作业V1/V2/最终版</code>；第一个博士生大一存 U 盘、大二 U 盘坏</td>
+</tr>
+<tr>
+<td>5</td>
+<td>git 的核心承诺</td>
+<td>快照 + 时间回溯；<code>clone/pull</code> 取代发邮件；mis submit 脚本打包≈CI/CD 雏形</td>
+</tr>
+<tr>
+<td>6</td>
+<td>怎么学</td>
+<td>「惊人的注意力」+ virtual implement：先自己想一遍再对比；用香港路牌 vs 南京地铁学 UI 的 first principle</td>
+</tr>
+<tr>
+<td>7</td>
+<td>init/add/status/commit</td>
+<td><code>git init</code> 只多一个隐藏的 <code>.git</code>；提交要写清「改了什么」</td>
+</tr>
+<tr>
+<td>8</td>
+<td>message 与反例</td>
+<td><code>I added some cool stuff</code> 是一万个提交后的灾难；让 AI 审提交，它按严重程度排序开骂</td>
+</tr>
+<tr>
+<td>9</td>
+<td>编译产物与 .gitignore</td>
+<td><code>.exe</code> 不该入库；每次构建带日期/hash/本机指纹必然冲突；<code>.DS_Store</code> 被 <code>git add .</code> 误收</td>
+</tr>
+<tr>
+<td>10</td>
+<td>merge 冲突</td>
+<td>面试问「冲突后看到什么」几乎没人答得出；<code>&lt;&lt;&lt;&lt; ==== &gt;&gt;&gt;&gt;</code>、HEAD/incoming、解决后要新 commit</td>
+</tr>
+<tr>
+<td>11</td>
+<td>git 从哪来</td>
+<td>Linux 1991–2002 靠邮件补丁；BitKeeper 之后 2005 年 Linus 自造；SVN 存 delta 是走错的路</td>
+</tr>
+<tr>
+<td>12</td>
+<td>底层对象模型</td>
+<td>改一个文件只复制到根的路径，其余挂指针；<code>.git/objects</code> 里只有 blob/tree/commit</td>
+</tr>
+<tr>
+<td>13</td>
+<td>可视化验证</td>
+<td>learn git branching 是模拟；现场 web coding 一个解析真实 <code>.git</code> 的工具；分支是指针，HEAD 是指向指针的指针</td>
+</tr>
+<tr>
+<td>14</td>
+<td>水面下的冰山</td>
+<td>conventional commits、中英文空格一致性、及时 commit 的审计/二分/备份价值、linear history</td>
+</tr>
+<tr>
+<td>15</td>
+<td>项目管理与架构</td>
+<td>先单线程跟高智力模型定接口（pure function + 十几行状态），再开三个 agent 并行迭代</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>章节详解</h2>
+<h3>1. 从「建一个目录」开始：软件是什么</h3>
+<p>⭐核心：老师给软件下的定义不是课本的「代码+文档」，而是**「人类世界的需求在信息世界里的一个投影」**，今天的形态就是「一个目录，里面一堆文件，共同构成可交付的东西」。你写个 <code>hello.c</code>、编出 <code>hello</code>，就已经在做软件了——只是不符合现代 best practice。</p>
+<p>🔧实操：不要靠 clone 别人的仓库来理解项目，先自己 <code>mkdir</code>、起个名字，再从空目录倒推「这里应该有什么」。老师反复用这个套路：<strong>从已有经验推下一个概念</strong>——「这不就是需求吗，那你自己就能发明一个 git」。</p>
+<p>⚠️易错：把「能跑」当「能交付」。视频里的笑话是「我又做了好几个 killer 级产品」，地址都是 <code>localhost</code>（字幕记作 5137，应为 Vite 默认 5173）——因为你没在 intent 里说「要被全世界看到」，AI 就把你当开发者，先起本地 dev server。</p>
+<blockquote>
+<p>💡 核心提炼：项目 = 一个目录；软件工程 = 让这个目录能被持续接手。</p>
+</blockquote>
+<h3>2. 前 git 时代：复制粘贴也是版本管理</h3>
+<p>⭐核心：<code>作业V1/V2/最终版</code> 的土办法其实已满足最朴素的需求——<strong>手滑改错了想回去看上一版</strong>。这个需求本身就能推出 git 的雏形：既然能「列出所有版本、切到任意版本」，你就已发明了一个没有分支合并的简化 git。</p>
+<p>🔧实操：第一个博士生（2012 年入学）大一嫌机房来回拷代码麻烦，把代码存 U 盘，大二 U 盘坏了，作业全没。老师自己上学时是打压缩包发邮件交作业，现在是网页上传——都是「管理项目的方式」。</p>
+<p>⚠️易错：把「复制目录」当版本管理。它回答不了「差在哪」「谁改的」「能否只回退这一处」。</p>
+<blockquote>
+<p>💡 核心提炼：先有需求再有工具；git 是被「我想回到过去」逼出来的。</p>
+</blockquote>
+<h3>3. 学习方式：惊人的注意力 + virtual implement</h3>
+<p>⭐核心：这门课几乎每节都讲——<strong>知识不重要，学习意识重要</strong>。大家打开过无数 GitHub 项目，却很少留意「为什么这个有那个文件、那个没有」「为什么这个 README 短得清爽，那个像 AI slop」。差异就是信号。</p>
+<p>🔧实操：读论文/读代码的方法是 <strong>virtual implement</strong>：看到方案前，先在脑子里自己做一遍；一致→已掌握；不一致→要么成熟方案更精巧（学它），要么你的更好（一万次里有一次的惊喜）。老师看 README 的习惯就是先想「我会怎么写」再对比。</p>
+<p>⚠️易错：带着中学「老师说做 A 就只做 A」的心态——「你就有点像今天干活的 AI，被强化学习成只做这一件事，绝不碰一点点，因为最省时间」。</p>
+<blockquote>
+<p>💡 核心提炼：把「对比」变成肌肉记忆，你就在任何场景下都在接收信息。</p>
+</blockquote>
+<h3>4. git 的核心承诺与最小实操</h3>
+<p>⭐核心：<code>git init</code> 之后项目多一个隐藏的 <code>.git</code> 目录，<strong>这就完了</strong>——从此这个目录是被版本管理的仓库，可以建快照、在任意时间点之间穿梭。</p>
+<p>🔧实操：<code>git init</code> → 写 <code>hello.c</code> → <code>git add hello.c</code> → <code>git status</code> 看工作区 → <code>git commit</code>（弹编辑器写 message）→ 保存退出即成功。</p>
+<p>⚠️易错：把 git 当「作业V1/V2/V3」用，很多同学真的这么干。推荐 practice 是<strong>任何一次有意义的改动（修 bug、加功能、调文档）之后立即 commit</strong>，而不是攒成「大版本」。</p>
+<blockquote>
+<p>💡 核心提炼：commit 不是存档点，是「一次可解释的意图」。</p>
+</blockquote>
+<h3>5. commit message：被低估的工程资产</h3>
+<p>⭐核心：git 存的是快照，但项目本质是「V1 经一次修改变成 V2」。message 要写出<strong>改了什么、为什么</strong>，让后来者顺着 message 读出历史轨迹：修了多少 bug、加了什么需求、经历了什么重构。</p>
+<p>🔧实操：现场让 agent 审自己的提交，AI 按严重程度排序：「提交信息毫无信息量」「主观废话」；建议用祈使句、现在时描述动机，并提 conventional commits 前缀。message 里写 <code>fix #3</code> 还能让 GitHub 自动关 issue。</p>
+<p>⚠️易错：一万个提交全写 <code>I did some cool stuff</code>——那这个特性就不该存在，直接叫 V1→V2 就行。</p>
+<blockquote>
+<p>💡 核心提炼：message 是写给三个月后的自己和同事的，不是写给 git 的。</p>
+</blockquote>
+<h3>6. 反例：<code>git add .</code>、编译产物与二进制冲突</h3>
+<p>⭐核心：<code>git add .</code> 完全合法，git 不拦你，但它是最典型的坏 practice 入口。<code>.exe</code> 是编译产物，不该进版本库，应写进 <code>.gitignore</code>，由构建系统产出。</p>
+<p>🔧实操：为什么不能提交二进制？① 版本库膨胀（一万个文件、一百个合作者）；② 各环境编出的东西不同——带日期、带 hash、带你本机指纹，<strong>同样源码也会冲突</strong>；③ 二进制冲突几乎无法合并。</p>
+<p>⚠️易错：<code>.DS_Store</code>。macOS Finder 自动留索引，点开头默认隐藏，<code>ls</code> 看不到但 <code>git add .</code> 会收进去。规则又没那么绝对：<code>.github/workflows</code>、<code>package-lock.json</code>、用另一套工具链生成的 header，有时<strong>恰恰应该提交</strong>（让没该工具链的人也能编译）。视频没给统一判据，只说「没有绝对的规则」。</p>
+<blockquote>
+<p>💡 核心提炼：版本库只放「人写的、需协作与回溯的东西」，不放「机器每次都能重新生成的中间物」——例外要能说清理由。</p>
+</blockquote>
+<h3>7. merge 冲突：责任落到你手上的那一刻</h3>
+<p>⭐核心：面试问「什么是 git」「git rebase 是什么」还能说两句，问「merge 冲突之后会观察到什么」几乎全军覆没——<strong>没真用过，或用了也从不停下来看</strong>：agent 啪啪啪修好，说测试通过，你看一眼觉得 OK。</p>
+<p>🔧实操：冲突现场是文本里的 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>、<code>=======</code>、<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>，两侧代码同时展示，还有 HEAD / incoming 标记；IDE 多出 <code>accept incoming change</code> 按钮，逐块选完<strong>再新建一个 commit</strong> 才算 resolve。原理和地铁标识一样（first principle）：<strong>在出问题的地方把需要的信息全放进来</strong>。</p>
+<p>⚠️易错：把冲突当「报错」而不是「待你决策的合并点」。让 agent 在不同分支开发时，冲突依然高发。</p>
+<blockquote>
+<p>💡 核心提炼：冲突不是 git 的失败，是 git 把决策权显式交还给你。</p>
+</blockquote>
+<h3>8. git 从哪来：一条走错的路和一条对的路</h3>
+<p>⭐核心：1991–2002 年 Linux 内核靠邮件列表发补丁 + 作业式版本维护，中间用过 BitKeeper（字幕音近「git keeper」），2005 年 Linus 受不了，做了个「绝对简单、概念正确」的工具——git 比想象的年轻。</p>
+<p>🔧实操：<strong>SVN 存变化（delta/patch）</strong>，改一行存一个 patch，看似高效，但项目一长就进泥潭：想回到早期版本得一个个往回退。<strong>git 存快照</strong>，「回到某版本」一步到位。这是「first principle 优先于局部高效」的典型。</p>
+<p>⚠️易错：以为版本控制的重点是「省空间」。省空间次要，<strong>随时精确回到任意状态</strong>才是主目标。</p>
+<blockquote>
+<p>💡 核心提炼：高效要服从正确；delta 存储是局部最优、全局灾难。</p>
+</blockquote>
+<h3>9. 底层：目录树 + 写时复制 + 三类对象</h3>
+<p>⭐核心：git 是<strong>持久化的数据结构</strong>，持久化内容是目录树。改一个文件不必复制整棵树，只要把「该文件到根的路径」复制一份，其余用指针指过去。目录不会很深（没人建 1000 层），每层索引指数级展开，所以百万文件的项目「只需创建一个很小的增量」。</p>
+<p>🔧实操：<code>.git/objects</code> 里是普通文件、按 hash 索引，三类对象——<strong>blob</strong>（字节序列）、<strong>tree</strong>（目录，含 <code>644 hello.c</code>、<code>755 hello</code> 的 mode 与名字）、<strong>commit</strong>（指向 tree，merge commit 有两个 parent）。现场解压可见：一个小文件 31 字节压缩后解出 23 字节（小文件压缩反而浪费），头部写着 <code>blob 15</code>。</p>
+<p>⚠️易错：把分支当「一份拷贝」。分支只是 <code>refs/heads/</code> 下的一个指针文件，HEAD 是「指向指针的指针」；merge 时 git 在 index 里悄悄留了 base/ours/theirs 三份，工作区那份才带尖括号。</p>
+<blockquote>
+<p>💡 核心提炼：理解了「只复制路径、其余共享」，就理解了 git 为什么又快又省。</p>
+</blockquote>
+<h3>10. 水面下的冰山：best practice 与项目管理</h3>
+<p>⭐核心：<code>add/commit/push</code> 一下午就会，区分水平的全是 best practice。<strong>及时 commit 的四个理由</strong>：① 改动越多越易引入多个 bug，大 commit 出问题冤无头债无主；② 小提交可审计、可 revert、可 bisect（历史是前缀全 0 后缀全 1 的数组，找第一个 1）；③ <code>git blame</code> 能定位每行是哪次提交改的；④ 提交后立即 push，等于多一份互联网备份。</p>
+<p>🔧实操：conventional commits（<code>feat:</code>/<code>fix:</code> + 冒号 + 空格）、markdown 里中英文间加空格并保持一致、严肃项目要求 linear history（反正 AI 做 rebase/cherry-pick 很容易）。架构上：先用单线程和高智力模型定接口（尽量 pure function、全局共享状态只有十几行），再开三个终端让 agent 并行迭代，用 <code>agent.md</code> 写清协作规则（不许调视觉模型、不许开浏览器任务）——这样的项目几万 token 就能做出来。<code>gh</code> CLI 则把 issue、assign、close 纳入 agent 工作流。</p>
+<p>⚠️易错：以为「AI 都能检查所以规范不重要」。老师研究过的「检查项目是否符合 best practice 并给 warning」的工具，「所有这些东西都被大模型杀死了」——前提是你得知道该问什么。</p>
+<blockquote>
+<p>💡 核心提炼：项目管理的本质是人处理不了一团混沌，必须把需求拆成可理解、可审计的小任务；小步提交是为了让错误可定位、协作可并行。</p>
+</blockquote>
+<hr>
+<h2>关键数字与例子</h2>
+<table>
+<thead>
+<tr>
+<th>数字 / 例子</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>hello.c</code> → 目录</td>
+<td>最小的软件工程项目形态</td>
+</tr>
+<tr>
+<td>2012 入学 / 大一存 U 盘 / 大二坏</td>
+<td>「无版本管理」的事故代价</td>
+</tr>
+<tr>
+<td>1991–2002 / 2005</td>
+<td>Linux 靠邮件补丁的年代 / Linus 造出 git 的年份</td>
+</tr>
+<tr>
+<td>31 字节 → 23 字节、52 → 43</td>
+<td>现场解压 <code>.git/objects</code> 的真实大小</td>
+</tr>
+<tr>
+<td><code>blob 15</code> / <code>644</code> / <code>755</code></td>
+<td>blob 对象头；文件与可执行文件的 mode</td>
+</tr>
+<tr>
+<td>一万个 <code>I did some cool stuff</code></td>
+<td>commit message 失效的极端反例</td>
+</tr>
+<tr>
+<td>一万行大 commit + 100 个后续 bug</td>
+<td>为什么必须小步提交</td>
+</tr>
+<tr>
+<td>100 万文件 / 1000 层深目录</td>
+<td>快照增量小；深目录是反例</td>
+</tr>
+<tr>
+<td>十几行状态 + 十几行组装</td>
+<td>好项目的核心共享状态量</td>
+</tr>
+<tr>
+<td>两天碎片时间</td>
+<td>现场那个 git 可视化工具的总成本</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>速查卡</h2>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>一句话</th>
+<th>标记</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>软件</td>
+<td>人类需求在信息世界的投影，今天是「一个目录」</td>
+<td>⭐核心</td>
+</tr>
+<tr>
+<td>快照 vs delta</td>
+<td>git 存快照，SVN 存 patch，后者回退要一步步退</td>
+<td>⭐核心</td>
+</tr>
+<tr>
+<td><code>.git</code></td>
+<td><code>git init</code> 唯一的产物，默认隐藏</td>
+<td>🔧实操</td>
+</tr>
+<tr>
+<td>commit message</td>
+<td>写「改了什么、为什么」，祈使句现在时</td>
+<td>⭐核心</td>
+</tr>
+<tr>
+<td><code>git add .</code></td>
+<td>合法但危险，会把 <code>.DS_Store</code>、<code>.exe</code> 一起收进去</td>
+<td>⚠️易错</td>
+</tr>
+<tr>
+<td><code>.gitignore</code></td>
+<td>拦编译产物；但 lock 文件、生成 header 可能要提交</td>
+<td>⚠️易错</td>
+</tr>
+<tr>
+<td>merge 冲突</td>
+<td>两侧同时展示，解决后要新 commit</td>
+<td>⚠️易错</td>
+</tr>
+<tr>
+<td>blob / tree / commit</td>
+<td>字节序列 / 目录 / 指向 tree 的提交</td>
+<td>⭐核心</td>
+</tr>
+<tr>
+<td>分支 / HEAD</td>
+<td>refs 里的指针 / 指向指针的指针</td>
+<td>🔧实操</td>
+</tr>
+<tr>
+<td>bisect / blame</td>
+<td>二分找第一个坏提交 / 定位每行归属</td>
+<td>🔧实操</td>
+</tr>
+<tr>
+<td>atomic change</td>
+<td>一切 best practice 的总根</td>
+<td>⭐核心</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>我的判断</h2>
+<p>这节的标题是「软件仓库管理」，但作者自己最后说破了：「虽然我好像在讲 git，其实我讲的是 best practice。」这定位诚实且聪明——命令层面的 git 一下午就会，真正的门槛是「什么时候该 commit、message 怎么写、什么该入库」，而这套东西课堂上讲不清，只能靠对比和追问习得。所以他把大量篇幅花在演示「怎么让 AI 审我的提交」上，本质是教一种元技能：把 AI 当随时在线的资深同事，而不是自动补全。</p>
+<p>要挑刺也明显：最锋利的洞察（快照 vs delta、写时复制、blob/tree/commit）只用十来分钟、语速飞快，对象模型停在「三类对象」——packfile、reflog、submodule、大仓库性能、二进制治理全没碰。前半节关于 GPT6、空间感知、自动驾驶的铺陈占了近三分之一，对「为什么要学基础」是很好的说服，对「仓库管理」这个标题却是溢价。这节课的价值不在知识密度，而在示范一种「对细节保持注意力」的工作方式——这恰恰也最难被抄走。</p>
+
+</article>
+</body>
+</html>
