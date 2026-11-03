@@ -5,53 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DSH 课堂笔记</title>
 <style>
-  :root {
-    --bg: #f6f8fc;
-    --ink: #0f172a;
-    --muted: #64748b;
-    --line: #e2e8f0;
-    --blue: #2563eb;
-    --blue-soft: #dbeafe;
-    --card: #ffffff;
-  }
+  :root { --bg:#f6f8fc; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --blue:#2563eb; --card:#fff; }
   * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background:
-      radial-gradient(1000px 500px at 10% -10%, #dbeafe 0%, transparent 60%),
-      radial-gradient(800px 400px at 100% 0%, #fce7f3 0%, transparent 55%),
-      var(--bg);
-    color: var(--ink);
-    font-family: "Microsoft YaHei", "PingFang SC", system-ui, -apple-system, sans-serif;
-    line-height: 1.7;
-  }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 64px 24px 80px; }
-  header { margin-bottom: 40px; }
-  .eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--blue); background: var(--blue-soft);
-    padding: 6px 12px; border-radius: 999px; font-weight: 700;
-  }
-  h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.2; margin: 18px 0 12px; letter-spacing: -0.02em; }
-  .lead { color: var(--muted); font-size: 17px; max-width: 680px; margin: 0; }
-  .grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 34px; }
-  .card {
-    display: block; text-decoration: none; color: inherit;
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 18px; padding: 24px 26px;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, .05);
-    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  }
-  .card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(37, 99, 235, .12); border-color: #bfdbfe; }
-  .tag { display: inline-block; font-size: 12px; font-weight: 700; color: var(--blue); background: #eff6ff; border-radius: 999px; padding: 4px 10px; margin-bottom: 12px; }
-  .card h2 { font-size: 22px; margin: 0 0 8px; line-height: 1.35; }
-  .card p { margin: 0; color: var(--muted); font-size: 15px; }
-  .meta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; color: #94a3b8; font-size: 13px; }
-  .links { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
-  .links a { color: var(--blue); text-decoration: none; font-size: 14px; background: #fff; border: 1px solid var(--line); padding: 8px 14px; border-radius: 10px; }
-  .links a:hover { background: #eff6ff; border-color: #bfdbfe; }
-  footer { margin-top: 56px; color: #94a3b8; font-size: 13px; border-top: 1px solid var(--line); padding-top: 20px; }
+  body { margin:0; color:var(--ink); font-family:"Microsoft YaHei","PingFang SC",system-ui,-apple-system,sans-serif; line-height:1.7;
+    background: radial-gradient(1000px 500px at 10% -10%, #dbeafe 0%, transparent 60%), radial-gradient(800px 400px at 100% 0%, #fce7f3 0%, transparent 55%), var(--bg); }
+  .wrap { max-width:1080px; margin:0 auto; padding:64px 24px 80px; }
+  header { margin-bottom:34px; }
+  .eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--blue); background:#dbeafe; padding:6px 12px; border-radius:999px; font-weight:700; }
+  h1 { font-size:clamp(32px,5vw,48px); line-height:1.2; margin:18px 0 12px; letter-spacing:-.02em; }
+  .lead { color:var(--muted); font-size:17px; max-width:720px; margin:0; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin-top:30px; }
+  .card { display:flex; flex-direction:column; text-decoration:none; color:inherit; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px 22px; box-shadow:0 8px 24px rgba(15,23,42,.04); transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  .card:hover { transform:translateY(-3px); box-shadow:0 16px 36px rgba(37,99,235,.12); border-color:#bfdbfe; }
+  .num { font-size:12px; font-weight:800; color:var(--blue); letter-spacing:.08em; }
+  .card h2 { font-size:19px; margin:8px 0 8px; line-height:1.35; }
+  .card p { margin:0; color:var(--muted); font-size:14px; flex:1; }
+  .meta { margin-top:14px; color:#94a3b8; font-size:12px; }
+  .links { margin-top:30px; display:flex; flex-wrap:wrap; gap:10px; }
+  .links a { color:var(--blue); text-decoration:none; font-size:14px; background:#fff; border:1px solid var(--line); padding:8px 14px; border-radius:10px; }
+  .links a:hover { background:#eff6ff; border-color:#bfdbfe; }
+  footer { margin-top:48px; color:#94a3b8; font-size:13px; border-top:1px solid var(--line); padding-top:20px; }
 </style>
 </head>
 <body>
@@ -59,26 +32,25 @@
   <header>
     <span class="eyebrow">DSH · Class Notes</span>
     <h1>把课程，整理成能复习的笔记。</h1>
-    <p class="lead">DeepSeek Harness / 大模型 / 系统课程的课堂笔记与思维导图。每份笔记都按「章节拆解 + 关键例子 + 易错点 + 速查卡」整理。</p>
+    <p class="lead">《生成式软件工程》1–9 节的课堂笔记与思维导图。每份都按「章节拆解 + 关键例子 + 易错点 + 速查卡」整理。</p>
   </header>
 
   <main class="grid">
-    <a class="card" href="notes/DeepSeek-Harness-09.html">
-      <span class="tag">课程笔记 · 09</span>
-      <h2>DeepSeek Harness [09]：架构 = 用限制换协作</h2>
-      <p>从 150 行 agent demo 为什么不能当产品，讲到 DSH 的 microkernel、session 事件日志、event bus 与插件生态。</p>
-      <div class="meta">
-        <span>南京大学 · 蒋炎岩</span>
-        <span>89:24</span>
-        <span>10 章 · 速查卡</span>
-      </div>
-    </a>
+    <a class="card" href="notes/01-welcome.html"><span class="num">01</span><h2>欢迎来到未来</h2><p>课程导论：软件工程、Agent 与生成式软件工程的起点。</p><div class="meta">导论 · 课程框架</div></a>
+    <a class="card" href="notes/02-prompt-engineering.html"><span class="num">02</span><h2>提示词工程</h2><p>提示词、上下文与模型行为：怎么让模型稳定地做对事。</p><div class="meta">Prompt · Context</div></a>
+    <a class="card" href="notes/03-repo-management.html"><span class="num">03</span><h2>软件仓库管理</h2><p>仓库、提交与协作：代码之外，仓库还是什么。</p><div class="meta">Git · Repository</div></a>
+    <a class="card" href="notes/04-repo-management-2.html"><span class="num">04</span><h2>软件仓库管理 (2)</h2><p>仓库管理进阶：分支、历史与协作中的取舍。</p><div class="meta">Git · Workflow</div></a>
+    <a class="card" href="notes/05-history-of-software-engineering.html"><span class="num">05</span><h2>软件工程的来龙去脉</h2><p>从软件危机到敏捷、开源与 AI：范式是怎么变的。</p><div class="meta">历史 · 范式</div></a>
+    <a class="card" href="notes/06-requirements-1.html"><span class="num">06</span><h2>需求和架构 (1)</h2><p>需求、MVP 与架构推导：为什么当前状态会丢掉历史。</p><div class="meta">需求 · 架构</div></a>
+    <a class="card" href="notes/07-requirements-2.html"><span class="num">07</span><h2>需求和架构 (2)</h2><p>需求收敛、经典架构与 event sourcing 治长流程不一致。</p><div class="meta">Event Sourcing · 业务系统</div></a>
+    <a class="card" href="notes/08-agent-native.html"><span class="num">08</span><h2>Agent-native 开发</h2><p>Ralph loop、状态机式开发与 agent 时代的 CI 门禁。</p><div class="meta">Agent · CI</div></a>
+    <a class="card" href="notes/09-deepseek-harness.html"><span class="num">09</span><h2>DeepSeek Harness</h2><p>microkernel、session 事件日志、event bus 与插件生态。</p><div class="meta">架构 · 插件生态</div></a>
   </main>
 
   <div class="links">
-    <a href="notes/DeepSeek-Harness-09.md">Markdown 原文</a>
     <a href="notes/mindmap.md">思维导图</a>
-    <a href="https://www.bilibili.com/video/BV144nc6KEA4/" target="_blank" rel="noreferrer">原视频</a>
+    <a href="https://space.bilibili.com/202224425" target="_blank" rel="noreferrer">原课程 UP</a>
+    <a href="https://github.com/Pingpongdragon/dsh-class-notes" target="_blank" rel="noreferrer">GitHub 仓库</a>
   </div>
 
   <footer>持续整理中 · 内容依据课程字幕，仅供个人学习。</footer>
