@@ -22,6 +22,9 @@
   pre code { background:transparent; color:inherit; padding:0; }
   a { color:#2563eb; }
   hr { border:0; border-top:1px solid #e2e8f0; margin:32px 0; }
+  figure { margin: 22px 0; }
+  figure img { width:100%; display:block; border-radius:12px; border:1px solid #e2e8f0; }
+  figcaption { color:#64748b; font-size:13px; margin-top:8px; text-align:center; }
   @media (max-width:640px){ article{padding:28px 16px 60px;} h1{font-size:24px;} h2{font-size:19px;} }
 </style>
 </head>
@@ -33,7 +36,39 @@
 </blockquote>
 <h2>一句话结论</h2>
 <p>版本控制系统是为「单核、慢速、要开会」的人类设计的；git 已露裂缝（merge 丢作者归属、rebase 全换 commit id、stash 难管），jj 用「change 是一等公民」补一刀，而 agent 时代的答案是：<strong>乐观并发换成悲观锁，只保快照、不再 blame</strong>。</p>
-<h2>分段大纲</h2>
+<!-- chapters:start -->
+<h2>官方章节时间轴</h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>章节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00:00–35:53</td>
+<td>重新设计版本管理系统</td>
+</tr>
+<tr>
+<td>35:53–1:03:48</td>
+<td>为Agent设计版本管理系统</td>
+</tr>
+<tr>
+<td>1:03:48–1:38:29</td>
+<td>从零开始一个新项目</td>
+</tr>
+</tbody></table>
+<h3>关键画面</h3>
+<figure>
+<img src="../assets/04/chapter-1.jpg" alt="重新设计版本管理系统">
+<figcaption>00:00 · 重新设计版本管理系统</figcaption>
+</figure><figure>
+<img src="../assets/04/chapter-2.jpg" alt="为Agent设计版本管理系统">
+<figcaption>35:53 · 为Agent设计版本管理系统</figcaption>
+</figure><figure>
+<img src="../assets/04/chapter-3.jpg" alt="从零开始一个新项目">
+<figcaption>1:03:48 · 从零开始一个新项目</figcaption>
+</figure><!-- chapters:end --><h2>分段大纲</h2>
 <table>
 <thead>
 <tr>
