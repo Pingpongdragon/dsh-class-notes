@@ -7,30 +7,34 @@
 模型靠"下一个 token 预测 + 注意力机制"遵循指令，所以写 prompt 的核心不是堆砌"你是一个专家"式咒语，而是**把明确、可验证（verifier）的约束放进上下文，并保证它在关键 token 上仍被注意力看到**：凡能用 verifier 定义的任务，AI 已远超常人；凡不能的（教学、审美、开放研究），人仍不可替代。
 
 <!-- chapters:start -->
-## 官方章节时间轴
+## 章节图文
 
-| 时间 | 章节 |
-|---|---|
-| 00:00–33:07 | Prompt (Context) Engineering |
-| 33:07–1:15:30 | 使模型遵循指令的技巧 |
-| 1:15:30–1:38:26 | 更长程任务的建议 |
-
-### 关键画面
+### 00:00–33:07 · Prompt (Context) Engineering
 
 <figure>
 <img src="../assets/02/chapter-1.jpg" alt="Prompt (Context) Engineering">
 <figcaption>00:00 · Prompt (Context) Engineering</figcaption>
 </figure>
 
+**这一节讲什么：** 从 2023 年用内联汇编测试 ChatGPT、感到时代要变讲起，把提示词定义为模型输出第一个 token 前看到的全部文本：system prompt、AGENTS.md、按需加载的 skills 与历史；「喵」丢了说明上下文被压缩。
+
+### 33:07–1:15:30 · 使模型遵循指令的技巧
+
 <figure>
 <img src="../assets/02/chapter-2.jpg" alt="使模型遵循指令的技巧">
 <figcaption>33:07 · 使模型遵循指令的技巧</figcaption>
 </figure>
 
+**这一节讲什么：** 先讲模糊意图必然漂移——一句话生成的极品飞车缺了没说出口的资产约束；再解释每个 token 是一次有限计算，思维链是把上下文当纸笔；核心是 verifier：藏头诗、偏旁诗能写，因为对错可机器判定；末尾是注意力竞争与上下文污染。
+
+### 1:15:30–1:38:26 · 更长程任务的建议
+
 <figure>
 <img src="../assets/02/chapter-3.jpg" alt="更长程任务的建议">
 <figcaption>1:15:30 · 更长程任务的建议</figcaption>
 </figure>
+
+**这一节讲什么：** 真正长程不是有 verifier 的作业，而是意图有、规格与实现都不清楚：从零做原型不难，持续加功能才翻车，成熟大系统里 AI 反而擅长；「我想证明 A 有用」会变成隐式目标，使模型 reward hacking；结论是验证容易、搜索困难。
 
 <!-- chapters:end -->
 
