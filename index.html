@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSH 课堂笔记</title>
+<style>
+  :root {
+    --bg: #f6f8fc;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --line: #e2e8f0;
+    --blue: #2563eb;
+    --blue-soft: #dbeafe;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1000px 500px at 10% -10%, #dbeafe 0%, transparent 60%),
+      radial-gradient(800px 400px at 100% 0%, #fce7f3 0%, transparent 55%),
+      var(--bg);
+    color: var(--ink);
+    font-family: "Microsoft YaHei", "PingFang SC", system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 64px 24px 80px; }
+  header { margin-bottom: 40px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--blue); background: var(--blue-soft);
+    padding: 6px 12px; border-radius: 999px; font-weight: 700;
+  }
+  h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.2; margin: 18px 0 12px; letter-spacing: -0.02em; }
+  .lead { color: var(--muted); font-size: 17px; max-width: 680px; margin: 0; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 34px; }
+  .card {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 18px; padding: 24px 26px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, .05);
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(37, 99, 235, .12); border-color: #bfdbfe; }
+  .tag { display: inline-block; font-size: 12px; font-weight: 700; color: var(--blue); background: #eff6ff; border-radius: 999px; padding: 4px 10px; margin-bottom: 12px; }
+  .card h2 { font-size: 22px; margin: 0 0 8px; line-height: 1.35; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; color: #94a3b8; font-size: 13px; }
+  .links { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .links a { color: var(--blue); text-decoration: none; font-size: 14px; background: #fff; border: 1px solid var(--line); padding: 8px 14px; border-radius: 10px; }
+  .links a:hover { background: #eff6ff; border-color: #bfdbfe; }
+  footer { margin-top: 56px; color: #94a3b8; font-size: 13px; border-top: 1px solid var(--line); padding-top: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">DSH · Class Notes</span>
+    <h1>把课程，整理成能复习的笔记。</h1>
+    <p class="lead">DeepSeek Harness / 大模型 / 系统课程的课堂笔记与思维导图。每份笔记都按「章节拆解 + 关键例子 + 易错点 + 速查卡」整理。</p>
+  </header>
+
+  <main class="grid">
+    <a class="card" href="notes/DeepSeek-Harness-09.html">
+      <span class="tag">课程笔记 · 09</span>
+      <h2>DeepSeek Harness [09]：架构 = 用限制换协作</h2>
+      <p>从 150 行 agent demo 为什么不能当产品，讲到 DSH 的 microkernel、session 事件日志、event bus 与插件生态。</p>
+      <div class="meta">
+        <span>南京大学 · 蒋炎岩</span>
+        <span>89:24</span>
+        <span>10 章 · 速查卡</span>
+      </div>
+    </a>
+  </main>
+
+  <div class="links">
+    <a href="notes/DeepSeek-Harness-09.md">Markdown 原文</a>
+    <a href="notes/mindmap.md">思维导图</a>
+    <a href="https://www.bilibili.com/video/BV144nc6KEA4/" target="_blank" rel="noreferrer">原视频</a>
+  </div>
+
+  <footer>持续整理中 · 内容依据课程字幕，仅供个人学习。</footer>
+</div>
+</body>
+</html>
