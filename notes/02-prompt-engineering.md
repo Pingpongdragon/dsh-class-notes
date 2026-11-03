@@ -6,6 +6,34 @@
 
 模型靠"下一个 token 预测 + 注意力机制"遵循指令，所以写 prompt 的核心不是堆砌"你是一个专家"式咒语，而是**把明确、可验证（verifier）的约束放进上下文，并保证它在关键 token 上仍被注意力看到**：凡能用 verifier 定义的任务，AI 已远超常人；凡不能的（教学、审美、开放研究），人仍不可替代。
 
+<!-- chapters:start -->
+## 官方章节时间轴
+
+| 时间 | 章节 |
+|---|---|
+| 00:00–33:07 | Prompt (Context) Engineering |
+| 33:07–1:15:30 | 使模型遵循指令的技巧 |
+| 1:15:30–1:38:26 | 更长程任务的建议 |
+
+### 关键画面
+
+<figure>
+<img src="../assets/02/chapter-1.jpg" alt="Prompt (Context) Engineering">
+<figcaption>00:00 · Prompt (Context) Engineering</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/02/chapter-2.jpg" alt="使模型遵循指令的技巧">
+<figcaption>33:07 · 使模型遵循指令的技巧</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/02/chapter-3.jpg" alt="更长程任务的建议">
+<figcaption>1:15:30 · 更长程任务的建议</figcaption>
+</figure>
+
+<!-- chapters:end -->
+
 ## 分段大纲（按内容顺序，字幕无时间轴）
 
 | 序号 | 章节 | 核心内容 |
