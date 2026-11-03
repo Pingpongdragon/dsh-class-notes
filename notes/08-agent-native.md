@@ -1,3 +1,37 @@
+<!-- chapters:start -->
+## 官方章节时间轴
+
+| 时间 | 章节 |
+|---|---|
+| 00:00–11:09 | Review & Comments |
+| 11:09–40:57 | Agent Loop |
+| 40:57–59:32 | CI/CD |
+| 59:32–1:37:10 | Agent-native 开发 |
+
+### 关键画面
+
+<figure>
+<img src="../assets/08/chapter-1.jpg" alt="Review & Comments">
+<figcaption>00:00 · Review & Comments</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/08/chapter-2.jpg" alt="Agent Loop">
+<figcaption>11:09 · Agent Loop</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/08/chapter-3.jpg" alt="CI/CD">
+<figcaption>40:57 · CI/CD</figcaption>
+</figure>
+
+<figure>
+<img src="../assets/08/chapter-4.jpg" alt="Agent-native 开发">
+<figcaption>59:32 · Agent-native 开发</figcaption>
+</figure>
+
+<!-- chapters:end -->
+
 # Agent-native 开发 [08-Raw/26生成式软件工程/NJU]
 
 > 把 agent 开发拆成三件事：Ralph loop 怎么把长任务变成状态机、CI/CD 门禁为什么在 agent 时代更值钱、以及 DeepSeek Harness 如何用一套「文档配对 + 门禁」把 AI slop 挡在主干之外。
