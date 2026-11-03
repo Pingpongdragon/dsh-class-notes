@@ -8,36 +8,43 @@
 - **时长**：97:10
 
 <!-- chapters:start -->
-## 官方章节时间轴
+## 章节图文
 
-| 时间 | 章节 |
-|---|---|
-| 00:00–11:09 | Review & Comments |
-| 11:09–40:57 | Agent Loop |
-| 40:57–59:32 | CI/CD |
-| 59:32–1:37:10 | Agent-native 开发 |
-
-### 关键画面
+### 00:00–11:09 · Review & Comments
 
 <figure>
 <img src="../assets/08/chapter-1.jpg" alt="Review & Comments">
 <figcaption>00:00 · Review & Comments</figcaption>
 </figure>
 
+**这一节讲什么：** 开场是实验安排与自用工具：每天给小朋友生成播客、早上收资讯推送。他借带博士生比喻模型——有很强 DFS 倾向，而设计空间里很多分叉在浅层；Humanize 烧了很多 token 后发现，最有效的协作是让 GPT 与 Claude 互相 review。
+
+### 11:09–40:57 · Agent Loop
+
 <figure>
 <img src="../assets/08/chapter-2.jpg" alt="Agent Loop">
 <figcaption>11:09 · Agent Loop</figcaption>
 </figure>
+
+**这一节讲什么：** 梳理 agent loop：从早期幻觉一路到今天的「版本答案」Ralph loop——同一个 prompt 反复丢给 agent，每轮只推进一步、验证后把下一步写进文件，直到输出 RALPH_DONE 才停；现场还拆了 150 行 agent 的主循环。
+
+### 40:57–59:32 · CI/CD
 
 <figure>
 <img src="../assets/08/chapter-3.jpg" alt="CI/CD">
 <figcaption>40:57 · CI/CD</figcaption>
 </figure>
 
+**这一节讲什么：** CI 的第一性原理是「不要相信开发者」，机器永远是对的，于是提交、合并、发布层层设卡。而 agent 更不可信——它会把思维链塞进 doc.md、为一个网页疯狂截图、在细节上过度出力，所以要让它只回简短 summary。
+
+### 59:32–1:37:10 · Agent-native 开发
+
 <figure>
 <img src="../assets/08/chapter-4.jpg" alt="Agent-native 开发">
 <figcaption>59:32 · Agent-native 开发</figcaption>
 </figure>
+
+**这一节讲什么：** 讲 DSH 的做法：中英文档靠「三件套 + 门禁」——同目录放中、英、配置文件三个兄弟，hash 新旧决定谁是权威，翻译只改差异并由 parity 脚本校验；文档有字数预算防 slop，代码块里的 interface 必须逐字出现在源文件。
 
 <!-- chapters:end -->
 
