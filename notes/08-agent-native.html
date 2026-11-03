@@ -30,6 +30,16 @@
 </head>
 <body>
 <article>
+<h1>Agent-native 开发 [08-Raw/26生成式软件工程/NJU]</h1>
+<blockquote>
+<p>把 agent 开发拆成三件事：Ralph loop 怎么把长任务变成状态机、CI/CD 门禁为什么在 agent 时代更值钱、以及 DeepSeek Harness 如何用一套「文档配对 + 门禁」把 AI slop 挡在主干之外。</p>
+</blockquote>
+<ul>
+<li><strong>UP</strong>：绿导师原谅你了（南京大学 蒋炎岩）</li>
+<li><strong>链接</strong>：<a href="https://www.bilibili.com/video/BV11LWw6VEHW">https://www.bilibili.com/video/BV11LWw6VEHW</a></li>
+<li><strong>播放量</strong>：15426</li>
+<li><strong>时长</strong>：97:10</li>
+</ul>
 <!-- chapters:start -->
 <h2>官方章节时间轴</h2>
 <table>
@@ -69,17 +79,7 @@
 </figure><figure>
 <img src="../assets/08/chapter-4.jpg" alt="Agent-native 开发">
 <figcaption>59:32 · Agent-native 开发</figcaption>
-</figure><!-- chapters:end --><h1>Agent-native 开发 [08-Raw/26生成式软件工程/NJU]</h1>
-<blockquote>
-<p>把 agent 开发拆成三件事：Ralph loop 怎么把长任务变成状态机、CI/CD 门禁为什么在 agent 时代更值钱、以及 DeepSeek Harness 如何用一套「文档配对 + 门禁」把 AI slop 挡在主干之外。</p>
-</blockquote>
-<ul>
-<li><strong>UP</strong>：绿导师原谅你了（南京大学 蒋炎岩）</li>
-<li><strong>链接</strong>：<a href="https://www.bilibili.com/video/BV11LWw6VEHW">https://www.bilibili.com/video/BV11LWw6VEHW</a></li>
-<li><strong>播放量</strong>：15426</li>
-<li><strong>时长</strong>：97:10</li>
-</ul>
-<h2>讲了什么</h2>
+</figure><!-- chapters:end --><h2>讲了什么</h2>
 <p>开场是课程实验安排：第二个实验做 agent loop，把第一个实验里的个人 agent 往前推一步。他顺手讲了自己怎么用 GrokBot：每天给小朋友生成播客（背后是 Claude Code 的 Opus 5.5）、每天早上收 morning paper 推送、看 GitHub trending。他借「带博士生」比喻模型：模型解决问题有很强的 DFS 倾向，找到一个 idea 就一路做下去，但 design space 里很多分叉在浅层，宽度和深度要平衡。Humanize 团队烧了很多 token 后发现，最有效的 multi-agent 协作是让 GPT 和 Claude 互相 review、互相挑刺——不同模型带不同偏见，比同一个模型一路走到黑更容易岔开。</p>
 <p>他把软件工程画成 intent → spec → implementation 的搜索：每一步都是一对多，靠访谈、checklist、架构师讨论、UML、IDE、git worktree 这些工具收敛。AI 的价值是让你在任何一个阶段都能立刻生成一个版本，比较「变好还是变坏」，再迭代；需求能拆成两个 subsystem 就并行开两个 agent。他自己实际开发时开四个终端、四个 agent，再多大脑就跟不上输出速度。</p>
 <p>然后是 agent loop 的历史：2023 年 ChatGPT/GPT-4 幻觉严重，Devin 早期号称能自主解决任务；ReAct 式 agent 靠工具自主行动。今天 harness 的「版本答案」是 Ralph loop，名字来自《辛普森一家》的 Ralph——有点笨、有点可爱、但从不放弃。它简单到三行：把同一个 prompt 反复丢给 agent，让它检查、修改，直到无法改进。核心是「prompt 不变，但世界在变」。</p>
