@@ -37,7 +37,7 @@
 
 <figure>
 <img src="../assets/04/chapter-1.jpg" alt="重新设计版本管理系统">
-<figcaption>00:00 · 重新设计版本管理系统</figcaption>
+<figcaption>画面 04:18 · 重新设计版本管理系统</figcaption>
 </figure>
 
 **画面解读：** 从实验一「会成长的个人助手」让你亲手踩一次焦油坑讲起，说项目是意图→规格→代码的分层、ReadMe 该短；再论证文件系统管项目是历史遗留——文档说链表、代码已换成树且无强制关联，这就是技术债与可追踪性，于是设想改成存关系的 repo.db。
@@ -106,7 +106,7 @@
 
 <figure>
 <img src="../assets/04/chapter-2.jpg" alt="为Agent设计版本管理系统">
-<figcaption>35:53 · 为Agent设计版本管理系统</figcaption>
+<figcaption>画面 36:07 · 为Agent设计版本管理系统</figcaption>
 </figure>
 
 **画面解读：** git 有两道裂缝：merge 丢作者归属、rebase 每搬一次就造新 id；jj 让 change 成一等公民、改一字节即提交。再论证版本控制假设「人单核、小时级」，agent 却秒级提交，所以要 worktree、不再需要 blame、并发换成悲观锁。
@@ -170,7 +170,7 @@ agent 呢？分钟级，上下文热时几十秒甚至几秒一个原子提交�
 
 <figure>
 <img src="../assets/04/chapter-3.jpg" alt="从零开始一个新项目">
-<figcaption>1:03:48 · 从零开始一个新项目</figcaption>
+<figcaption>画面 1:04:36 · 从零开始一个新项目</figcaption>
 </figure>
 
 **画面解读：** 现场把作业直接丢给 agent：它做出入口层、编排层、能力层和一个数据库，却没有邮箱、也没初始化仓库，成了「看着像教务系统」的业务系统——每句都对、整体错了。于是回到最小原型：先文件系统别急上数据库；收尾是记住现在、历史与教训。
