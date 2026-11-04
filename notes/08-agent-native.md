@@ -19,7 +19,7 @@
 ## 讲了什么
 <figure>
 <img src="../assets/08/chapter-1.jpg" alt="Review & Comments">
-<figcaption>00:00 · Review & Comments</figcaption>
+<figcaption>画面 04:19 · Review & Comments</figcaption>
 </figure>
 
 **画面解读：** 开场是实验安排与自用工具：每天给小朋友生成播客、早上收资讯推送。他借带博士生比喻模型——有很强 DFS 倾向，而设计空间里很多分叉在浅层；Humanize 烧了很多 token 后发现，最有效的协作是让 GPT 与 Claude 互相 review。
@@ -30,7 +30,7 @@
 
 <figure>
 <img src="../assets/08/chapter-2.jpg" alt="Agent Loop">
-<figcaption>11:09 · Agent Loop</figcaption>
+<figcaption>画面 11:14 · Agent Loop</figcaption>
 </figure>
 
 **画面解读：** 梳理 agent loop：从早期幻觉一路到今天的「版本答案」Ralph loop——同一个 prompt 反复丢给 agent，每轮只推进一步、验证后把下一步写进文件，直到输出 RALPH_DONE 才停；现场还拆了 150 行 agent 的主循环。
@@ -43,7 +43,7 @@ Ralph loop 的关键 prompt 是：每轮先检查当前状态，只推进一个�
 
 <figure>
 <img src="../assets/08/chapter-3.jpg" alt="CI/CD">
-<figcaption>40:57 · CI/CD</figcaption>
+<figcaption>画面 44:11 · CI/CD</figcaption>
 </figure>
 
 **画面解读：** CI 的第一性原理是「不要相信开发者」，机器永远是对的，于是提交、合并、发布层层设卡。而 agent 更不可信——它会把思维链塞进 doc.md、为一个网页疯狂截图、在细节上过度出力，所以要让它只回简短 summary。
@@ -56,7 +56,7 @@ Ralph loop 的关键 prompt 是：每轮先检查当前状态，只推进一个�
 
 <figure>
 <img src="../assets/08/chapter-4.jpg" alt="Agent-native 开发">
-<figcaption>59:32 · Agent-native 开发</figcaption>
+<figcaption>画面 1:00:06 · Agent-native 开发</figcaption>
 </figure>
 
 **画面解读：** 讲 DSH 的做法：中英文档靠「三件套 + 门禁」——同目录放中、英、配置文件三个兄弟，hash 新旧决定谁是权威，翻译只改差异并由 parity 脚本校验；文档有字数预算防 slop，代码块里的 interface 必须逐字出现在源文件。
