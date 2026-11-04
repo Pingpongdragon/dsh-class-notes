@@ -131,7 +131,7 @@
 <h3>1. 作业开场：为什么让你亲手做一遍</h3>
 <figure>
 <img src="../assets/04/chapter-1.jpg" alt="重新设计版本管理系统">
-<figcaption>00:00 · 重新设计版本管理系统</figcaption>
+<figcaption>画面 04:18 · 重新设计版本管理系统</figcaption>
 </figure><p><strong>画面解读：</strong> 从实验一「会成长的个人助手」让你亲手踩一次焦油坑讲起，说项目是意图→规格→代码的分层、ReadMe 该短；再论证文件系统管项目是历史遗留——文档说链表、代码已换成树且无强制关联，这就是技术债与可追踪性，于是设想改成存关系的 repo.db。</p>
 <p><strong>⭐ 核心：</strong> lab1「会成长的个人助手」不限做法、选做自愿、由机器人按链接验收。目的是体验 tar pit（焦油坑）：AI 一上手就会做出很多<strong>看着合理、却让项目越来越难维护</strong>的决定，直到你删库重做。他预告下一个 lab 与它强冲突，逼你越改越崩。</p>
 <p><strong>⚠️ 易错：</strong> 把需求整包丢给 AI——「看起来都在能力范围内」正是陷阱。</p>
@@ -175,7 +175,7 @@
 <h3>7. 慢人与快 agent</h3>
 <figure>
 <img src="../assets/04/chapter-2.jpg" alt="为Agent设计版本管理系统">
-<figcaption>35:53 · 为Agent设计版本管理系统</figcaption>
+<figcaption>画面 36:07 · 为Agent设计版本管理系统</figcaption>
 </figure><p><strong>画面解读：</strong> git 有两道裂缝：merge 丢作者归属、rebase 每搬一次就造新 id；jj 让 change 成一等公民、改一字节即提交。再论证版本控制假设「人单核、小时级」，agent 却秒级提交，所以要 worktree、不再需要 blame、并发换成悲观锁。</p>
 <p><strong>⭐ 核心：</strong> 现有 VCS 的隐含假设是「使用者是人」，而人是 <strong>single-core</strong>：并发里 load/store 不能同时；人观察世界时手背在身后，要 write 时必须闭眼，读到的值已过期。所以人以<strong>小时</strong>为单位写代码，一个模块十几人已不小，团队最细也就 <strong>10 分钟一个提交</strong>；而问一句只要二三十秒，或早上开会半小时切好 scope——这就是 stash 合理的原因（打断会发生，但「修到一半再被打断」概率低，stash 通常只有一层）。</p>
 <p>agent 呢？分钟级，上下文热时几十秒甚至几秒一个原子提交，10x~100x 团队更是秒级；即便有测试流水线门控，整体仍被加速。<strong>git 这套为人设计的模型跟不上了。</strong></p>
@@ -215,7 +215,7 @@
 <h3>12. 收尾：版本管理就三件事</h3>
 <figure>
 <img src="../assets/04/chapter-3.jpg" alt="从零开始一个新项目">
-<figcaption>1:03:48 · 从零开始一个新项目</figcaption>
+<figcaption>画面 1:04:36 · 从零开始一个新项目</figcaption>
 </figure><p><strong>画面解读：</strong> 现场把作业直接丢给 agent：它做出入口层、编排层、能力层和一个数据库，却没有邮箱、也没初始化仓库，成了「看着像教务系统」的业务系统——每句都对、整体错了。于是回到最小原型：先文件系统别急上数据库；收尾是记住现在、历史与教训。</p>
 <p><strong>⭐ 核心：</strong> <strong>记住现在</strong>（必须有 repository 把文件管起来）、<strong>记住历史</strong>（删掉的东西有一天要捞回来）、<strong>记住教训</strong>（看清自己怎么演进、怎么失败、怎么换条路）。</p>
 <blockquote>
