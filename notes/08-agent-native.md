@@ -24,7 +24,6 @@
 
 **画面解读：** 开场是实验安排与自用工具：每天给小朋友生成播客、早上收资讯推送。他借带博士生比喻模型——有很强 DFS 倾向，而设计空间里很多分叉在浅层；Humanize 烧了很多 token 后发现，最有效的协作是让 GPT 与 Claude 互相 review。
 
-
 开场是课程实验安排：第二个实验做 agent loop，把第一个实验里的个人 agent 往前推一步。他顺手讲了自己怎么用 GrokBot：每天给小朋友生成播客（背后是 Claude Code 的 Opus 5.5）、每天早上收 morning paper 推送、看 GitHub trending。他借「带博士生」比喻模型：模型解决问题有很强的 DFS 倾向，找到一个 idea 就一路做下去，但 design space 里很多分叉在浅层，宽度和深度要平衡。Humanize 团队烧了很多 token 后发现，最有效的 multi-agent 协作是让 GPT 和 Claude 互相 review、互相挑刺——不同模型带不同偏见，比同一个模型一路走到黑更容易岔开。
 
 他把软件工程画成 intent → spec → implementation 的搜索：每一步都是一对多，靠访谈、checklist、架构师讨论、UML、IDE、git worktree 这些工具收敛。AI 的价值是让你在任何一个阶段都能立刻生成一个版本，比较「变好还是变坏」，再迭代；需求能拆成两个 subsystem 就并行开两个 agent。他自己实际开发时开四个终端、四个 agent，再多大脑就跟不上输出速度。
