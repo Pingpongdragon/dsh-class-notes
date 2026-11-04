@@ -88,6 +88,7 @@ Anthropic 说 git 已经不够用。蒋炎岩的解释是：有了 agent 之后�
 - 🔧 可以借鉴操作系统的锁，以及数据库的乐观/悲观并发控制和 conflict detection。
 - ⚠️ 这不是「git 要死了」，而是「git 的假设是单人/单线程，agent 把假设打破了」。
 
+
 > 💡 **核心提炼：** agent 把「一个人写代码」变成「一个人管理一个组织」，版本控制必须从「提交」升级为「并行任务的协调」。
 
 ## 1. 150 行 demo：能玩，不能当产品（10:50–20:00）
@@ -105,6 +106,7 @@ Anthropic 说 git 已经不够用。蒋炎岩的解释是：有了 agent 之后�
 
 - 🔧 API 中断后的重试间隔：1s → 2s → 4s → 8s 的指数退避；物理故障可能要两三分钟才恢复。
 - ⚠️ 客户端/服务端状态不一致：支付请求发出后，服务端已把订单提交给银行/航空公司，手机却断网了，App 只能转圈并显示「订单处于我不知道的状态」。
+
 
 > 💡 **核心提炼：** demo 的假设是「网络稳定、进程不崩、状态可丢」；产品的假设是「这些都会发生」。两者之间是 essential complexity。
 
@@ -124,6 +126,7 @@ Anthropic 说 git 已经不够用。蒋炎岩的解释是：有了 agent 之后�
 - ⭐ MVP 的价值是让假设被 validate；假设一破，需求就膨胀。
 - ⭐ 需求会杀死架构：你已经按 WorkBody 写完 50 万行并上线，老板突然说下一版照 GrokBot 做——交互从「左侧项目栏 + 右侧面板」变成「拉群、agent 当人、有记忆、可定时」。之前所有需求假设的根基崩塌。
 - 大厂靠拉通对齐、闭环沉淀、保守架构保证交付质量；而 DSH 生态里，GrokBot 火了几周就有人像素级复刻出 dsh bot，还能加 multi-agent dashboard。
+
 
 > 💡 **核心提炼：** 需求变更不是例外，是常态；架构必须为「假设会变」留余地，否则 50 万行会变成负债。
 
@@ -154,6 +157,7 @@ Anthropic 说 git 已经不够用。蒋炎岩的解释是：有了 agent 之后�
 - **Event sourcing**：概念干净、可回退、可审计；但性能更难，而且「教务员想悄悄让一个学生强行毕业」这种 hack 当前状态的需求很难办，因为事件历史会留下谁 committed 的记录。
 - **MapReduce（2004，Jeff Dean & Sanjay）**：把编程模型限制成 map 和 reduce，用户只写这两个函数，框架负责排序 shuffle、分布式执行和机器故障容错（最多 2000 台机器、每 task 100MB 内存）。代价是只适合离线批处理，实时数据撑不住，后来才有 Spark、Flink。
 
+
 > 💡 **核心提炼：** 架构不是「画得越干净越好」，而是「用限制换协作」；限制和需求匹配时是便利，假设一变就是阻力。
 
 ## 4. DSH 的世界模型：Cordis、session、event bus（40:15–50:00）
@@ -174,6 +178,7 @@ DSH 的 first principle 是操作系统式的：
 - 第一方提供 session、agent、UI slots 等抽象，trajectory 就是 session history 的另一种投影；
 - 插件大部分状态留在本地，只把希望别人看见的东西发上 event bus。
 
+
 > 💡 **核心提炼：** DSH 不是「一堆插件」，而是「一个所有插件共享事实的世界模型」；session 是事实，event bus 是协作接口，插件是投影。
 
 ## 5. 演示：TUI、PDF、VS Code 式侧边栏（50:00–58:30）
@@ -182,6 +187,7 @@ DSH 的 first principle 是操作系统式的：
 - **PDF reader**：用事件 hook 注入生命周期。
 - **VS Code 式侧边栏**：终端、git、side chat 都能作为插件加上去。
 - better sidebar 这类插件证明了：只要看主 session、维护自己的状态，就能做出完整工作台，而不侵入系统。
+
 
 > 💡 **核心提炼：** UI 只是 session 的一种投影；把 UI slots 换掉，DSH 就能变成 TUI、IDE、bot，甚至你没想到的形态。
 
@@ -198,6 +204,7 @@ DSH 的 first principle 是操作系统式的：
 - 现场演示：让 agent 现场写插件，给 token usage 旁加一个超大号显示；agent 一边跑一边往 event bus 上挂东西。
 - 这和 Wake up/Buddy 这类「预设需求」产品不同：creator mode 把「创造插件」本身交给使用者。
 
+
 > 💡 **核心提炼：** 动态插件生命周期把「软件发布」变成「运行时许愿」；架构的上限由第一方抽象决定。
 
 ## 7. WPS/Excel bridge：给超级应用装 AI 原生能力（68:20–76:00）
@@ -205,6 +212,7 @@ DSH 的 first principle 是操作系统式的：
 - WPS/Excel bridge 只支持三个操作：**锁住对象**、**把对象 hand off 给模型**、**把修改拿回来**。
 - 就把一个没有 AI 能力的超级应用接进生态；任何能嵌在网页里的应用都可以。
 - 他举了个人 database 插件 + WPS 填表的例子：论文列表、学生信息、个人资料由生态里的工具协作完成，不需要 computer use、不需要疯狂截图。
+
 
 > 💡 **核心提炼：** 不需要重写超级应用，只需要一个很薄的 bridge，把「对象」交给模型，再把结果写回；生态的能力就接上了。
 
@@ -214,6 +222,7 @@ DSH 的 first principle 是操作系统式的：
 - 现场演示成语接龙、五子棋：五子棋状态在 UI 里，落子由模型思考决定。
 - 插件用 `context.systemPrompt` 注入 1.5KB 协议，让模型知道要生成特定标记的 div。
 - ⚠️ demo 有 bug（五子棋下在线上），不是成熟产品；但它展示了「生成式 UI」的可能性。
+
 
 > 💡 **核心提炼：** 动态 UI 把「模型输出」变成「可交互界面」，再把界面事件注回上下文——这是 generative UI 的雏形。
 
@@ -231,6 +240,7 @@ DSH 的 first principle 是操作系统式的：
 - 这些 essential complexity 解决不了，插件只减少 accidental complexity。
 - ⭐ DSH 发布时几乎「release 了一个 nothing」，把剩下的交给开源生态；任何 super app 都可以用很小的 bridge 接入，享受整个生态。
 - 他提到自己在做 agent OS，思路与 DSH 类似，但位于更底层，可以和 DSH 并行。
+
 
 > 💡 **核心提炼：** 插件不是万能的，架构也不是；好的架构能把「协作」变成生态，但语义冲突、hook 顺序、压缩叠加这些 essential complexity 仍然要人来解决。
 
