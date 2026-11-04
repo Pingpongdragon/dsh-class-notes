@@ -71,29 +71,32 @@
       语义冲突
 </code></pre>
 <hr>
-<!-- chapters:start -->
-<h2>章节图文</h2>
-<h3>00:00–23:27 · 需求</h3>
-<figure>
-<img src="../assets/09/chapter-1.jpg" alt="需求">
-<figcaption>00:00 · 需求</figcaption>
-</figure><p><strong>这一节讲什么：</strong> 开场先说 git 已经不够用：有 agent 后一个学生就拥有公司级组织架构，你是 CTO，要协调大量并行任务，于是设想只读锁、写锁、重构锁。再用 150 行 agent 做三维校园：能跑，但断网即终止、没有会话恢复，demo 的假设是网络稳定。</p>
-<h3>23:27–38:21 · 架构</h3>
-<figure>
-<img src="../assets/09/chapter-2.jpg" alt="架构">
-<figcaption>23:27 · 架构</figcaption>
-</figure><p><strong>这一节讲什么：</strong> 先讲需求会杀死架构：五十万行写完上线，老板一句改需求，交互假设全崩。再讲架构的本质是受限与自由的取舍——约束划出边界让 sub agent 并行，太自由等于没有架构；LAMP 单机最优、十亿人处处瓶颈，MapReduce 用两函数限制换容错。</p>
-<h3>38:21–1:05:56 · 设计</h3>
-<figure>
-<img src="../assets/09/chapter-3.jpg" alt="设计">
-<figcaption>38:21 · 设计</figcaption>
-</figure><p><strong>这一节讲什么：</strong> 讲 DSH 的世界模型：Cordis 管服务解析与插件装卸，session 是只追加的事件日志、唯一事实来源，模型历史由事件派生，event bus 按领域分类，插件还能修改尚未落盘的 pre-step 事件。随后演示扔掉 UI slots 的 TUI 与侧边栏。</p>
-<h3>1:05:56–1:29:24 · 生态</h3>
-<figure>
-<img src="../assets/09/chapter-4.jpg" alt="生态">
-<figcaption>1:05:56 · 生态</figcaption>
-</figure><p><strong>这一节讲什么：</strong> 讲生态侧：creator mode 让 agent 运行时拆装插件，现场加了个超大号用量显示；WPS/Excel bridge 只支持锁对象、交给模型、把修改拿回来三步就接进生态；动态 UI 让模型输出带 JS 的 HTML 卡片。代价是插件语义会冲突。</p>
-<!-- chapters:end --><h2>分段大纲</h2>
+<h2>官方章节时间轴</h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>章节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00:00–23:27</td>
+<td>需求</td>
+</tr>
+<tr>
+<td>23:27–38:21</td>
+<td>架构</td>
+</tr>
+<tr>
+<td>38:21–1:05:56</td>
+<td>设计</td>
+</tr>
+<tr>
+<td>1:05:56–1:29:24</td>
+<td>生态</td>
+</tr>
+</tbody></table>
+<h2>分段大纲</h2>
 <table>
 <thead>
 <tr>
@@ -166,6 +169,10 @@
 </tbody></table>
 <hr>
 <h2>0. 开场：agent 时代，git 不够用了（00:00–10:50）</h2>
+<figure>
+<img src="../assets/09/chapter-1.jpg" alt="需求">
+<figcaption>00:00 · 需求</figcaption>
+</figure><p><strong>画面解读：</strong> 开场先说 git 已经不够用：有 agent 后一个学生就拥有公司级组织架构，你是 CTO，要协调大量并行任务，于是设想只读锁、写锁、重构锁。再用 150 行 agent 做三维校园：能跑，但断网即终止、没有会话恢复，demo 的假设是网络稳定。</p>
 <p>Anthropic 说 git 已经不够用。蒋炎岩的解释是：有了 agent 之后，一个学生立刻拥有公司级组织架构——你是 CTO，下面有产品、前端、后端 agent，每个还能再带 sub-agent。</p>
 <ul>
 <li>⭐ 这时版本控制要处理的不再是单线程提交，而是大量并行 task。</li>
@@ -212,6 +219,10 @@
 <p>💡 <strong>核心提炼：</strong> 需求变更不是例外，是常态；架构必须为「假设会变」留余地，否则 50 万行会变成负债。</p>
 </blockquote>
 <h2>3. 架构的本质：受限 vs 自由（30:00–40:15）</h2>
+<figure>
+<img src="../assets/09/chapter-2.jpg" alt="架构">
+<figcaption>23:27 · 架构</figcaption>
+</figure><p><strong>画面解读：</strong> 先讲需求会杀死架构：五十万行写完上线，老板一句改需求，交互假设全崩。再讲架构的本质是受限与自由的取舍——约束划出边界让 sub agent 并行，太自由等于没有架构；LAMP 单机最优、十亿人处处瓶颈，MapReduce 用两函数限制换容错。</p>
 <p>时间倒回 <strong>2026 年 6 月 10 日 23:00</strong>，DSH 的第一个提交：一个 microkernel architecture、link MVP requirement analysis，什么都没有，连 CLAUDE.md 都是后来才不需要的。</p>
 <p>他对比了两种设计路径：</p>
 <ul>
@@ -263,6 +274,10 @@
 <p>💡 <strong>核心提炼：</strong> UI 只是 session 的一种投影；把 UI slots 换掉，DSH 就能变成 TUI、IDE、bot，甚至你没想到的形态。</p>
 </blockquote>
 <h2>6. Creator mode：运行时拆装插件（58:30–68:20）</h2>
+<figure>
+<img src="../assets/09/chapter-3.jpg" alt="设计">
+<figcaption>38:21 · 设计</figcaption>
+</figure><p><strong>画面解读：</strong> 讲 DSH 的世界模型：Cordis 管服务解析与插件装卸，session 是只追加的事件日志、唯一事实来源，模型历史由事件派生，event bus 按领域分类，插件还能修改尚未落盘的 pre-step 事件。随后演示扔掉 UI slots 的 TUI 与侧边栏。</p>
 <ul>
 <li>Creator mode 给插件 Cordis 权限，agent 运行时可以拆插件、加插件，因为 DSH 有全动态插件生命周期。</li>
 <li>现场演示：让 agent 现场写插件，给 token usage 旁加一个超大号显示；agent 一边跑一边往 event bus 上挂东西。</li>
@@ -291,6 +306,10 @@
 <p>💡 <strong>核心提炼：</strong> 动态 UI 把「模型输出」变成「可交互界面」，再把界面事件注回上下文——这是 generative UI 的雏形。</p>
 </blockquote>
 <h2>9. 代价与结论：release nothing（84:00–89:23）</h2>
+<figure>
+<img src="../assets/09/chapter-4.jpg" alt="生态">
+<figcaption>1:05:56 · 生态</figcaption>
+</figure><p><strong>画面解读：</strong> 讲生态侧：creator mode 让 agent 运行时拆装插件，现场加了个超大号用量显示；WPS/Excel bridge 只支持锁对象、交给模型、把修改拿回来三步就接进生态；动态 UI 让模型输出带 JS 的 HTML 卡片。代价是插件语义会冲突。</p>
 <ul>
 <li>event bus 只统一了事件和类型，插件自己的状态仍在本地。</li>
 <li>⚠️ 插件之间语义会冲突：装十个「上下文压缩一半」的插件，输出会被压到千分之一；一个 hook 要停、一个要继续，谁先谁后没有规定。</li>
