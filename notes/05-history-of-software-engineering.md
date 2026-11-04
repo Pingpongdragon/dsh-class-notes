@@ -35,7 +35,7 @@
 
 <figure>
 <img src="../assets/05/chapter-1.jpg" alt="新闻播报">
-<figcaption>00:00 · 新闻播报</figcaption>
+<figcaption>画面 00:33 · 新闻播报</figcaption>
 </figure>
 
 **画面解读：** 课前新闻：百毫秒级只吐一个决策 token 的模型玩《Doom》，打开实时决策赛道；随后是七十年加速史，判断新 scaling 维度是「数据分布工程」；再讲基模厂在搭递归自我改进闭环、每建一个实验室能力就上一台阶，学术界的投稿—评审链正被取代。
@@ -96,7 +96,7 @@
 
 <figure>
 <img src="../assets/05/chapter-2.jpg" alt="回到软件开发">
-<figcaption>17:37 · 回到软件开发</figcaption>
+<figcaption>画面 17:40 · 回到软件开发</figcaption>
 </figure>
 
 **画面解读：** 回到软件：意图、规格、实现之间的 gap 才是世纪难题，所以先做能扔的最小原型逼出没想清的意图；再讲标签打印机加扫描仪的自助服务——设备抽象成 scan/print 接口，让 AI 打一张问一句、第十五次调准加热深度；APP 则沦为接口。
@@ -139,7 +139,7 @@
 
 <figure>
 <img src="../assets/05/chapter-3.jpg" alt="从软件危机到软件工程">
-<figcaption>39:01 · 从软件危机到软件工程</figcaption>
+<figcaption>画面 51:41 · 从软件危机到软件工程</figcaption>
 </figure>
 
 **画面解读：** 讲软件工程为何诞生：硬件贵、码农贵，客户根本不知道计算机能干什么，需求全靠拍脑袋；再精读三篇一手文献——Dijkstra 的 goto 讲的是可读性、图灵奖演讲说机器越强意图越多，Royce 那篇是瀑布出处却恰在批判瀑布，共同原则是把发现问题提前。
@@ -218,7 +218,7 @@
 
 <figure>
 <img src="../assets/05/chapter-4.jpg" alt="软件工程给世界带来了什么">
-<figcaption>1:15:06 · 软件工程给世界带来了什么</figcaption>
+<figcaption>画面 1:16:01 · 软件工程给世界带来了什么</figcaption>
 </figure>
 
 **画面解读：** 把学科沉淀摊开：checklist、需求追踪矩阵这些无代码工具都在降返工；形式化程度是从自然语言到形式化证明的一条光谱，契约式编程把前置后置条件写进语言；UML 的前提被大模型打破所以判它已死，但「哪些语义必须钉死」这个问题还在。
