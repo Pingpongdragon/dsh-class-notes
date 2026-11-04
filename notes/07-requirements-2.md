@@ -19,7 +19,7 @@
 ## 讲了什么
 <figure>
 <img src="../assets/07/chapter-1.jpg" alt="回顾">
-<figcaption>00:00 · 回顾</figcaption>
+<figcaption>画面 02:58 · 回顾</figcaption>
 </figure>
 
 **画面解读：** 承接上讲：做设计决定就背技术债，Brooks 说本质是驾驭复杂性，选课的容量、先修、教室冲突是消不掉的本质复杂性；文件系统好 hack 却没事务，数据库给事务却要穿过中间层调试。再以「登录」演示需求怎么滚成泥潭。
@@ -30,7 +30,7 @@
 
 <figure>
 <img src="../assets/07/chapter-2.jpg" alt="阅读经典">
-<figcaption>14:17 · 阅读经典</figcaption>
+<figcaption>画面 14:25 · 阅读经典</figcaption>
 </figure>
 
 **画面解读：** 用 AI 重读老 paper：Dijkstra 说人脑很小，只能靠抽象与层次分解，把不能一次理解的东西变成可逐层理解的；再用动态规划说明「抽象丢失」。Guy Steele 全篇只用单音节词，主张语言要小、要有形式语义、扩展必须是一等公民且可组合。
@@ -43,7 +43,7 @@
 
 <figure>
 <img src="../assets/07/chapter-3.jpg" alt="典型的系统架构">
-<figcaption>49:21 · 典型的系统架构</figcaption>
+<figcaption>画面 59:46 · 典型的系统架构</figcaption>
 </figure>
 
 **画面解读：** 三个可生长架构：UNIX 每个工具只做一件事、用文本流协作，管道把人与程序统一起来；关系数据库用二维表加 SQL，把优化器与事务藏在接口后；Internet 只做连通性，RFC 1958 说唯一该永存的原则是变化本身。
@@ -56,7 +56,7 @@
 
 <figure>
 <img src="../assets/07/chapter-4.jpg" alt="应对复杂性">
-<figcaption>1:19:04 · 应对复杂性</figcaption>
+<figcaption>画面 1:21:32 · 应对复杂性</figcaption>
 </figure>
 
 **画面解读：** 业务系统里每个功能等于一个数据库事务，MVC 与 MVVM 把模型、页面状态都形式化。但长流程撑不住：订单表只加一列状态就会出现「既该毕业又不该毕业」；于是引入复式记账与事件溯源，只追加事实、重放出报表，让派生状态可溯源。
