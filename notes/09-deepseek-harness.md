@@ -76,7 +76,7 @@ mindmap
 
 <figure>
 <img src="../assets/09/chapter-1.jpg" alt="需求">
-<figcaption>00:00 · 需求</figcaption>
+<figcaption>画面 10:53 · 需求</figcaption>
 </figure>
 
 **画面解读：** 开场先说 git 已经不够用：有 agent 后一个学生就拥有公司级组织架构，你是 CTO，要协调大量并行任务，于是设想只读锁、写锁、重构锁。再用 150 行 agent 做三维校园：能跑，但断网即终止、没有会话恢复，demo 的假设是网络稳定。
@@ -134,7 +134,7 @@ Anthropic 说 git 已经不够用。蒋炎岩的解释是：有了 agent 之后�
 
 <figure>
 <img src="../assets/09/chapter-2.jpg" alt="架构">
-<figcaption>23:27 · 架构</figcaption>
+<figcaption>画面 23:45 · 架构</figcaption>
 </figure>
 
 **画面解读：** 先讲需求会杀死架构：五十万行写完上线，老板一句改需求，交互假设全崩。再讲架构的本质是受限与自由的取舍——约束划出边界让 sub agent 并行，太自由等于没有架构；LAMP 单机最优、十亿人处处瓶颈，MapReduce 用两函数限制换容错。
@@ -195,7 +195,7 @@ DSH 的 first principle 是操作系统式的：
 
 <figure>
 <img src="../assets/09/chapter-3.jpg" alt="设计">
-<figcaption>38:21 · 设计</figcaption>
+<figcaption>画面 42:54 · 设计</figcaption>
 </figure>
 
 **画面解读：** 讲 DSH 的世界模型：Cordis 管服务解析与插件装卸，session 是只追加的事件日志、唯一事实来源，模型历史由事件派生，event bus 按领域分类，插件还能修改尚未落盘的 pre-step 事件。随后演示扔掉 UI slots 的 TUI 与侧边栏。
@@ -230,7 +230,7 @@ DSH 的 first principle 是操作系统式的：
 
 <figure>
 <img src="../assets/09/chapter-4.jpg" alt="生态">
-<figcaption>1:05:56 · 生态</figcaption>
+<figcaption>画面 1:12:49 · 生态</figcaption>
 </figure>
 
 **画面解读：** 讲生态侧：creator mode 让 agent 运行时拆装插件，现场加了个超大号用量显示；WPS/Excel bridge 只支持锁对象、交给模型、把修改拿回来三步就接进生态；动态 UI 让模型输出带 JS 的 HTML 卡片。代价是插件语义会冲突。
