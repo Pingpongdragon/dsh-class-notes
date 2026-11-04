@@ -19,7 +19,7 @@
 ## 讲了什么
 <figure>
 <img src="../assets/06/chapter-1.jpg" alt="引言 (后半音频翻车)">
-<figcaption>00:00 · 引言 (后半音频翻车)</figcaption>
+<figcaption>画面 02:24 · 引言 (后半音频翻车)</figcaption>
 </figure>
 
 **画面解读：** 开场回顾瀑布模型：意图→规格→实现→维护，层间是数据依赖，错一层会往回污染，所以要可追踪性；再补「软件不软」——一个 bit 翻掉就能让程序无限读数。AI 让实现变便宜，但意图→规格、产品设计与架构仍是杠杆。
@@ -30,7 +30,7 @@
 
 <figure>
 <img src="../assets/06/chapter-2.jpg" alt="需求工程">
-<figcaption>15:03 · 需求工程</figcaption>
+<figcaption>画面 30:22 · 需求工程</figcaption>
 </figure>
 
 **画面解读：** 拿南大教学平台当样本：让 agent 写成带形式化 ID 的需求说明书，再交给只看文档的 sub agent 复现，页面能跑却出现缺课次数超课时的 bug。需求变更则更狠：离散数学拆成两门，毕业、重修、抵扣全被穿透，最后靠院长特批手改数据库。
@@ -41,7 +41,7 @@
 
 <figure>
 <img src="../assets/06/chapter-3.jpg" alt="无处不在的架构">
-<figcaption>44:28 · 无处不在的架构</figcaption>
+<figcaption>画面 59:05 · 无处不在的架构</figcaption>
 </figure>
 
 **画面解读：** 从 10 行代码讲架构：getopt 把参数收进解析状态再分派，就是把变化隔在稳定接口后；同一道汉诺塔的四种写法用来衡量「压缩就是智能」。再讲 Excel 里生成二维码：公式直写必成一坨，正解是先造中间语言，再分别翻译成程序与公式验证。
@@ -54,7 +54,7 @@
 
 <figure>
 <img src="../assets/06/chapter-4.jpg" alt="回到教务系统">
-<figcaption>1:12:32 · 回到教务系统</figcaption>
+<figcaption>画面 1:35:05 · 回到教务系统</figcaption>
 </figure>
 
 **画面解读：** 回到 50 万行的教务系统：AI 写出的单体有乐观锁、事务、审计，本质仍是 CRUD——当前状态丢掉了历史，毕业字段只是别人算完又忘了的结论，院系改名还会让旧毕业记录说谎。解法是 event sourcing：只追加事实、重放出状态。
