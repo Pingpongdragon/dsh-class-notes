@@ -6,37 +6,13 @@
 
 模型靠"下一个 token 预测 + 注意力机制"遵循指令，所以写 prompt 的核心不是堆砌"你是一个专家"式咒语，而是**把明确、可验证（verifier）的约束放进上下文，并保证它在关键 token 上仍被注意力看到**：凡能用 verifier 定义的任务，AI 已远超常人；凡不能的（教学、审美、开放研究），人仍不可替代。
 
-<!-- chapters:start -->
-## 章节图文
+## 官方章节时间轴
 
-### 00:00–33:07 · Prompt (Context) Engineering
-
-<figure>
-<img src="../assets/02/chapter-1.jpg" alt="Prompt (Context) Engineering">
-<figcaption>00:00 · Prompt (Context) Engineering</figcaption>
-</figure>
-
-**这一节讲什么：** 从 2023 年用内联汇编测试 ChatGPT、感到时代要变讲起，把提示词定义为模型输出第一个 token 前看到的全部文本：system prompt、AGENTS.md、按需加载的 skills 与历史；「喵」丢了说明上下文被压缩。
-
-### 33:07–1:15:30 · 使模型遵循指令的技巧
-
-<figure>
-<img src="../assets/02/chapter-2.jpg" alt="使模型遵循指令的技巧">
-<figcaption>33:07 · 使模型遵循指令的技巧</figcaption>
-</figure>
-
-**这一节讲什么：** 先讲模糊意图必然漂移——一句话生成的极品飞车缺了没说出口的资产约束；再解释每个 token 是一次有限计算，思维链是把上下文当纸笔；核心是 verifier：藏头诗、偏旁诗能写，因为对错可机器判定；末尾是注意力竞争与上下文污染。
-
-### 1:15:30–1:38:26 · 更长程任务的建议
-
-<figure>
-<img src="../assets/02/chapter-3.jpg" alt="更长程任务的建议">
-<figcaption>1:15:30 · 更长程任务的建议</figcaption>
-</figure>
-
-**这一节讲什么：** 真正长程不是有 verifier 的作业，而是意图有、规格与实现都不清楚：从零做原型不难，持续加功能才翻车，成熟大系统里 AI 反而擅长；「我想证明 A 有用」会变成隐式目标，使模型 reward hacking；结论是验证容易、搜索困难。
-
-<!-- chapters:end -->
+| 时间 | 章节 |
+|---|---|
+| 00:00–33:07 | Prompt (Context) Engineering |
+| 33:07–1:15:30 | 使模型遵循指令的技巧 |
+| 1:15:30–1:38:26 | 更长程任务的建议 |
 
 ## 分段大纲（按内容顺序，字幕无时间轴）
 
@@ -56,6 +32,13 @@
 ## 章节详解
 
 ### 一、提示词是唯一接口
+
+<figure>
+<img src="../assets/02/chapter-1.jpg" alt="Prompt (Context) Engineering">
+<figcaption>00:00 · Prompt (Context) Engineering</figcaption>
+</figure>
+
+**画面解读：** 从 2023 年用内联汇编测试 ChatGPT、感到时代要变讲起，把提示词定义为模型输出第一个 token 前看到的全部文本：system prompt、AGENTS.md、按需加载的 skills 与历史；「喵」丢了说明上下文被压缩。
 
 ⭐核心：2023 年备操作系统课时，老师故意写了一段"地球人不会这么实现"的内联汇编（inline assembly）让 ChatGPT 讲，它解释得出奇地好、且大概率不在训练语料里——那一刻觉得时代要变。
 
@@ -94,6 +77,13 @@
 > 💡 核心提炼：风险判定本身就是 prompt engineering 的产物，值得被审计而非被信任。
 
 ### 五、从 intent 到 spec 再到风格
+
+<figure>
+<img src="../assets/02/chapter-2.jpg" alt="使模型遵循指令的技巧">
+<figcaption>33:07 · 使模型遵循指令的技巧</figcaption>
+</figure>
+
+**画面解读：** 先讲模糊意图必然漂移——一句话生成的极品飞车缺了没说出口的资产约束；再解释每个 token 是一次有限计算，思维链是把上下文当纸笔；核心是 verifier：藏头诗、偏旁诗能写，因为对错可机器判定；末尾是注意力竞争与上下文污染。
 
 ⭐核心：intent（做个国民级应用）→ 选型的 expect → implementation。给模型模糊 intent，它容易"认为完成了"并漂移。Kimi K3 一句话生成"极品飞车"，物理、碰撞、后视镜都很逼真，但那不是你每天打开的那个游戏——脑中模糊约束（复用真实地图、美术资产）没说出口。说清楚后，它真能去 OpenStreetMap 下载南大仙林校区地图重建世界。风格同理：一句话"现代风格个人主页"必然 AI 味重，因为"现代"不可验证；给出背景、前景、渲染后处理、排版才可能去掉。
 
@@ -142,6 +132,13 @@
 > 💡 核心提炼：上下文里有什么，模型就学什么：高质量代码是正污染，低质量论文是负污染；prompt 里每句"我想证明 X"都是隐式 reward。
 
 ### 十、人的位置
+
+<figure>
+<img src="../assets/02/chapter-3.jpg" alt="更长程任务的建议">
+<figcaption>1:15:30 · 更长程任务的建议</figcaption>
+</figure>
+
+**画面解读：** 真正长程不是有 verifier 的作业，而是意图有、规格与实现都不清楚：从零做原型不难，持续加功能才翻车，成熟大系统里 AI 反而擅长；「我想证明 A 有用」会变成隐式目标，使模型 reward hacking；结论是验证容易、搜索困难。
 
 ⭐核心：盯着 codex 的 session、一跑偏就纠正，总时间更短但耗人力；放手让它跑也能完成，但烧 token。纠正 AI 是多巴胺——"我好像还是比 AI 有点用"，这是要警惕的假努力。上下文越长指令遵循越下降，但最后的 prompt 一般还能遵循，所以最后一个短窗口给具体任务仍好用。真正开放的"哪种方案最好"，模型被训成舔狗只给有限方案；P/NP 类比：验证容易、搜索困难。于是"算力换智力"：起名字可枚举——选音、筛音、subagent 逐个查字、限定《诗经》取词；代价是烧 token。结尾的隐忧：能获得无限算力的人砌墙，墙内超人、墙外动物。
 
