@@ -61,7 +61,7 @@
 ### 3. 大学剩下的，与四条规定
 <figure>
 <img src="../assets/01/chapter-2.jpg" alt="实操 (1)">
-<figcaption>画面 35:28 · 实操 (1)</figcaption>
+<figcaption>画面 31:59 · 实操 (1)</figcaption>
 </figure>
 
 **画面解读：** 现场实操：两条原则是现在就开始用、随时问他。装 Debian 先在 qemu 里启动验证再交付，终端配置全交给模型，邮件草稿按历史风格自动生成，读论文用减法只剥离真正新的那点。
@@ -86,7 +86,7 @@
 ### 5. 普通人的四个案例
 <figure>
 <img src="../assets/01/chapter-3.jpg" alt="视频恢复—实操 (2)">
-<figcaption>画面 48:44 · 视频恢复—实操 (2)</figcaption>
+<figcaption>画面 49:15 · 视频恢复—实操 (2)</figcaption>
 </figure>
 
 **画面解读：** 用 agent 读长视频：给一个 BVID 就整理成带时间点的图文时间轴，两帧间隔够大就截图拿真值，再让带记忆的 agent 去掉琐碎部分，两小时的课几分钟看完；代价是理解可能偏浅。
@@ -117,7 +117,7 @@
 ### 7. CS 视角：改卷流水线
 <figure>
 <img src="../assets/01/chapter-4.jpg" alt="实操 (3)">
-<figcaption>画面 1:07:04 · 实操 (3)</figcaption>
+<figcaption>画面 1:05:19 · 实操 (3)</figcaption>
 </figure>
 
 **画面解读：** 把浏览器交给 agent：F12 删广告、带 cookie 的 cURL 到终端重放；现场让它用浏览器把教学周历填掉，先翻车、事件注入失败，改模拟点击才成功，走通一次即沉淀成脚本，于是有了自动抢课系统。
@@ -142,7 +142,7 @@
 ### 9. 三个空间、焦油坑与收尾
 <figure>
 <img src="../assets/01/chapter-5.jpg" alt="软件工程">
-<figcaption>画面 1:18:58 · 软件工程</figcaption>
+<figcaption>画面 1:26:48 · 软件工程</figcaption>
 </figure>
 
 **画面解读：** 收在软件工程：同一份 spec 的两种死法——直接实现只剩硬编码，先设计中间语言再分别翻译验证才一次成型；由此讲到意图→规格→实现之间的 gap、焦油坑，最后是导师那句「为什么招你而不是买一个 Claude Max」。
