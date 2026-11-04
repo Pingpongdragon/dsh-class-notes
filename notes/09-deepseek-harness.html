@@ -171,7 +171,7 @@
 <h2>0. 开场：agent 时代，git 不够用了（00:00–10:50）</h2>
 <figure>
 <img src="../assets/09/chapter-1.jpg" alt="需求">
-<figcaption>00:00 · 需求</figcaption>
+<figcaption>画面 10:53 · 需求</figcaption>
 </figure><p><strong>画面解读：</strong> 开场先说 git 已经不够用：有 agent 后一个学生就拥有公司级组织架构，你是 CTO，要协调大量并行任务，于是设想只读锁、写锁、重构锁。再用 150 行 agent 做三维校园：能跑，但断网即终止、没有会话恢复，demo 的假设是网络稳定。</p>
 <p>Anthropic 说 git 已经不够用。蒋炎岩的解释是：有了 agent 之后，一个学生立刻拥有公司级组织架构——你是 CTO，下面有产品、前端、后端 agent，每个还能再带 sub-agent。</p>
 <ul>
@@ -221,7 +221,7 @@
 <h2>3. 架构的本质：受限 vs 自由（30:00–40:15）</h2>
 <figure>
 <img src="../assets/09/chapter-2.jpg" alt="架构">
-<figcaption>23:27 · 架构</figcaption>
+<figcaption>画面 23:45 · 架构</figcaption>
 </figure><p><strong>画面解读：</strong> 先讲需求会杀死架构：五十万行写完上线，老板一句改需求，交互假设全崩。再讲架构的本质是受限与自由的取舍——约束划出边界让 sub agent 并行，太自由等于没有架构；LAMP 单机最优、十亿人处处瓶颈，MapReduce 用两函数限制换容错。</p>
 <p>时间倒回 <strong>2026 年 6 月 10 日 23:00</strong>，DSH 的第一个提交：一个 microkernel architecture、link MVP requirement analysis，什么都没有，连 CLAUDE.md 都是后来才不需要的。</p>
 <p>他对比了两种设计路径：</p>
@@ -276,7 +276,7 @@
 <h2>6. Creator mode：运行时拆装插件（58:30–68:20）</h2>
 <figure>
 <img src="../assets/09/chapter-3.jpg" alt="设计">
-<figcaption>38:21 · 设计</figcaption>
+<figcaption>画面 42:54 · 设计</figcaption>
 </figure><p><strong>画面解读：</strong> 讲 DSH 的世界模型：Cordis 管服务解析与插件装卸，session 是只追加的事件日志、唯一事实来源，模型历史由事件派生，event bus 按领域分类，插件还能修改尚未落盘的 pre-step 事件。随后演示扔掉 UI slots 的 TUI 与侧边栏。</p>
 <ul>
 <li>Creator mode 给插件 Cordis 权限，agent 运行时可以拆插件、加插件，因为 DSH 有全动态插件生命周期。</li>
@@ -308,7 +308,7 @@
 <h2>9. 代价与结论：release nothing（84:00–89:23）</h2>
 <figure>
 <img src="../assets/09/chapter-4.jpg" alt="生态">
-<figcaption>1:05:56 · 生态</figcaption>
+<figcaption>画面 1:12:49 · 生态</figcaption>
 </figure><p><strong>画面解读：</strong> 讲生态侧：creator mode 让 agent 运行时拆装插件，现场加了个超大号用量显示；WPS/Excel bridge 只支持锁对象、交给模型、把修改拿回来三步就接进生态；动态 UI 让模型输出带 JS 的 HTML 卡片。代价是插件语义会冲突。</p>
 <ul>
 <li>event bus 只统一了事件和类型，插件自己的状态仍在本地。</li>
