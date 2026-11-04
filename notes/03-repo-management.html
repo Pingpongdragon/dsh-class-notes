@@ -37,24 +37,28 @@
 <h2>一句话结论</h2>
 <p>git 的本质是<strong>一个可回溯的目录树数据结构</strong>——只在改动路径上复制、其余靠指针共享，所以百万文件的项目也只需极小增量就能存下整棵快照树；而真正难学的不是 <code>add/commit/push</code>，是水面下那套 best practice（提交信息、提交粒度、<code>.gitignore</code>、原子提交、线性历史），每一条都是血和泪的教训。</p>
 <hr>
-<!-- chapters:start -->
-<h2>章节图文</h2>
-<h3>00:00–24:40 · 开场 &amp; 版本管理</h3>
-<figure>
-<img src="../assets/03/chapter-1.jpg" alt="开场 & 版本管理">
-<figcaption>00:00 · 开场 & 版本管理</figcaption>
-</figure><p><strong>这一节讲什么：</strong> 开场谈 GPT6 的进步与「还要不要学基础」，再把软件定义为人类需求在信息世界的投影、今天就是一个目录；随后回溯前 git 时代——U 盘拷代码、作业V1/V2/最终版、压缩包发邮件，说明「想回到上一版」就足以推出 git。</p>
-<h3>24:40–1:03:08 · Git 入门与一些  最佳实践</h3>
-<figure>
-<img src="../assets/03/chapter-2.jpg" alt="Git 入门与一些  最佳实践">
-<figcaption>24:40 · Git 入门与一些  最佳实践</figcaption>
-</figure><p><strong>这一节讲什么：</strong> 从 git init 只多一个隐藏的 .git 讲起；重点是提交信息——「I added some cool stuff」是灾难，让 AI 审一遍还会开骂。接着讲编译产物与 .gitignore、merge 冲突现场，以及 git 起源于 Linux 的邮件补丁。</p>
-<h3>1:03:08–1:40:14 · 学习 Git</h3>
-<figure>
-<img src="../assets/03/chapter-3.jpg" alt="学习 Git">
-<figcaption>1:03:08 · 学习 Git</figcaption>
-</figure><p><strong>这一节讲什么：</strong> 深入 .git/objects：只有 blob、tree、commit，改一个文件只复制到根的路径、其余挂指针，百万文件也只要很小增量；分支只是 refs 下的指针，HEAD 指向指针的指针。冰山之下是小步提交、bisect、blame。</p>
-<!-- chapters:end --><h2>分段大纲</h2>
+<h2>官方章节时间轴</h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>章节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00:00–24:40</td>
+<td>开场 &amp; 版本管理</td>
+</tr>
+<tr>
+<td>24:40–1:03:08</td>
+<td>Git 入门与一些  最佳实践</td>
+</tr>
+<tr>
+<td>1:03:08–1:40:14</td>
+<td>学习 Git</td>
+</tr>
+</tbody></table>
+<h2>分段大纲</h2>
 <table>
 <thead>
 <tr>
@@ -142,6 +146,10 @@
 <hr>
 <h2>章节详解</h2>
 <h3>1. 从「建一个目录」开始：软件是什么</h3>
+<figure>
+<img src="../assets/03/chapter-1.jpg" alt="开场 & 版本管理">
+<figcaption>00:00 · 开场 & 版本管理</figcaption>
+</figure><p><strong>画面解读：</strong> 开场谈 GPT6 的进步与「还要不要学基础」，再把软件定义为人类需求在信息世界的投影、今天就是一个目录；随后回溯前 git 时代——U 盘拷代码、作业V1/V2/最终版、压缩包发邮件，说明「想回到上一版」就足以推出 git。</p>
 <p>⭐核心：老师给软件下的定义不是课本的「代码+文档」，而是**「人类世界的需求在信息世界里的一个投影」**，今天的形态就是「一个目录，里面一堆文件，共同构成可交付的东西」。你写个 <code>hello.c</code>、编出 <code>hello</code>，就已经在做软件了——只是不符合现代 best practice。</p>
 <p>🔧实操：不要靠 clone 别人的仓库来理解项目，先自己 <code>mkdir</code>、起个名字，再从空目录倒推「这里应该有什么」。老师反复用这个套路：<strong>从已有经验推下一个概念</strong>——「这不就是需求吗，那你自己就能发明一个 git」。</p>
 <p>⚠️易错：把「能跑」当「能交付」。视频里的笑话是「我又做了好几个 killer 级产品」，地址都是 <code>localhost</code>（字幕记作 5137，应为 Vite 默认 5173）——因为你没在 intent 里说「要被全世界看到」，AI 就把你当开发者，先起本地 dev server。</p>
@@ -170,6 +178,10 @@
 <p>💡 核心提炼：commit 不是存档点，是「一次可解释的意图」。</p>
 </blockquote>
 <h3>5. commit message：被低估的工程资产</h3>
+<figure>
+<img src="../assets/03/chapter-2.jpg" alt="Git 入门与一些  最佳实践">
+<figcaption>24:40 · Git 入门与一些  最佳实践</figcaption>
+</figure><p><strong>画面解读：</strong> 从 git init 只多一个隐藏的 .git 讲起；重点是提交信息——「I added some cool stuff」是灾难，让 AI 审一遍还会开骂。接着讲编译产物与 .gitignore、merge 冲突现场，以及 git 起源于 Linux 的邮件补丁。</p>
 <p>⭐核心：git 存的是快照，但项目本质是「V1 经一次修改变成 V2」。message 要写出<strong>改了什么、为什么</strong>，让后来者顺着 message 读出历史轨迹：修了多少 bug、加了什么需求、经历了什么重构。</p>
 <p>🔧实操：现场让 agent 审自己的提交，AI 按严重程度排序：「提交信息毫无信息量」「主观废话」；建议用祈使句、现在时描述动机，并提 conventional commits 前缀。message 里写 <code>fix #3</code> 还能让 GitHub 自动关 issue。</p>
 <p>⚠️易错：一万个提交全写 <code>I did some cool stuff</code>——那这个特性就不该存在，直接叫 V1→V2 就行。</p>
@@ -205,6 +217,10 @@
 <p>💡 核心提炼：理解了「只复制路径、其余共享」，就理解了 git 为什么又快又省。</p>
 </blockquote>
 <h3>10. 水面下的冰山：best practice 与项目管理</h3>
+<figure>
+<img src="../assets/03/chapter-3.jpg" alt="学习 Git">
+<figcaption>1:03:08 · 学习 Git</figcaption>
+</figure><p><strong>画面解读：</strong> 深入 .git/objects：只有 blob、tree、commit，改一个文件只复制到根的路径、其余挂指针，百万文件也只要很小增量；分支只是 refs 下的指针，HEAD 指向指针的指针。冰山之下是小步提交、bisect、blame。</p>
 <p>⭐核心：<code>add/commit/push</code> 一下午就会，区分水平的全是 best practice。<strong>及时 commit 的四个理由</strong>：① 改动越多越易引入多个 bug，大 commit 出问题冤无头债无主；② 小提交可审计、可 revert、可 bisect（历史是前缀全 0 后缀全 1 的数组，找第一个 1）；③ <code>git blame</code> 能定位每行是哪次提交改的；④ 提交后立即 push，等于多一份互联网备份。</p>
 <p>🔧实操：conventional commits（<code>feat:</code>/<code>fix:</code> + 冒号 + 空格）、markdown 里中英文间加空格并保持一致、严肃项目要求 linear history（反正 AI 做 rebase/cherry-pick 很容易）。架构上：先用单线程和高智力模型定接口（尽量 pure function、全局共享状态只有十几行），再开三个终端让 agent 并行迭代，用 <code>agent.md</code> 写清协作规则（不许调视觉模型、不许开浏览器任务）——这样的项目几万 token 就能做出来。<code>gh</code> CLI 则把 issue、assign、close 纳入 agent 工作流。</p>
 <p>⚠️易错：以为「AI 都能检查所以规范不重要」。老师研究过的「检查项目是否符合 best practice 并给 warning」的工具，「所有这些东西都被大模型杀死了」——前提是你得知道该问什么。</p>
