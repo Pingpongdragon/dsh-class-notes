@@ -8,37 +8,13 @@ git 的本质是**一个可回溯的目录树数据结构**——只在改动路
 
 ---
 
-<!-- chapters:start -->
-## 章节图文
+## 官方章节时间轴
 
-### 00:00–24:40 · 开场 & 版本管理
-
-<figure>
-<img src="../assets/03/chapter-1.jpg" alt="开场 & 版本管理">
-<figcaption>00:00 · 开场 & 版本管理</figcaption>
-</figure>
-
-**这一节讲什么：** 开场谈 GPT6 的进步与「还要不要学基础」，再把软件定义为人类需求在信息世界的投影、今天就是一个目录；随后回溯前 git 时代——U 盘拷代码、作业V1/V2/最终版、压缩包发邮件，说明「想回到上一版」就足以推出 git。
-
-### 24:40–1:03:08 · Git 入门与一些  最佳实践
-
-<figure>
-<img src="../assets/03/chapter-2.jpg" alt="Git 入门与一些  最佳实践">
-<figcaption>24:40 · Git 入门与一些  最佳实践</figcaption>
-</figure>
-
-**这一节讲什么：** 从 git init 只多一个隐藏的 .git 讲起；重点是提交信息——「I added some cool stuff」是灾难，让 AI 审一遍还会开骂。接着讲编译产物与 .gitignore、merge 冲突现场，以及 git 起源于 Linux 的邮件补丁。
-
-### 1:03:08–1:40:14 · 学习 Git
-
-<figure>
-<img src="../assets/03/chapter-3.jpg" alt="学习 Git">
-<figcaption>1:03:08 · 学习 Git</figcaption>
-</figure>
-
-**这一节讲什么：** 深入 .git/objects：只有 blob、tree、commit，改一个文件只复制到根的路径、其余挂指针，百万文件也只要很小增量；分支只是 refs 下的指针，HEAD 指向指针的指针。冰山之下是小步提交、bisect、blame。
-
-<!-- chapters:end -->
+| 时间 | 章节 |
+|---|---|
+| 00:00–24:40 | 开场 & 版本管理 |
+| 24:40–1:03:08 | Git 入门与一些  最佳实践 |
+| 1:03:08–1:40:14 | 学习 Git |
 
 ## 分段大纲
 
@@ -65,6 +41,13 @@ git 的本质是**一个可回溯的目录树数据结构**——只在改动路
 ## 章节详解
 
 ### 1. 从「建一个目录」开始：软件是什么
+
+<figure>
+<img src="../assets/03/chapter-1.jpg" alt="开场 & 版本管理">
+<figcaption>00:00 · 开场 & 版本管理</figcaption>
+</figure>
+
+**画面解读：** 开场谈 GPT6 的进步与「还要不要学基础」，再把软件定义为人类需求在信息世界的投影、今天就是一个目录；随后回溯前 git 时代——U 盘拷代码、作业V1/V2/最终版、压缩包发邮件，说明「想回到上一版」就足以推出 git。
 
 ⭐核心：老师给软件下的定义不是课本的「代码+文档」，而是**「人类世界的需求在信息世界里的一个投影」**，今天的形态就是「一个目录，里面一堆文件，共同构成可交付的东西」。你写个 `hello.c`、编出 `hello`，就已经在做软件了——只是不符合现代 best practice。
 
@@ -105,6 +88,13 @@ git 的本质是**一个可回溯的目录树数据结构**——只在改动路
 > 💡 核心提炼：commit 不是存档点，是「一次可解释的意图」。
 
 ### 5. commit message：被低估的工程资产
+
+<figure>
+<img src="../assets/03/chapter-2.jpg" alt="Git 入门与一些  最佳实践">
+<figcaption>24:40 · Git 入门与一些  最佳实践</figcaption>
+</figure>
+
+**画面解读：** 从 git init 只多一个隐藏的 .git 讲起；重点是提交信息——「I added some cool stuff」是灾难，让 AI 审一遍还会开骂。接着讲编译产物与 .gitignore、merge 冲突现场，以及 git 起源于 Linux 的邮件补丁。
 
 ⭐核心：git 存的是快照，但项目本质是「V1 经一次修改变成 V2」。message 要写出**改了什么、为什么**，让后来者顺着 message 读出历史轨迹：修了多少 bug、加了什么需求、经历了什么重构。
 
@@ -155,6 +145,13 @@ git 的本质是**一个可回溯的目录树数据结构**——只在改动路
 > 💡 核心提炼：理解了「只复制路径、其余共享」，就理解了 git 为什么又快又省。
 
 ### 10. 水面下的冰山：best practice 与项目管理
+
+<figure>
+<img src="../assets/03/chapter-3.jpg" alt="学习 Git">
+<figcaption>1:03:08 · 学习 Git</figcaption>
+</figure>
+
+**画面解读：** 深入 .git/objects：只有 blob、tree、commit，改一个文件只复制到根的路径、其余挂指针，百万文件也只要很小增量；分支只是 refs 下的指针，HEAD 指向指针的指针。冰山之下是小步提交、bisect、blame。
 
 ⭐核心：`add/commit/push` 一下午就会，区分水平的全是 best practice。**及时 commit 的四个理由**：① 改动越多越易引入多个 bug，大 commit 出问题冤无头债无主；② 小提交可审计、可 revert、可 bisect（历史是前缀全 0 后缀全 1 的数组，找第一个 1）；③ `git blame` 能定位每行是哪次提交改的；④ 提交后立即 push，等于多一份互联网备份。
 
