@@ -44,7 +44,7 @@ git 的本质是**一个可回溯的目录树数据结构**——只在改动路
 
 <figure>
 <img src="../assets/03/chapter-1.jpg" alt="开场 & 版本管理">
-<figcaption>00:00 · 开场 & 版本管理</figcaption>
+<figcaption>画面 00:39 · 开场 & 版本管理</figcaption>
 </figure>
 
 **画面解读：** 开场谈 GPT6 的进步与「还要不要学基础」，再把软件定义为人类需求在信息世界的投影、今天就是一个目录；随后回溯前 git 时代——U 盘拷代码、作业V1/V2/最终版、压缩包发邮件，说明「想回到上一版」就足以推出 git。
@@ -95,7 +95,7 @@ git 的本质是**一个可回溯的目录树数据结构**——只在改动路
 
 <figure>
 <img src="../assets/03/chapter-2.jpg" alt="Git 入门与一些  最佳实践">
-<figcaption>24:40 · Git 入门与一些  最佳实践</figcaption>
+<figcaption>画面 25:54 · Git 入门与一些  最佳实践</figcaption>
 </figure>
 
 **画面解读：** 从 git init 只多一个隐藏的 .git 讲起；重点是提交信息——「I added some cool stuff」是灾难，让 AI 审一遍还会开骂。接着讲编译产物与 .gitignore、merge 冲突现场，以及 git 起源于 Linux 的邮件补丁。
@@ -157,7 +157,7 @@ git 的本质是**一个可回溯的目录树数据结构**——只在改动路
 
 <figure>
 <img src="../assets/03/chapter-3.jpg" alt="学习 Git">
-<figcaption>1:03:08 · 学习 Git</figcaption>
+<figcaption>画面 1:03:11 · 学习 Git</figcaption>
 </figure>
 
 **画面解读：** 深入 .git/objects：只有 blob、tree、commit，改一个文件只复制到根的路径、其余挂指针，百万文件也只要很小增量；分支只是 refs 下的指针，HEAD 指向指针的指针。冰山之下是小步提交、bisect、blame。
